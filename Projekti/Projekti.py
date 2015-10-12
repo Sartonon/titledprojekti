@@ -13,7 +13,7 @@ def hello_world():
     for component in cal.walk('vevent'):
         print (component.get('summary'))
         print (component.get('location'))
-    return "Hello Worldg!"
+    return "Hello World!"
 
 @app.route('/luku')
 def luku():
