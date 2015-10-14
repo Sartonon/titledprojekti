@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <p>
+          Please enter your URL:<br>
+          {{ form.url(size=80) }}<br>
+          {% for error in form.url.errors %}
+            <span style="color: #ff061a;">[{{ error }}]</span>
+          {% endfor %}<br>
+      </p>
+      <p><input type="submit" value="Hae"></p>
+  </form>
+{% endblock %}
