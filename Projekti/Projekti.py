@@ -5,12 +5,14 @@ import requests
 import folium
 from forms import LoginForm
 
+
+
 app = Flask(__name__)
 app.config.from_object('config')
 
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
     r = requests.get('https://korppi.jyu.fi/calendar/ical/QAdtuntDGVQmFXN')
     koodi = r.text
@@ -19,13 +21,28 @@ def hello_world():
         print(component.get('summary'))
         print(component.get('location'))
 
-    return "Hello Worldg!"
+    map_osm = folium.Map(location=[45.5236, -122.6750],  width="75%", height="95%")
+    map_osm.create_map(path='templates/osm.html')
+    lol = map_osm.HTML
+
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for URL="%s"' %
+              (form.url.data))
+        return redirect('/')
+    return render_template('indeksi.html',
+                           title='Sign In',
+                           form=form,
+                           lol=lol)
 
 @app.route('/kartta')
 def kartta():
     map_osm = folium.Map(location=[45.5236, -122.6750],  width="75%", height="95%")
-    map_osm.create_map(path='osm.html')
-    return render_template('osm.html')
+    map_osm._build_map()
+    srcdoc = map_osm.HTML
+    print(srcdoc)
+
+    return srcdoc
 
 @app.route('/indeksi', methods=['GET', 'POST'])
 def indeksi():
