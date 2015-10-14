@@ -3,6 +3,7 @@ from icalendar import Calendar
 from flask import render_template, flash, redirect
 import requests
 import folium
+from forms import LoginForm
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -23,7 +24,7 @@ def hello_world():
 @app.route('/kartta')
 def kartta():
     map_osm = folium.Map(location=[45.5236, -122.6750],  width="75%", height="95%")
-    map_osm.create_map(path='templates/osm.html')
+    map_osm.create_map(path='osm.html')
     return render_template('osm.html')
 
 @app.route('/indeksi', methods=['GET', 'POST'])

@@ -1,8 +1,14 @@
-<!DOCTYPE HTML>
-<title>OpenLayers Simplest Example</title>
-<div id="demoMap" style="height:250px"></div>
-<script src="OpenLayers.js"></script>
-<script>
-    map = OpenLayers.Map("demoMap")
-    map.addLayer(new OpenLayers.Layer.OSM())
-</script>
+{% extends "base.html" %}
+	{% block content %}
+	    <form action="" method="post" name="login">
+	      {{ form.hidden_tag() }}
+	      <p>
+	          Please enter your URL:<br>
+	          {{ form.url(size=80) }}<br>
+	          {% for error in form.url.errors %}
+	            <span style="color: #ff061a;">[{{ error }}]</span>
+	          {% endfor %}<br>
+	      </p>
+	      <p><input type="submit" value="Hae"></p>
+	  </form>
+	{% endblock %}
