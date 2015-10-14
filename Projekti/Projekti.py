@@ -2,10 +2,11 @@ from flask import Flask
 from icalendar import Calendar
 from flask import render_template, flash, redirect
 import requests
-from forms import LoginForm
+import folium
 
 app = Flask(__name__)
 app.config.from_object('config')
+
 
 
 @app.route('/')
@@ -14,9 +15,16 @@ def hello_world():
     koodi = r.text
     cal = Calendar.from_ical(koodi)
     for component in cal.walk('vevent'):
-        print (component.get('summary'))
-        print (component.get('location'))
+        print(component.get('summary'))
+        print(component.get('location'))
+
     return "Hello Worldg!"
+
+@app.route('/kartta')
+def kartta():
+    map_osm = folium.Map(location=[45.5236, -122.6750],  width="75%", height="95%")
+    map_osm.create_map(path='templates/osm.html')
+    return render_template('osm.html')
 
 @app.route('/indeksi', methods=['GET', 'POST'])
 def indeksi():
