@@ -22,10 +22,12 @@ def hello_world():
         print(component.get('location'))
 
     map_osm = folium.Map(location=[45.5236, -122.6750],  width="75%", height="95%")
-    map_osm.create_map(path='templates/osm.html')
+    map_osm.create_map(path='osm.html')
     lol = map_osm.HTML
-
+    hepa = "heihei"
     form = LoginForm()
+    long = 25.731064
+    lat = 62.234984
     if form.validate_on_submit():
         flash('Login requested for URL="%s"' %
               (form.url.data))
@@ -33,7 +35,8 @@ def hello_world():
     return render_template('indeksi.html',
                            title='Sign In',
                            form=form,
-                           lol=lol)
+                           lat=lat,
+                           long=long)
 
 @app.route('/kartta')
 def kartta():
