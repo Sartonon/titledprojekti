@@ -70,7 +70,7 @@ def indeksi():
                            title='Sign In',
                            form=form,
                            lat=lat,
-                           long=lon)
+                           lon=lon)
 
 if __name__ == '__main__':
     app.run(debug=True)
