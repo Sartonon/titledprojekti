@@ -22,7 +22,12 @@
   <h2>{{ hepa }}</h2>
   <h1>Karttaprojekti</h1>
  {% block content %}{% endblock %}
+  {% if tapahtumat %}
+  {%  for tapahtuma in tapahtumat %}
+  <div><p> {{ tapahtuma.paikka }} klo. <b>{{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</b></p></div>
+  {% enfor %}
+  {% endif %}
  <div id="map"></div>
-    <iframe id="kartta" src="/kartta?lat={{ lat }}&lon {{ long }}"></iframe>
+    <iframe id="kartta" src="/kartta?lat={{ lat }}&lon{{ long }}"></iframe>
 </body>
 </html>

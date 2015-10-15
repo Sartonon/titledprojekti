@@ -6,18 +6,15 @@ from forms import LoginForm
 from flask import request
 import requests
 
-
-
 app = Flask(__name__)
 app.config.from_object('config')
-
 
 
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
     r = requests.get('https://korppi.jyu.fi/calendar/ical/QAdtuntDGVQmFXN')
-    koodi = r.text
-    cal = Calendar.from_ical(koodi)
+    teksti = r.text
+    cal = Calendar.from_ical(teksti)
     for component in cal.walk('vevent'):
         print(component.get('summary'))
         print(component.get('location'))
@@ -26,7 +23,7 @@ def hello_world():
     lat = 62.234984
     if form.validate_on_submit():
         flash('Login requested for URL="%s"' %
-              (form.url.data))
+              form.url.data)
         return redirect('/')
     return render_template('indeksi.html',
                            title='Sign In',
@@ -49,6 +46,7 @@ def kartta():
     srcdoc = map_osm.HTML
     return render_template('osm.html')
 
+
 @app.route('/indeksi', methods=['GET', 'POST'])
 def indeksi():
     form = LoginForm()
@@ -56,7 +54,7 @@ def indeksi():
     lon = 25.731064
     if form.validate_on_submit():
         flash('Login requested for URL="%s"' %
-              (form.url.data))
+              form.url.data)
         return redirect('/indeksi')
     return render_template('indeksi.html',
                            title='Sign In',
