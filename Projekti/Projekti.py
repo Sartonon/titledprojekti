@@ -41,11 +41,12 @@ def hello_world():
 @app.route('/kartta')
 def kartta():
     map_osm = folium.Map(location=[45.5236, -122.6750],  width="75%", height="95%")
-    map_osm._build_map()
+    print(map_osm)
+    map = map_osm.create_map(path='templates/osm.html')
     srcdoc = map_osm.HTML
     print(srcdoc)
 
-    return srcdoc
+    return render_template('osm.html')
 
 @app.route('/indeksi', methods=['GET', 'POST'])
 def indeksi():
