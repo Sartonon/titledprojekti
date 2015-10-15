@@ -1,9 +1,8 @@
 from flask import Flask
 from icalendar import Calendar
 from flask import render_template, flash, redirect
-import requests
 import folium
-from forms import LoginForm
+from .forms import LoginForm
 from flask import request
 
 
