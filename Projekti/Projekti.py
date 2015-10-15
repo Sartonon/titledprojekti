@@ -43,7 +43,7 @@ def kartta():
         lat = float(request.args.get("lat"))
     if request.args.get('lon'):
         lon = float(request.args.get("lon"))
-    map_osm = folium.Map(location=[lat, lon],  width="75%", height="95%")
+    map_osm = folium.Map(location=[lat, lon],  width="100%", height="100%")
     print(map_osm)
     map = map_osm.create_map(path='templates/osm.html')
     srcdoc = map_osm.HTML
@@ -52,13 +52,17 @@ def kartta():
 @app.route('/indeksi', methods=['GET', 'POST'])
 def indeksi():
     form = LoginForm()
+    lat = 62.234984
+    lon = 25.731064
     if form.validate_on_submit():
         flash('Login requested for URL="%s"' %
               (form.url.data))
         return redirect('/indeksi')
     return render_template('indeksi.html',
                            title='Sign In',
-                           form=form)
+                           form=form,
+                           lat=lat,
+                           long=lon)
 
 if __name__ == '__main__':
     app.run(debug=True)
