@@ -2,32 +2,6 @@
 <html lang="en">
 
 <head>
-    <style>
-      #map {
-        height: 500px;
-        width: 500px;
-      }
-
-    </style>
-    <script>
-        var myLatLng = {lat: {{ lat }}, lng: {{long}}};
-        var map;
-        function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: {{ lat }}, lng: {{long}}},
-            zoom: 15
-          });
-
-    var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: 'Hello World!'
-  });
-}
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5_esLDmTBBVgfA5Fo1eF-RVPnbH5Wv6U&callback=initMap"
-        async defer></script>
-    <meta charset="UTF-8">
     <title>Karttaprojekti</title>
 </head>
 <body>
@@ -35,6 +9,6 @@
   <h1>Karttaprojekti</h1>
  {% block content %}{% endblock %}
  <div id="map"></div>
-    <iframe src="/kartta?lat=" {{ lat }}></iframe>
+    <iframe src="/kartta?lat={{ lat }}&lon {{ long }}"></iframe>
 </body>
 </html>
