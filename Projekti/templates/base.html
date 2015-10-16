@@ -4,8 +4,8 @@
 <head>
     <style>
         #kartta {
-         width: 70%;
-         height: 70%;
+         width: 500px;
+         height: 500px;
         }
         html {
             height: 90%;
@@ -28,6 +28,6 @@
   {% endfor %}
   {% endif %}
  <div id="map"></div>
-    <iframe id="kartta" src="/kartta?lat={{ lat }}&lon{{ long }}"></iframe>
+    <iframe id="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
 </body>
 </html>
