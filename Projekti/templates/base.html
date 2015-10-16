@@ -21,6 +21,16 @@
 <body>
   <h2>{{ hepa }}</h2>
   <h1>Karttaprojekti</h1>
+  <hr>
+    {% with message = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li> {{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
  {% block content %}{% endblock %}
   {% if tapahtumat %}
   {%  for tapahtuma in tapahtumat %}

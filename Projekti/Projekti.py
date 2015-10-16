@@ -6,36 +6,41 @@ from forms import LoginForm
 from flask import request
 import requests
 import lista
+import parseri
 
 app = Flask(__name__)
 app.config.from_object('config')
 
 
 @app.route('/', methods=['GET', 'POST'])
-def hello_world():
+def perus():
     listaDict = lista.listaDict()
     lat = (listaDict['Ag']['lat'])
     lon = (listaDict['Ag']['lon'])
     form = LoginForm()
+    tapahtumat = []
     try:
-      if form.url.data is not None:
-          r = requests.get(form.url.data)
-          koodi = r.text
-          cal = Calendar.from_ical(koodi)
-          for component in cal.walk('vevent'):
-             print(component.get('summary'))
-             print(component.get('location'))
+        if form.url.data is not None:
+            data = requests.get(form.url.data)
+            tapahtumat = parseri.tiedotArray(data)
+            koodi = data.text
+            cal = Calendar.from_ical(koodi)
+            for component in cal.walk('vevent'):
+                print(component.get('summary'))
+                print(component.get('location'))
     except:
         print ("virhe")
 
-
+    ''' #Mita tama tekee?
     if form.validate_on_submit():
         flash('Login requested for URL="%s"' %
               form.url.data)
-        return redirect('/')
+        return redirect('/')'''
+
     return render_template('indeksi.html',
                            title='Sign In',
                            form=form,
+                           tapahtumat=tapahtumat,
                            lat=lat,
                            lon=lon)
 
