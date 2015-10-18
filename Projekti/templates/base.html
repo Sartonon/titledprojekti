@@ -22,7 +22,7 @@
   <h2>{{ hepa }}</h2>
   <h1>Karttaprojekti</h1>
   <hr>
-    {% with message = get_flashed_messages() %}
+    {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
             {% for message in messages %}
@@ -34,7 +34,7 @@
  {% block content %}{% endblock %}
   {% if tapahtumat %}
   {%  for tapahtuma in tapahtumat %}
-  <div><p> {{ tapahtuma.paikka }} klo. <b>{{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</b></p></div>
+  <div><p> {{ tapahtuma.paiva }}, {{ tapahtuma.paikka }} klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</p></div>
   {% endfor %}
   {% endif %}
  <div id="map"></div>

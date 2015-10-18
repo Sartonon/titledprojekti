@@ -23,20 +23,9 @@ def perus():
         if form.url.data is not None:
             data = requests.get(form.url.data)
             tapahtumat = parseri.tiedotArray(data)
-            koodi = data.text
-            cal = Calendar.from_ical(koodi)
-            for component in cal.walk('vevent'):
-                print(component.get('summary'))
-                print(component.get('location'))
     except:
         print ("virhe")
-
-    ''' #Mita tama tekee?
-    if form.validate_on_submit():
-        flash('Login requested for URL="%s"' %
-              form.url.data)
-        return redirect('/')'''
-
+        flash('Anna kalenterin URL')
     return render_template('indeksi.html',
                            title='Sign In',
                            form=form,
@@ -44,12 +33,12 @@ def perus():
                            lat=lat,
                            lon=lon)
 
-
+#Turha?
 @app.route('/kartta', methods=['GET', 'POST'])
 def kartta():
     if request.args.get('lat') and request.args.get('lon'):
         lat = float(request.args.get("lat"))
-        lon = float(request.args.get("lat"))
+        lon = float(request.args.get("lon"))
     else:
         listaDict = lista.listaDict()
         lat = (listaDict['Ag']['lat'])
@@ -59,22 +48,6 @@ def kartta():
     map_osm.create_map(path='templates/osm.html')
 
     return render_template('osm.html')
-
-
-@app.route('/indeksi', methods=['GET', 'POST'])
-def indeksi():
-    form = LoginForm()
-    lat = 62.234984
-    lon = 25.731064
-    if form.validate_on_submit():
-        flash('Login requested for URL="%s"' %
-              form.url.data)
-        return redirect('/indeksi')
-    return render_template('indeksi.html',
-                           title='Sign In',
-                           form=form,
-                           lat=lat,
-                           lon=lon)
 
 if __name__ == '__main__':
     app.run(debug=True)
