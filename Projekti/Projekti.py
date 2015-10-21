@@ -26,7 +26,7 @@ def perus():
     except:
         print ("virhe")
         flash('Anna kalenterin URL')
-    return render_template('indeksi.html',
+    return render_template('base.html',
                            title='Sign In',
                            form=form,
                            tapahtumat=tapahtumat,
