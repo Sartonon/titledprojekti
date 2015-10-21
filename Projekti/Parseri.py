@@ -10,7 +10,7 @@ def tiedotArray(data):
     try:
         cal = Calendar.from_ical(data.text)
         for tapahtuma in cal.walk('vevent'):
-            if tapahtuma.get('dtstart').dt.date() >= today:
+            if tapahtuma.get('dtstart').dt.date() == today:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
                                    'aika': tapahtuma.get('dtstart').dt.time(),

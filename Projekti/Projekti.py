@@ -6,7 +6,7 @@ from forms import LoginForm
 from flask import request
 import requests
 import lista
-import parseri
+from Parseri import tiedotArray
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -22,7 +22,7 @@ def perus():
     try:
         if form.url.data is not None:
             data = requests.get(form.url.data)
-            tapahtumat = parseri.tiedotArray(data)
+            tapahtumat = tiedotArray(data)
     except:
         print ("virhe")
         flash('Anna kalenterin URL')
