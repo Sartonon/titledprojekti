@@ -20,12 +20,10 @@
 
         #url {
             width: 100%;
-            margin-bottom: 2px;
+            margin-bottom: 0px;
         }
 
         @media (min-width: 600px) {
-
-
         }
 
         .jumbotron {
@@ -61,12 +59,9 @@
 	      {{ form.hidden_tag() }}
 	      <p>
 	          Anna Korpin kalenterin URL:<br>
-	          {{ form.url(size=80) }}<br>
-	          {% for error in form.url.errors %}
-	            <span style="color: #ff061a;">[{{ error }}]</span>
-	          {% endfor %}<br>
+	          {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL") }}<br>
 	      </p>
-	      <p><input type="submit" value="Hae"></p>
+	      <p><input type="submit" class="btn btn-default" value="Hae"></p>
 	   </form>
     <iframe id="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
    </div>
