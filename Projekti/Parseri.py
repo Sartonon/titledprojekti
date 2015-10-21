@@ -1,5 +1,6 @@
 from icalendar import Calendar
 from datetime import date
+import urllib
 import time
 import datetime
 
@@ -15,8 +16,8 @@ def tiedotArray(data):
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
                                    'aika': tapahtuma.get('dtstart').dt.time(),
                                    'kuvaus': tapahtuma.get('summary')})
-    except:
-        print('virhe parsimisessa')
+    except urllib.URLError as e:
+        print("Website (%s) could not be reached due to %s" % (e.url, e.reason))
 
     tiedot = [
         {

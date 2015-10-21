@@ -23,9 +23,10 @@ def perus():
         if form.url.data is not None:
             data = requests.get(form.url.data)
             tapahtumat = tiedotArray(data)
+
     except:
-        print ("virhe")
-        flash('Anna kalenterin URL')
+        print("virhe")
+        flash("URL:ssa virhe, kokeile uudelleen.")
     return render_template('base.html',
                            title='Sign In',
                            form=form,
