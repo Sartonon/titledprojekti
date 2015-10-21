@@ -14,6 +14,7 @@ app.config.from_object('config')
 
 @app.route('/', methods=['GET', 'POST'])
 def perus():
+
     listaDict = lista.listaDict()
     lat = (listaDict['Ag']['C232']['lat'])
     lon = (listaDict['Ag']['C232']['lon'])

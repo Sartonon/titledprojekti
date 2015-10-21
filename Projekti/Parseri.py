@@ -1,7 +1,7 @@
 from icalendar import Calendar
 from datetime import date
 import urllib
-import time
+from datetime import timezone
 import datetime
 
 
@@ -14,7 +14,7 @@ def tiedotArray(data):
             if tapahtuma.get('dtstart').dt.date() == today:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
-                                   'aika': tapahtuma.get('dtstart').dt.time(),
+                                   'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
                                    'kuvaus': tapahtuma.get('summary')})
     except urllib.URLError as e:
         print("Website (%s) could not be reached due to %s" % (e.url, e.reason))
@@ -27,3 +27,7 @@ def tiedotArray(data):
         }
     ]
     return tapahtumat
+
+
+def utc_to_local(utc_dt):
+    return utc_dt.replace(tzinfo=timezone.utc).astimezone(tz=None)
