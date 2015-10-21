@@ -26,45 +26,43 @@
 
 
         }
-
-
-
     </style>
     <title>Karttaprojekti</title>
 </head>
 <body>
-  <h2>{{ hepa }}</h2>
   <div class="jumbotron">
   <div class="container">
     <h1>Karttaprojekti</h1>
   </div>
   </div>
-  <hr>
   <div class="container-fluid">
   <div class="row-fluid">
-   <div class="col-md-8">
+   <div class="col-md-8 col-sm-8">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ul>
+
             {% for message in messages %}
-                <li> {{ message }} </li>
+               <div class="alert alert-danger" role="alert">
+               <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+               <span class="sr-only">Error:</span>
+              {{ message }}
+              </div>
             {% endfor %}
-        </ul>
+
         {% endif %}
     {% endwith %}
  {% block content %}{% endblock %}
     <iframe id="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
    </div>
-   <div class="col-md-4">
+   <div class="col-md-4 col-sm-4">
        {% if tapahtumat %}
-           <ol>
-       {%  for tapahtuma in tapahtumat %}
-           <li>
-       {{ tapahtuma.paiva }}, {{ tapahtuma.paikka }} klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}
-           </li>
-       {% endfor %}
-           </ol>
+           <div class="list-group">
+           {%  for tapahtuma in tapahtumat %}
+           <a href="#" class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }} klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>
+           {% endfor %}
+           </div>
        {% endif %}
+
    </div>
   </div>
   </div>
