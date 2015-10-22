@@ -1,6 +1,5 @@
 import operator
 from flask import Flask
-from icalendar import Calendar
 from flask import render_template, flash, redirect
 import folium
 from forms import LoginForm
@@ -25,7 +24,7 @@ def perus():
         if form.url.data is not None:
             data = requests.get(form.url.data)
             tapahtumat = tiedotArray(data)
-            tapahtumat.sort(key=operator.itemgetter('aika'))
+            tapahtumat.sort(key=operator.itemgetter('paiva','aika'))
 
     except:
         print("virhe")
