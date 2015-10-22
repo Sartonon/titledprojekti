@@ -69,7 +69,7 @@
        {% if tapahtumat %}
            <div class="list-group">
            {%  for tapahtuma in tapahtumat %}
-           <a href="javascript:muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }} klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>
+           <a href="javascript:muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')" class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }} klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>
            {% endfor %}
            </div>
        {% endif %}
