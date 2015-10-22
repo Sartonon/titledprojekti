@@ -65,7 +65,7 @@
 	   </form>
     <!--<iframe id="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe> -->
 
-
+   <!-- OpenStreetMap embedded vaatii ikkunan oikean ja vasemman laidan koordinaatit, nyt siis "zoomaustaso" kovakoodattu-->
    <iframe id="kartta" src="http://www.openstreetmap.org/export/embed.html?bbox={{ lon - 0.004 }}%2C{{ lat - 0.002 }}%2C{{ lon + 0.004 }}%2C{{ lat + 0.002 }}&amp;layer=mapnik&amp;marker={{ lat }}%2C{{ lon }}"></iframe>
        <br/>
        <small><a href="http://www.openstreetmap.org/?mlat={{ lat }}&amp;mlon={{ lon }}#map=18/{{ lat }}/{{ lon }}&amp;layers=N">Katso isommalla kartalla</a></small>
