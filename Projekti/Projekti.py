@@ -1,3 +1,4 @@
+import operator
 from flask import Flask
 from icalendar import Calendar
 from flask import render_template, flash, redirect
@@ -24,6 +25,7 @@ def perus():
         if form.url.data is not None:
             data = requests.get(form.url.data)
             tapahtumat = tiedotArray(data)
+            tapahtumat.sort(key=operator.itemgetter('aika'))
 
     except:
         print("virhe")
