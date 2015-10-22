@@ -63,19 +63,13 @@
 	      </p>
 	      <p><input type="submit" class="btn btn-default" value="Hae"></p>
 	   </form>
-    <!--<iframe id="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe> -->
-
-   <!-- OpenStreetMap embedded vaatii ikkunan oikean ja vasemman laidan koordinaatit, nyt siis "zoomaustaso" kovakoodattu-->
-   <iframe id="kartta" src="http://www.openstreetmap.org/export/embed.html?bbox={{ lon - 0.004 }}%2C{{ lat - 0.002 }}%2C{{ lon + 0.004 }}%2C{{ lat + 0.002 }}&amp;layer=mapnik&amp;marker={{ lat }}%2C{{ lon }}"></iframe>
-       <br/>
-       <small><a href="http://www.openstreetmap.org/?mlat={{ lat }}&amp;mlon={{ lon }}#map=18/{{ lat }}/{{ lon }}&amp;layers=N">Katso isommalla kartalla</a></small>
-
+    <iframe id="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
    </div>
    <div class="col-md-4 col-sm-4">
        {% if tapahtumat %}
            <div class="list-group">
            {%  for tapahtuma in tapahtumat %}
-           <a href="#" class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }} klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>
+           <a href="javascript:muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }} klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>
            {% endfor %}
            </div>
        {% endif %}
@@ -86,5 +80,10 @@
   <script src="../static/jquery-2.1.4.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function muuta(lat, lon) {
+            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon)
+        }
+    </script>
 </body>
 </html>

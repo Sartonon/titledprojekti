@@ -3,6 +3,7 @@ from datetime import date
 import urllib
 from datetime import timezone
 import datetime
+from lista import listaDict
 
 
 def tiedotArray(data):
@@ -14,7 +15,9 @@ def tiedotArray(data):
             tapahtumat.append({'paikka': tapahtuma.get('location'),
                                'paiva': tapahtuma.get('dtstart').dt.date(),
                                'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
-                               'kuvaus': tapahtuma.get('summary')})
+                               'kuvaus': tapahtuma.get('summary'),
+                               'lat': 62.23208179357579,
+                               'lon': 25.736987865703245})
     except urllib.URLError as e:
         print("Website (%s) could not be reached due to %s" % (e.url, e.reason))
 

@@ -36,7 +36,7 @@ def perus():
                            lat=lat,
                            lon=lon)
 
-#Turha?
+
 @app.route('/kartta', methods=['GET', 'POST'])
 def kartta():
     if request.args.get('lat') and request.args.get('lon'):
@@ -44,8 +44,8 @@ def kartta():
         lon = float(request.args.get("lon"))
     else:
         listaDict = lista.listaDict()
-        lat = (listaDict['Ag']['lat'])
-        lon = (listaDict['Ag']['lon'])
+        lat = (listaDict['Ag']['C232']['lat'])
+        lon = (listaDict['Ag']['C232']['lon'])
     map_osm = folium.Map(location=[lat, lon],  width="100%", height="100%", zoom_start=17, max_zoom=18)
     map_osm.simple_marker([lat, lon])
     map_osm.create_map(path='templates/osm.html')
