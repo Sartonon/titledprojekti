@@ -1,9 +1,9 @@
 def listaDict():
     listaDict = {
-         'Ag': {
+        'Ag': {
             'lat': 62.23252728347514,
             'lon': 25.73729200674369
-         },
+        },
         #     'C232':
         #     {
         #         'lat': 62.23252728347514,
@@ -20,5 +20,5 @@ def listaDict():
                 'lat': 75,
                 'lon': 75
             }
-                }
+    }
     return listaDict
