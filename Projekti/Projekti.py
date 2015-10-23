@@ -16,8 +16,8 @@ app.config.from_object('config')
 def perus():
 
     listaDict = lista.listaDict()
-    lat = (listaDict['Ag']['C232']['lat'])
-    lon = (listaDict['Ag']['C232']['lon'])
+    lat = 67
+    lon = 67
     form = LoginForm()
     tapahtumat = []
     try:
@@ -44,8 +44,8 @@ def kartta():
         lon = float(request.args.get("lon"))
     else:
         listaDict = lista.listaDict()
-        lat = (listaDict['Ag']['C232']['lat'])
-        lon = (listaDict['Ag']['C232']['lon'])
+        lat = (listaDict['Ag']['lat'])
+        lon = (listaDict['Ag']['lon'])
     map_osm = folium.Map(location=[lat, lon],  width="100%", height="100%", zoom_start=17, max_zoom=18)
     map_osm.simple_marker([lat, lon])
     map_osm.create_map(path='templates/osm.html')
