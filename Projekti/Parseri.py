@@ -9,22 +9,29 @@ def tiedotArray(data):
     today = date.today()
     listaDict = lista.listaDict()
     tapahtumat = []
-    try:
-        cal = Calendar.from_ical(data.text)
-        for tapahtuma in cal.walk('vevent'):
-            tapahtumaLyh = tapahtuma.get('location')[:2]
-            tapahtumat.append({'paikka': tapahtuma.get('location'),
-                               'paiva': tapahtuma.get('dtstart').dt.date(),
-                               'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
-                               'kuvaus': tapahtuma.get('summary')})
-
-                                if tapahtumaLyh in listaDict:
-                                    tapahtumat.append({ 'lat': listaDict[tapahtumaLyh]['lat'],
-                                                        'lon': listaDict[tapahtumaLyh]['lon']}) #lat = (listaDict['Ag']['C232']['lat'])
-
-
-    except urllib.URLError as e:
-        print("Website (%s) could not be reached due to %s" % (e.url, e.reason))
+    #try:
+    cal = Calendar.from_ical(data.text)
+    for tapahtuma in cal.walk('vevent'):
+         if  tapahtuma.get('location') is not None:
+             tapahtumaLyh = tapahtuma.get('location')[:2]
+         if tapahtumaLyh in listaDict:
+             print(tapahtumaLyh)
+             tapahtumat.append({'paikka': tapahtuma.get('location'),
+                            'paiva': tapahtuma.get('dtstart').dt.date(),
+                            'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
+                            'kuvaus': tapahtuma.get('summary'),
+                            'lat': listaDict[tapahtumaLyh]['lat'],
+                            'lon': listaDict[tapahtumaLyh]['lon']})
+         else:
+             print(tapahtumaLyh)
+             tapahtumat.append({'paikka': tapahtuma.get('location'),
+                            'paiva': tapahtuma.get('dtstart').dt.date(),
+                            'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
+                            'kuvaus': tapahtuma.get('summary'),
+                            'lat': 0,
+                            'lon': 0})
+    #ecept:
+     #   print("virhe")
 
     tiedot = [
         {
