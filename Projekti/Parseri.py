@@ -16,7 +16,7 @@ def tiedotArray(data):
             tapahtumat.append({'paikka': tapahtuma.get('location'),
                                'paiva': tapahtuma.get('dtstart').dt.date(),
                                'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
-                               'kuvaus': tapahtuma.get('summary')}),
+                               'kuvaus': tapahtuma.get('summary')})
 
                                 if tapahtumaLyh in listaDict:
                                     tapahtumat.append({ 'lat': listaDict[tapahtumaLyh]['lat'],
