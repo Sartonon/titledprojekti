@@ -20,15 +20,16 @@ def perus():
     lon = 67
     form = LoginForm()
     tapahtumat = []
-   # try:
-    if form.url.data is not None:
+    lahimmatTapahtumat = [] #tahan voisi parsia tapahtumat-jutusta lahimman seuraavan paivan tapahtumat
+    try:
+     if form.url.data is not None:
             data = requests.get(form.url.data)
             tapahtumat = tiedotArray(data)
             tapahtumat.sort(key=operator.itemgetter('paiva','aika'))
 
-   # except:
-       # print("virhe")
-       # flash("URL:ssa virhe, kokeile uudelleen.")
+    except:
+       print("virhe")
+       flash("URL:ssa virhe, kokeile uudelleen.")
     return render_template('base.html',
                            title='Sign In',
                            form=form,
