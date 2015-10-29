@@ -1,8 +1,8 @@
-from icalendar import Calendar
 from datetime import date
-import urllib
 from datetime import timezone
-import datetime
+
+from icalendar import Calendar
+
 import lista
 
 
@@ -51,16 +51,28 @@ def tiedotArray(data):
     today = date.today()
     listaDict = lista.listaDict()
     kaikkiTapahtumat = []
-    tanaanTapahtumat = []
     #try:
     cal = Calendar.from_ical(data.text)
 
     laitaListaanKaikki(kaikkiTapahtumat, cal, listaDict, today)
-    #laitaListaanTanaanHuomennaYlihuomenna(tanaanTapahtumat, listaDict, today) TODO: toimimaan???
 
     #ecept:
      #   print("virhe")
     return kaikkiTapahtumat
+
+def tiedotArrayTanaan(data):
+    today = date.today()
+    listaDict = lista.listaDict()
+    tanaanTapahtumat = []
+    #try:
+    cal = Calendar.from_ical(data.text)
+
+    laitaListaanTanaanHuomennaYlihuomenna(tanaanTapahtumat, cal, listaDict, today)
+    #laitaListaanTanaanHuomennaYlihuomenna(tanaanTapahtumat, listaDict, today) TODO: toimimaan???
+
+    #ecept:
+     #   print("virhe")
+    return tanaanTapahtumat
 
 
 def utc_to_local(utc_dt):

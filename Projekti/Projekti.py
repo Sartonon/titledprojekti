@@ -6,7 +6,7 @@ from forms import LoginForm
 from flask import request
 import requests
 import lista
-from Parseri import tiedotArray
+from Parseri import tiedotArray, tiedotArrayTanaan
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -14,17 +14,16 @@ app.config.from_object('config')
 
 @app.route('/', methods=['GET', 'POST'])
 def perus():
-
-    listaDict = lista.listaDict()
     lat = 67
     lon = 67
     form = LoginForm()
     tapahtumat = []
-    lahimmatTapahtumat = [] #jotain, jotain
+    tapahtumatTanaan = []
     try:
      if form.url.data is not None:
             data = requests.get(form.url.data)
             tapahtumat = tiedotArray(data)
+            tapahtumatTanaan = tiedotArrayTanaan(data)
             tapahtumat.sort(key=operator.itemgetter('paiva','aika'))
 
     except:
@@ -34,6 +33,7 @@ def perus():
                            title='Sign In',
                            form=form,
                            tapahtumat=tapahtumat,
+                           tapahtumatTanaan=tapahtumatTanaan,
                            lat=lat,
                            lon=lon)
 
