@@ -10,8 +10,10 @@ def tiedotArray(data):
     today = date.today()
     listaDict = lista.listaDict()
     tapahtumat = []
+
     # try:
-    cal = Calendar.from_ical(data.text)
+    tekstina = data.text
+    cal = Calendar.from_ical(tekstina)
     for tapahtuma in cal.walk('vevent'):
         if tapahtuma.get('location') is not None:
             tapahtumaLyh = tapahtuma.get('location')[:2]
