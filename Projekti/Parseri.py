@@ -1,49 +1,66 @@
-from datetime import date
-from datetime import timezone
-
 from icalendar import Calendar
-
+from datetime import date
+import urllib
+from datetime import timezone
+import datetime
 import lista
 
 
-def tiedotArray(data):
-    today = date.today()
-    listaDict = lista.listaDict()
-    tapahtumat = []
-
-    # try:
-    tekstina = data.text
-    cal = Calendar.from_ical(tekstina)
+def laitaListaanKaikki(tapahtumat, cal, listaDict, today):
     for tapahtuma in cal.walk('vevent'):
-        if tapahtuma.get('location') is not None:
-            tapahtumaLyh = tapahtuma.get('location')[:2]
-        if tapahtumaLyh in listaDict:
-            print(tapahtumaLyh)
-            tapahtumat.append({'paikka': tapahtuma.get('location'),
+     if tapahtuma.get('dtstart').dt.date() >= today:
+            if tapahtuma.get('location') is not None:
+                tapahtumaLyh = tapahtuma.get('location')[:2]
+            if tapahtumaLyh in listaDict:
+                tapahtumat.append({'paikka': tapahtuma.get('location'),
                                'paiva': tapahtuma.get('dtstart').dt.date(),
                                'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
                                'kuvaus': tapahtuma.get('summary'),
                                'lat': listaDict[tapahtumaLyh]['lat'],
                                'lon': listaDict[tapahtumaLyh]['lon']})
-        else:
-            print(tapahtumaLyh)
-            tapahtumat.append({'paikka': tapahtuma.get('location'),
+            else:
+                tapahtumat.append({'paikka': tapahtuma.get('location'),
                                'paiva': tapahtuma.get('dtstart').dt.date(),
                                'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
                                'kuvaus': tapahtuma.get('summary'),
                                'lat': 0,
                                'lon': 0})
-            # ecept:
-            #   print("virhe")
 
-    tiedot = [
-        {
-            'paikka': 'Ag C231',
-            'aika': '20150928T051500Z',
-            'kuvaus': 'TIEA207 TIEA207 projektikurssin aloitustapaaminen'
-        }
-    ]
-    return tapahtumat
+def laitaListaanTanaanHuomennaYlihuomenna(tapahtumat1, cal, listaDict, paiva):
+    for tapahtuma in cal.walk('vevent'):
+     if tapahtuma.get('dtstart').dt.date() == paiva:
+            if tapahtuma.get('location') is not None:
+                tapahtumaLyh = tapahtuma.get('location')[:2]
+            if tapahtumaLyh in listaDict:
+                tapahtumat1.append({'paikka': tapahtuma.get('location'),
+                               'paiva': tapahtuma.get('dtstart').dt.date(),
+                               'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
+                               'kuvaus': tapahtuma.get('summary'),
+                               'lat': listaDict[tapahtumaLyh]['lat'],
+                               'lon': listaDict[tapahtumaLyh]['lon']})
+            else:
+                tapahtumat1.append({'paikka': tapahtuma.get('location'),
+                               'paiva': tapahtuma.get('dtstart').dt.date(),
+                               'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
+                               'kuvaus': tapahtuma.get('summary'),
+                               'lat': 0,
+                               'lon': 0})
+
+
+def tiedotArray(data):
+    today = date.today()
+    listaDict = lista.listaDict()
+    kaikkiTapahtumat = []
+    tanaanTapahtumat = []
+    #try:
+    cal = Calendar.from_ical(data.text)
+
+    laitaListaanKaikki(kaikkiTapahtumat, cal, listaDict, today)
+    #laitaListaanTanaanHuomennaYlihuomenna(tanaanTapahtumat, listaDict, today) TODO: toimimaan???
+
+    #ecept:
+     #   print("virhe")
+    return kaikkiTapahtumat
 
 
 def utc_to_local(utc_dt):
