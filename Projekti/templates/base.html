@@ -69,9 +69,8 @@
             <ul class="test2 nav nav-pills">
                 <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
                     <ul id="myTabs" class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#tanaan" id="home-tab" role="tab"
-                                                                  data-toggle="tab" aria-controls="home"
-                                                                  aria-expanded="true">Tänään</a></li>
+                        <li role="presentation" class="active"><a href="#tanaan" id="home-tab" role="tab" data-toggle="tab"
+                                                                  aria-controls="home" aria-expanded="true">Tänään</a></li>
                         <li class="" role="presentation"><a aria-expanded="false" href="#huomenna" role="tab"
                                                             id="profile-tab" data-toggle="tab" aria-controls="profile">Huomenna</a>
                         </li>
@@ -94,12 +93,31 @@
                                 </div>
                             {% endif %}
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="huomennaTapahtumat" aria-labelledby="profile-tab">
 
+                        <div role="tabpanel" class="tab-pane fade" id="huomenna" aria-labelledby="profile-tab">
+                            {% if tapahtumatHuomenna %}
+                                <div class="list-group" id="huomennaTapahtumat">
+                                    {% for tapahtumaHuomenna in tapahtumatHuomenna %}
+                                        <a href="javascript:muuta('{{ tapahtumaHuomenna.lat }}', '{{ tapahtumaHuomenna.lon }}')"
+                                           class="list-group-item">{{ tapahtumaHuomenna.paiva }}, {{ tapahtumaHuomenna.paikka }}
+                                            klo. {{ tapahtumaHuomenna.aika }}. kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="ylihuomennaTapahtumat" aria-labelledby="profile-tab">
 
+                        <div role="tabpanel" class="tab-pane fade" id="ylihuomenna" aria-labelledby="profile-tab">
+                            {% if tapahtumatYlihuomenna %}
+                                <div class="list-group" id="ylihuomennaTapahtumat">
+                                    {% for tapahtumaYlihuomenna in tapahtumatYlihuomenna %}
+                                        <a href="javascript:muuta('{{ tapahtumaYlihuomenna.lat }}', '{{ tapahtumaYlihuomenna.lon }}')"
+                                           class="list-group-item">{{ tapahtumaYlihuomenna.paiva }}, {{ tapahtumaYlihuomenna.paikka }}
+                                            klo. {{ tapahtumaYlihuomenna.aika }}. kuvaus: {{ tapahtumaYlihuomenna.kuvaus }}</a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
+
                         <div role="tabpanel" class="tab-pane fade" id="kaikki" aria-labelledby="profile-tab">
                             {% if tapahtumat %}
                                 <div class="list-group" id="kaikkiTapahtumat">

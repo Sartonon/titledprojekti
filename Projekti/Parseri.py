@@ -1,6 +1,6 @@
 from datetime import date
 from datetime import timezone
-
+import datetime
 from icalendar import Calendar
 
 import lista
@@ -68,11 +68,36 @@ def tiedotArrayTanaan(data):
     cal = Calendar.from_ical(data.text)
 
     laitaListaanTanaanHuomennaYlihuomenna(tanaanTapahtumat, cal, listaDict, today)
-    #laitaListaanTanaanHuomennaYlihuomenna(tanaanTapahtumat, listaDict, today) TODO: toimimaan???
 
     #ecept:
      #   print("virhe")
     return tanaanTapahtumat
+
+def tiedotArrayHuomenna(data):
+    huomenna = datetime.date.today() + datetime.timedelta(days=1)
+    listaDict = lista.listaDict()
+    huomennaTapahtumat = []
+    #try:
+    cal = Calendar.from_ical(data.text)
+
+    laitaListaanTanaanHuomennaYlihuomenna(huomennaTapahtumat, cal, listaDict, huomenna)
+
+    #ecept:
+     #   print("virhe")
+    return huomennaTapahtumat
+
+def tiedotArrayYlihuomenna(data):
+    ylihuomenna = datetime.date.today() + datetime.timedelta(days=2)
+    listaDict = lista.listaDict()
+    ylihuomennaTapahtumat = []
+    #try:
+    cal = Calendar.from_ical(data.text)
+
+    laitaListaanTanaanHuomennaYlihuomenna(ylihuomennaTapahtumat, cal, listaDict, ylihuomenna)
+
+    #ecept:
+     #   print("virhe")
+    return ylihuomennaTapahtumat
 
 
 def utc_to_local(utc_dt):

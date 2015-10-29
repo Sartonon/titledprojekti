@@ -6,7 +6,7 @@ from forms import LoginForm
 from flask import request
 import requests
 import lista
-from Parseri import tiedotArray, tiedotArrayTanaan
+from Parseri import tiedotArray, tiedotArrayTanaan, tiedotArrayHuomenna, tiedotArrayYlihuomenna
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -19,12 +19,34 @@ def perus():
     form = LoginForm()
     tapahtumat = []
     tapahtumatTanaan = []
+    tapahtumatHuomenna = []
+    tapahtumatYlihuomenna = []
     try:
      if form.url.data is not None:
             data = requests.get(form.url.data)
-            tapahtumat = tiedotArray(data)
-            tapahtumatTanaan = tiedotArrayTanaan(data)
-            tapahtumat.sort(key=operator.itemgetter('paiva','aika'))
+
+            try:
+                tapahtumatHuomenna = tiedotArrayHuomenna(data)
+                tapahtumatHuomenna.sort(key=operator.itemgetter('paiva','aika'))
+            except:
+                ()
+
+            try:
+                tapahtumat = tiedotArray(data)
+                tapahtumat.sort(key=operator.itemgetter('paiva','aika'))
+            except:
+                ()
+            try:
+                tapahtumatTanaan = tiedotArrayTanaan(data)
+                tapahtumatTanaan.sort(key=operator.itemgetter('paiva','aika'))
+            except:
+                ()
+
+            try:
+                tapahtumatYlihuomenna = tiedotArrayYlihuomenna(data)
+                tapahtumatYlihuomenna.sort(key=operator.itemgetter('paiva','aika'))
+            except:
+                ()
 
     except:
        print("virhe")
@@ -34,6 +56,8 @@ def perus():
                            form=form,
                            tapahtumat=tapahtumat,
                            tapahtumatTanaan=tapahtumatTanaan,
+                           tapahtumatHuomenna=tapahtumatHuomenna,
+                           tapahtumatYlihuomenna=tapahtumatYlihuomenna,
                            lat=lat,
                            lon=lon)
 
