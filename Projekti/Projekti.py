@@ -14,21 +14,22 @@ app.config.from_object('config')
 
 @app.route('/', methods=['GET', 'POST'])
 def perus():
+
     listaDict = lista.listaDict()
     lat = 67
     lon = 67
     form = LoginForm()
     tapahtumat = []
-    lahimmatTapahtumat = []  # tahan voisi parsia tapahtumat-jutusta lahimman seuraavan paivan tapahtumat
+    lahimmatTapahtumat = [] #jotain, jotain
     try:
-        if form.url.data is not None:
+     if form.url.data is not None:
             data = requests.get(form.url.data)
             tapahtumat = tiedotArray(data)
-            tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
+            tapahtumat.sort(key=operator.itemgetter('paiva','aika'))
 
     except:
-        print("virhe")
-        flash("URL:ssa virhe, kokeile uudelleen.")
+       print("virhe")
+       flash("URL:ssa virhe, kokeile uudelleen.")
     return render_template('base.html',
                            title='Sign In',
                            form=form,
@@ -46,12 +47,11 @@ def kartta():
         listaDict = lista.listaDict()
         lat = (listaDict['Ag']['lat'])
         lon = (listaDict['Ag']['lon'])
-    map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=17, max_zoom=18)
+    map_osm = folium.Map(location=[lat, lon],  width="100%", height="100%", zoom_start=17, max_zoom=18)
     map_osm.simple_marker([lat, lon])
     map_osm.create_map(path='templates/osm.html')
 
     return render_template('osm.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
