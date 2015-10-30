@@ -6,7 +6,7 @@ from forms import LoginForm
 from flask import request
 import requests
 import lista
-from Parseri import tiedotArray
+from Parseri import tiedotArray, tiedotArrayTanaan, tiedotArrayHuomenna, tiedotArrayYlihuomenna
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -14,18 +14,39 @@ app.config.from_object('config')
 
 @app.route('/', methods=['GET', 'POST'])
 def perus():
-
-    listaDict = lista.listaDict()
     lat = 67
     lon = 67
     form = LoginForm()
     tapahtumat = []
-    lahimmatTapahtumat = [] #jotain, jotain
+    tapahtumatTanaan = []
+    tapahtumatHuomenna = []
+    tapahtumatYlihuomenna = []
     try:
      if form.url.data is not None:
             data = requests.get(form.url.data)
-            tapahtumat = tiedotArray(data)
-            tapahtumat.sort(key=operator.itemgetter('paiva','aika'))
+
+            try:
+                tapahtumatHuomenna = tiedotArrayHuomenna(data)
+                tapahtumatHuomenna.sort(key=operator.itemgetter('paiva','aika'))
+            except:
+                ()
+
+            try:
+                tapahtumat = tiedotArray(data)
+                tapahtumat.sort(key=operator.itemgetter('paiva','aika'))
+            except:
+                ()
+            try:
+                tapahtumatTanaan = tiedotArrayTanaan(data)
+                tapahtumatTanaan.sort(key=operator.itemgetter('paiva','aika'))
+            except:
+                ()
+
+            try:
+                tapahtumatYlihuomenna = tiedotArrayYlihuomenna(data)
+                tapahtumatYlihuomenna.sort(key=operator.itemgetter('paiva','aika'))
+            except:
+                ()
 
     except:
        print("virhe")
@@ -34,6 +55,9 @@ def perus():
                            title='Sign In',
                            form=form,
                            tapahtumat=tapahtumat,
+                           tapahtumatTanaan=tapahtumatTanaan,
+                           tapahtumatHuomenna=tapahtumatHuomenna,
+                           tapahtumatYlihuomenna=tapahtumatYlihuomenna,
                            lat=lat,
                            lon=lon)
 
