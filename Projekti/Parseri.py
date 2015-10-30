@@ -7,6 +7,7 @@ import lista
 
 
 def laitaListaanKaikki(tapahtumat, cal, listaDict, today):
+    tapahtumaLyh = ""
     for tapahtuma in cal.walk('vevent'):
      if tapahtuma.get('dtstart').dt.date() >= today:
             if tapahtuma.get('location') is not None:
@@ -27,6 +28,7 @@ def laitaListaanKaikki(tapahtumat, cal, listaDict, today):
                                'lon': 0})
 
 def laitaListaanTanaanHuomennaYlihuomenna(tapahtumat1, cal, listaDict, paiva):
+    tapahtumaLyh = ""
     for tapahtuma in cal.walk('vevent'):
      if tapahtuma.get('dtstart').dt.date() == paiva:
             if tapahtuma.get('location') is not None:
@@ -75,6 +77,7 @@ def tiedotArrayTanaan(data):
 
 def tiedotArrayHuomenna(data):
     huomenna = datetime.date.today() + datetime.timedelta(days=1)
+    print(huomenna)
     listaDict = lista.listaDict()
     huomennaTapahtumat = []
     #try:
@@ -88,6 +91,7 @@ def tiedotArrayHuomenna(data):
 
 def tiedotArrayYlihuomenna(data):
     ylihuomenna = datetime.date.today() + datetime.timedelta(days=2)
+    print(ylihuomenna)
     listaDict = lista.listaDict()
     ylihuomennaTapahtumat = []
     #try:
@@ -97,6 +101,7 @@ def tiedotArrayYlihuomenna(data):
 
     #ecept:
      #   print("virhe")
+    print(ylihuomennaTapahtumat)
     return ylihuomennaTapahtumat
 
 
