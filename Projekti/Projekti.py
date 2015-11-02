@@ -21,15 +21,15 @@ def perus():
     tapahtumatTanaan = []
     tapahtumatHuomenna = []
     tapahtumatYlihuomenna = []
-    try:
-     if form.url.data is not None:
+    #try:
+    if form.url.data is not None:
             data = requests.get(form.url.data)
 
             try:
                 tapahtumatHuomenna = tiedotArrayHuomenna(data)
                 tapahtumatHuomenna.sort(key=operator.itemgetter('paiva','aika'))
             except:
-                ()
+                print("virhe huomenna")
 
             try:
                 tapahtumat = tiedotArray(data)
@@ -40,17 +40,16 @@ def perus():
                 tapahtumatTanaan = tiedotArrayTanaan(data)
                 tapahtumatTanaan.sort(key=operator.itemgetter('paiva','aika'))
             except:
-                ()
+                print("virhe tanaan")
 
-            try:
-                tapahtumatYlihuomenna = tiedotArrayYlihuomenna(data)
-                tapahtumatYlihuomenna.sort(key=operator.itemgetter('paiva','aika'))
-            except:
-                ()
 
-    except:
-       print("virhe")
-       flash("URL:ssa virhe, kokeile uudelleen.")
+            tapahtumatYlihuomenna = tiedotArrayYlihuomenna(data)
+            tapahtumatYlihuomenna.sort(key=operator.itemgetter('paiva','aika'))
+
+
+    #except:
+      # print("virhe")
+     #  flash("URL:ssa virhe, kokeile uudelleen.")
     return render_template('base.html',
                            title='Sign In',
                            form=form,
