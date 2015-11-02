@@ -21,35 +21,36 @@ def perus():
     tapahtumatTanaan = []
     tapahtumatHuomenna = []
     tapahtumatYlihuomenna = []
-    #try:
-    if form.url.data is not None:
+    try:
+        if form.url.data is not None:
             data = requests.get(form.url.data)
 
             try:
+                tapahtumatTanaan = tiedotArrayTanaan(data)
+                tapahtumatTanaan.sort(key=operator.itemgetter('paiva', 'aika'))
+            except:
+                print("virhe tanaan")
+            try:
                 tapahtumatHuomenna = tiedotArrayHuomenna(data)
-                tapahtumatHuomenna.sort(key=operator.itemgetter('paiva','aika'))
+                tapahtumatHuomenna.sort(key=operator.itemgetter('paiva', 'aika'))
             except:
                 print("virhe huomenna")
 
             try:
-                tapahtumat = tiedotArray(data)
-                tapahtumat.sort(key=operator.itemgetter('paiva','aika'))
+                tapahtumatYlihuomenna = tiedotArrayYlihuomenna(data)
+                tapahtumatYlihuomenna.sort(key=operator.itemgetter('paiva', 'aika'))
             except:
-                ()
+                print("virhe ylihuomenna")
+
             try:
-                tapahtumatTanaan = tiedotArrayTanaan(data)
-                tapahtumatTanaan.sort(key=operator.itemgetter('paiva','aika'))
+                tapahtumat = tiedotArray(data)
+                tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
             except:
-                print("virhe tanaan")
+                flash("URL:ssa virhe, kokeile uudelleen.")
 
-
-            tapahtumatYlihuomenna = tiedotArrayYlihuomenna(data)
-            tapahtumatYlihuomenna.sort(key=operator.itemgetter('paiva','aika'))
-
-
-    #except:
-      # print("virhe")
-     #  flash("URL:ssa virhe, kokeile uudelleen.")
+    except:
+        print("virhe")
+        flash("URL:ssa virhe, kokeile uudelleen.")
     return render_template('base.html',
                            title='Sign In',
                            form=form,
@@ -70,11 +71,12 @@ def kartta():
         listaDict = lista.listaDict()
         lat = (listaDict['Ag']['lat'])
         lon = (listaDict['Ag']['lon'])
-    map_osm = folium.Map(location=[lat, lon],  width="100%", height="100%", zoom_start=17, max_zoom=18)
+    map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=17, max_zoom=18)
     map_osm.simple_marker([lat, lon])
     map_osm.create_map(path='templates/osm.html')
 
     return render_template('osm.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

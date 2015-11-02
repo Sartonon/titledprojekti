@@ -6,10 +6,10 @@ from icalendar import Calendar
 import lista
 
 
-def laitaListaanKaikki(tapahtumat, cal, listaDict, today):
+def laitaListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki = False):
     tapahtumaLyh = ""
     for tapahtuma in cal.walk('vevent'):
-     if tapahtuma.get('dtstart').dt.date() >= today:
+     if tapahtuma.get('dtstart').dt.date() == paiva or kaikki:
             if tapahtuma.get('location') is not None:
                 tapahtumaLyh = tapahtuma.get('location')[:2]
             if tapahtumaLyh in listaDict:
@@ -21,27 +21,6 @@ def laitaListaanKaikki(tapahtumat, cal, listaDict, today):
                                'lon': listaDict[tapahtumaLyh]['lon']})
             else:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
-                               'paiva': tapahtuma.get('dtstart').dt.date(),
-                               'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
-                               'kuvaus': tapahtuma.get('summary'),
-                               'lat': 0,
-                               'lon': 0})
-
-def laitaListaanTanaanHuomennaYlihuomenna(tapahtumat1, cal, listaDict, paiva):
-    tapahtumaLyh = ""
-    for tapahtuma in cal.walk('vevent'):
-     if tapahtuma.get('dtstart').dt.date() == paiva:
-            if tapahtuma.get('location') is not None:
-                tapahtumaLyh = tapahtuma.get('location')[:2]
-            if tapahtumaLyh in listaDict:
-                tapahtumat1.append({'paikka': tapahtuma.get('location'),
-                               'paiva': tapahtuma.get('dtstart').dt.date(),
-                               'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
-                               'kuvaus': tapahtuma.get('summary'),
-                               'lat': listaDict[tapahtumaLyh]['lat'],
-                               'lon': listaDict[tapahtumaLyh]['lon']})
-            else:
-                tapahtumat1.append({'paikka': tapahtuma.get('location'),
                                'paiva': tapahtuma.get('dtstart').dt.date(),
                                'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
                                'kuvaus': tapahtuma.get('summary'),
@@ -53,54 +32,37 @@ def tiedotArray(data):
     today = date.today()
     listaDict = lista.listaDict()
     kaikkiTapahtumat = []
-    #try:
     cal = Calendar.from_ical(data.text)
-
-    laitaListaanKaikki(kaikkiTapahtumat, cal, listaDict, today)
-
-    #ecept:
-     #   print("virhe")
+    laitaListaan(kaikkiTapahtumat, cal, listaDict, today, True)
     return kaikkiTapahtumat
+
 
 def tiedotArrayTanaan(data):
     today = date.today()
     listaDict = lista.listaDict()
     tanaanTapahtumat = []
-    #try:
     cal = Calendar.from_ical(data.text)
-
-    laitaListaanTanaanHuomennaYlihuomenna(tanaanTapahtumat, cal, listaDict, today)
-
-    #ecept:
-     #   print("virhe")
+    laitaListaan(tanaanTapahtumat, cal, listaDict, today)
     return tanaanTapahtumat
+
 
 def tiedotArrayHuomenna(data):
     huomenna = datetime.date.today() + datetime.timedelta(days=1)
     print(huomenna)
     listaDict = lista.listaDict()
     huomennaTapahtumat = []
-    #try:
     cal = Calendar.from_ical(data.text)
-
-    laitaListaanTanaanHuomennaYlihuomenna(huomennaTapahtumat, cal, listaDict, huomenna)
-
-    #ecept:
-     #   print("virhe")
+    laitaListaan(huomennaTapahtumat, cal, listaDict, huomenna)
     return huomennaTapahtumat
+
 
 def tiedotArrayYlihuomenna(data):
     ylihuomenna = datetime.date.today() + datetime.timedelta(days=2)
     print(ylihuomenna)
     listaDict = lista.listaDict()
     ylihuomennaTapahtumat = []
-    #try:
     cal = Calendar.from_ical(data.text)
-
-    laitaListaanTanaanHuomennaYlihuomenna(ylihuomennaTapahtumat, cal, listaDict, ylihuomenna)
-
-    #ecept:
-     #   print("virhe")
+    laitaListaan(ylihuomennaTapahtumat, cal, listaDict, ylihuomenna)
     print(ylihuomennaTapahtumat)
     return ylihuomennaTapahtumat
 
