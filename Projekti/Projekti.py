@@ -7,6 +7,7 @@ from flask import request
 import requests
 import lista
 from Parseri import tiedotArray, tiedotArrayTanaan, tiedotArrayHuomenna, tiedotArrayYlihuomenna
+import os
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -21,10 +22,10 @@ def perus():
     tapahtumatTanaan = []
     tapahtumatHuomenna = []
     tapahtumatYlihuomenna = []
+    tiedosto = 'kayttoohjeet.txt'
     try:
         if form.url.data is not None:
             data = requests.get(form.url.data)
-
             try:
                 tapahtumatTanaan = tiedotArrayTanaan(data)
             except:
@@ -43,10 +44,15 @@ def perus():
                 tapahtumat = tiedotArray(data)
             except:
                 print("virhe kaikkien listaamisessa")
-
     except:
         print("virhe")
         flash("URL:ssa virhe, kokeile uudelleen.")
+    try:
+        with open(tiedosto, encoding='UTF-8') as t:
+            kayttoohjeet = t.readlines()
+    except:
+        print("Virhe tiedoston lukemisessa.")
+        kayttoohjeet = ["Pahoittelemme. Kayttoohjeiden lukemisessa tapahtui virhe."]
     return render_template('base.html',
                            title='Sign In',
                            form=form,
@@ -54,6 +60,7 @@ def perus():
                            tapahtumatTanaan=tapahtumatTanaan,
                            tapahtumatHuomenna=tapahtumatHuomenna,
                            tapahtumatYlihuomenna=tapahtumatYlihuomenna,
+                           kayttoohjeet=kayttoohjeet,
                            lat=lat,
                            lon=lon)
 

@@ -80,7 +80,9 @@
                         <h4 class="modal-title">Käyttöhjeet</h4>
                     </div>
                     <div class="modal-body">
-                        <p>One fine body&hellip;</p>
+                        <p>{% for rivi in kayttoohjeet %}
+                            {{ rivi }}<br>
+                        {% endfor %}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Sulje</button>

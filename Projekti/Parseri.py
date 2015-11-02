@@ -2,7 +2,6 @@ from datetime import date, timezone
 import datetime
 import operator
 from icalendar import Calendar
-
 import lista
 
 
