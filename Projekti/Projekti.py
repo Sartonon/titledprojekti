@@ -27,26 +27,22 @@ def perus():
 
             try:
                 tapahtumatTanaan = tiedotArrayTanaan(data)
-                tapahtumatTanaan.sort(key=operator.itemgetter('paiva', 'aika'))
             except:
                 print("virhe tanaan")
             try:
                 tapahtumatHuomenna = tiedotArrayHuomenna(data)
-                tapahtumatHuomenna.sort(key=operator.itemgetter('paiva', 'aika'))
             except:
                 print("virhe huomenna")
 
             try:
                 tapahtumatYlihuomenna = tiedotArrayYlihuomenna(data)
-                tapahtumatYlihuomenna.sort(key=operator.itemgetter('paiva', 'aika'))
             except:
                 print("virhe ylihuomenna")
 
             try:
                 tapahtumat = tiedotArray(data)
-                tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
             except:
-                flash("URL:ssa virhe, kokeile uudelleen.")
+                print("virhe kaikkien listaamisessa")
 
     except:
         print("virhe")
