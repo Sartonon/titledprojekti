@@ -6,7 +6,7 @@ from forms import LoginForm
 from flask import request
 import requests
 import lista
-from Parseri import tiedotArray, tiedotArrayTanaan, tiedotArrayHuomenna, tiedotArrayYlihuomenna
+from parseri import tiedotArray, tiedotArrayTanaan, tiedotArrayHuomenna, tiedotArrayYlihuomenna
 import os
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ def perus():
     tapahtumatTanaan = []
     tapahtumatHuomenna = []
     tapahtumatYlihuomenna = []
-    tiedosto = 'kayttoohjeet.txt'
+    tiedosto = '../kayttoohjeet.txt'
     try:
         if form.url.data is not None:
             data = requests.get(form.url.data)
