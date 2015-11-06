@@ -20,7 +20,7 @@ def perus():
     form = LoginForm()
     tapahtumat = []
     tapahtumatTanaan = []
-    tapahtumatHuomenna = []2
+    tapahtumatHuomenna = []
     tapahtumatYlihuomenna = []
     tiedosto = '../kayttoohjeet.txt'
     try:
