@@ -172,13 +172,34 @@
         </div>
     </div>
 </div>
+<p id="demo">Jou</p>
 <script src="../static/jquery-2.1.4.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 <script>
+    window.onload = function(){
+        getLocation();
+    };
+
     function muuta(lat, lon) {
         $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon)
+        getLocation();
     }
+
+    var x = document.getElementById("demo");
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+function showPosition(position) {
+    console.log(position.coords.latitude)
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+ }
 </script>
+
 </body>
 </html>
