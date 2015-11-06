@@ -15,7 +15,7 @@ app.config.from_object('config')
 
 @app.route('/', methods=['GET', 'POST'])
 def perus():
-    #kokeilu dddddd
+    #kokeilu dddddddddd
     lat = 67
     lon = 67
     form = LoginForm()
