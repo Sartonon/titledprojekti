@@ -176,14 +176,18 @@
 <script src="../static/jquery-2.1.4.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
-<script>
+<script type="text/javascript">
+    var matg = 0;
+    var motg = 0;
     window.onload = function(){
         getLocation();
     };
 
     function muuta(lat, lon) {
-        $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon)
+        matg = lat;
+        motg = lon;
         getLocation();
+        $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon);
     }
 
     var x = document.getElementById("demo");
@@ -195,9 +199,17 @@ function getLocation() {
     }
 }
 function showPosition(position) {
-    console.log(position.coords.latitude)
     x.innerHTML = "Latitude: " + position.coords.latitude +
     "<br>Longitude: " + position.coords.longitude;
+    if (matg != undefined && motg != undefined) {
+           var lon = motg;
+           var lat = matg;
+
+        $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+    }
+    else {
+        $("#kartta").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+    }
  }
 </script>
 
