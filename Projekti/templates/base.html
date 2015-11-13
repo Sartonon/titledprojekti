@@ -162,9 +162,17 @@
                     </div>
                 </div>
             </ul>
+            {#       {% if tapahtumat %}#}
+            {#           <div class="list-group" id="tanaanTapahtumat">#}
+            {#           {%  for tapahtuma in tapahtumat %}#}
+            {#           <a href="javascript:muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')" class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }} klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>#}
+            {#           {% endfor %}#}
+            {#           </div>#}
+            {#       {% endif %}#}
         </div>
     </div>
 </div>
+<p id="demo">Jou</p>
 <script src="../static/jquery-2.1.4.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
@@ -179,17 +187,24 @@
         matg = lat;
         motg = lon;
         getLocation();
+        //$("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon);
     }
 
+    var x = document.getElementById("demo");
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
     if (matg != undefined && motg != undefined) {
-        var lon = motg;
-        var lat = matg;
+           var lon = motg;
+           var lat = matg;
+
         $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
     }
     else {
