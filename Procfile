@@ -1,1 +1,1 @@
-web: gunicorn Projekti.projekti --log-file -
+web: gunicorn Projekti.Projekti --log-file -
