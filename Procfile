@@ -1,1 +1,1 @@
-web: gunicorn Projekti/projekti:app --log-file -
+web: gunicorn .Projekti.projekti:app --log-file -
