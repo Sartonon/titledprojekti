@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd projekti
-python projekti.py
+cd Projekti
+python Projekti.py
