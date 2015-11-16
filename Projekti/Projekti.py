@@ -90,4 +90,11 @@ def kartta():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    server_port = os.environ.get("PORT")
+    if server_port is None:
+        server_port = 5000
+    else:
+        server_port = int(server_port)
+
+
+    app.run(port=server_port, debug=True)
