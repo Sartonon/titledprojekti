@@ -1,1 +1,1 @@
-web: gunicorn projekti.projekti:app --log-file -
+web: cd projekti && python projekti.py
