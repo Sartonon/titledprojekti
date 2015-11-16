@@ -151,7 +151,7 @@
                             {% if tapahtumat %}
                                 <div class="list-group" id="kaikkiTapahtumat">
                                     {% for tapahtuma in tapahtumat %}
-                                        <a href="javascript:muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')"
+                                        <a onClick="muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')" href="javascript:muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')"
                                            class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }}
                                             klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>
                                     {% endfor %}
@@ -184,6 +184,7 @@
     };
 
     function muuta(lat, lon) {
+        console.log("moi")
         matg = lat;
         motg = lon;
         getLocation();
@@ -196,6 +197,7 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
+
     }
 }
 function showPosition(position) {
