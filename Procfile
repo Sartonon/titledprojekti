@@ -1,1 +1,1 @@
-web: sh -c 'cd ./projekti/ && python projekti.py'
+web: sh ./run.sh
