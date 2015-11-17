@@ -201,12 +201,17 @@
 
     var x = document.getElementById("demo");
     function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        try {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
 
-    }
+            }
+        }
+        catch (err) {
+            console.log(err.message)
+        }
 }
 function showPosition(position) {
     if (matg != undefined && motg != undefined) {
