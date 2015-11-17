@@ -74,18 +74,13 @@ def kartta():
         showMarker = False
 
     if request.args.get('lat') and request.args.get('lon'):
-        try:
-            lat = float(request.args.get("lat"))
-            lon = float(request.args.get("lon"))
-        except:
-            listaDict = lista.listaDict()
-            lat = (listaDict['Ag']['lat'])
-            lon = (listaDict['Ag']['lon'])
-            showMarker = False
+        lat = float(request.args.get("lat"))
+        lon = float(request.args.get("lon"))
     else:
         listaDict = lista.listaDict()
         lat = (listaDict['Ag']['lat'])
         lon = (listaDict['Ag']['lon'])
+        showMarker = False
 
     if showMarker:
         map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=17, max_zoom=18)
