@@ -187,12 +187,12 @@
         console.log("moi")
         matg = lat;
         motg = lon;
-        getLocation();
-        //$("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon);
+       // getLocation();
+        $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon);
     }
 
     var x = document.getElementById("demo");
-function getLocation() {
+    function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
