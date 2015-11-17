@@ -11,3 +11,5 @@ https://korppi.jyu.fi/calendar/ical/xxxxxxxx
 
 Kopioi tämä osoite ja liitä se sille varattuun paikkaan tällä sivulla. Jatkossa tuon 
 osoitteen pitäisi olla jo valmiina selaimesi muistissa kun vain valitset tekstilaatikon.
+
+https://korppi.jyu.fi/kotka/servlet/calendar/export/ui/ical/
