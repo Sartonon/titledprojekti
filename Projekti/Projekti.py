@@ -67,6 +67,12 @@ def perus():
 
 @app.route('/kartta', methods=['GET', 'POST'])
 def kartta():
+
+    if request.args.get('marker'):
+        showMarker = True
+    else:
+        showMarker = False
+
     if request.args.get('lat') and request.args.get('lon'):
         lat = float(request.args.get("lat"))
         lon = float(request.args.get("lon"))
@@ -74,24 +80,27 @@ def kartta():
         listaDict = lista.listaDict()
         lat = (listaDict['Ag']['lat'])
         lon = (listaDict['Ag']['lon'])
+        showMarker = False
 
-
-
-    if request.args.get('marker'):
+    if showMarker:
         map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=17, max_zoom=18)
         map_osm.simple_marker([lat, lon])
     else:
         map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=15, max_zoom=18)
 
     if request.args.get('ulat') and request.args.get('ulon'):
-         ulat = float(request.args.get("ulat"))
-         ulon = float(request.args.get("ulon"))
-         #map_osm.simple_marker([ulat, ulon])
-         map_osm.polygon_marker(location=[ulat, ulon], popup='Sinun sijainti',
-                     fill_color='red', num_sides=0, radius=10, rotation=60)
+        ulat = float(request.args.get("ulat"))
+        ulon = float(request.args.get("ulon"))
+        map_osm.polygon_marker(location=[ulat, ulon], popup='Sinun sijainti',
+                               fill_color='red', num_sides=0, radius=10, rotation=60)
     map_osm.create_map(path='templates/osm.html')
 
     return render_template('osm.html')
+
+@app.route('/pohjapiirrustus', methods=['GET', 'POST'])
+def pohjapiirrustus():
+
+    return ("http://navi.jyu.fi/?viewport=big#map?areaId=Mattilanniemi&buildingId=Agora&floorId=2&spaceId=Ag%20C222.2")
 
 
 if __name__ == '__main__':
@@ -105,6 +114,5 @@ if __name__ == '__main__':
         server_port = int(server_port)
         host = "0.0.0.0"
         debugging = False
-
 
     app.run(port=server_port, debug=debugging, host=host)

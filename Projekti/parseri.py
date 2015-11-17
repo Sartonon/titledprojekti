@@ -24,8 +24,8 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
                                    'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
                                    'kuvaus': tapahtuma.get('summary'),
-                                   'lat': 0,
-                                   'lon': 0})
+                                   'lat': '',
+                                   'lon': ''})
     tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
 
 
@@ -70,4 +70,4 @@ def tiedotArrayYlihuomenna(data):
 
 def utc_to_local(utc_dt):
     return utc_dt.replace(tzinfo=timezone.utc).astimezone(tz=None)
-    # TODO: aikavyöhykkeen kovakoodaaminen (ei voi tietää missä päin maailmaa serveri tulee sijaitsemaan)
+    # TODO: aikavyï¿½hykkeen kovakoodaaminen (ei voi tietï¿½ï¿½ missï¿½ pï¿½in maailmaa serveri tulee sijaitsemaan)
