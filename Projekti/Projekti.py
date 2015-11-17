@@ -75,10 +75,13 @@ def kartta():
         lat = (listaDict['Ag']['lat'])
         lon = (listaDict['Ag']['lon'])
 
-    map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=17, max_zoom=18)
+
 
     if request.args.get('marker'):
+        map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=17, max_zoom=18)
         map_osm.simple_marker([lat, lon])
+    else:
+        map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=15, max_zoom=18)
 
     if request.args.get('ulat') and request.args.get('ulon'):
          ulat = float(request.args.get("ulat"))

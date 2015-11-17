@@ -193,10 +193,10 @@
        // getLocation();
         console.log(document.getElementById("lat").value)
         if (document.getElementById("lat").value != "" && document.getElementById("lon").value != ""){
-            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + document.getElementById("lat").value + "&ulon=" + document.getElementById("lon").value);
+            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("lat").value + "&ulon=" + document.getElementById("lon").value);
         }
         else {
-            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon);
+            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
         }
 
     }
@@ -223,7 +223,7 @@ function showPosition(position) {
         document.getElementById("lon").value = position.coords.longitude;
         //sss
 
-        $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+        $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
     }
     else {
         $("#kartta").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
