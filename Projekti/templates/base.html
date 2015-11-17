@@ -185,13 +185,13 @@
     };
 
     function muuta(lat, lon) {
-        console.log("moi")
+        console.log("moi");
         matg = lat;
         motg = lon;
        // getLocation();
         console.log(document.getElementById("lat").value)
         if (document.getElementById("lat").value != "" && document.getElementById("lon").value != ""){
-            $("#kartta").attr("src", "/kartta?" + "ulat=" + document.getElementById("lat").value + "&ulon=" + document.getElementById("lon").value);
+            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + document.getElementById("lat").value + "&ulon=" + document.getElementById("lon").value);
         }
         else {
             $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon);
