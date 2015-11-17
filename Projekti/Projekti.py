@@ -91,7 +91,7 @@ def kartta():
     if request.args.get('ulat') and request.args.get('ulon'):
         ulat = float(request.args.get("ulat"))
         ulon = float(request.args.get("ulon"))
-        map_osm.polygon_marker(location=[ulat, ulon], popup='Sinun sijainti',
+        map_osm.polygon_marker(location=[ulat, ulon], popup='Sinun sijaintisi',
                                fill_color='red', num_sides=0, radius=10, rotation=60)
     map_osm.create_map(path='templates/osm.html')
 
