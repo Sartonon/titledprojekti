@@ -172,7 +172,8 @@
         </div>
     </div>
 </div>
-<p id="demo">Jou</p>
+<input type="hidden" value="" id="lat">
+<input type="hidden" value="" id="lon">
 <script src="../static/jquery-2.1.4.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
@@ -188,7 +189,14 @@
         matg = lat;
         motg = lon;
        // getLocation();
-        $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon);
+        console.log(document.getElementById("lat").value)
+        if (document.getElementById("lat").value != "" && document.getElementById("lon").value != ""){
+            $("#kartta").attr("src", "/kartta?" + "ulat=" + document.getElementById("lat").value + "&ulon=" + document.getElementById("lon").value);
+        }
+        else {
+            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon);
+        }
+
     }
 
     var x = document.getElementById("demo");
@@ -201,11 +209,11 @@
     }
 }
 function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
     if (matg != undefined && motg != undefined) {
            var lon = motg;
            var lat = matg;
+        document.getElementById("lat").value = position.coords.latitude;
+        document.getElementById("lon").value = position.coords.longitude;
         //sss
 
         $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
