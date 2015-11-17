@@ -65,10 +65,12 @@
                     Anna Korpin kalenterin URL:<br>
                     {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL") }}
                 </p>
+
                 <p>
                     <input type="submit" class="btn btn-default" value="Hae">
                     <a type="button" class="btn btn-default" href="#ohje" data-toggle="modal">?</a>
-                    <a type="button" class="btn btn-default pull-right" href="#pohjap" data-toggle="modal">Näytä rakennuksen kartta</a>
+                    <a type="button" class="btn btn-default pull-right" href="#pohjap" data-toggle="modal">Näytä
+                        rakennuksen kartta</a>
                 </p>
             </form>
             <iframe id="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
@@ -100,7 +102,8 @@
                                                                   data-toggle="tab"
                                                                   aria-controls="home" aria-expanded="true">Tänään</a>
                         </li>
-                        <li class="" role="presentation"><a aria-expanded="false" href="#huomenna" role="tab"
+                        <li class="" role="presentation">
+                            <a aria-expanded="false" href="#huomenna" role="tab"
                                                             id="profile-tab" data-toggle="tab" aria-controls="profile">Huomenna</a>
                         </li>
                         <li class="" role="presentation"><a aria-expanded="false" href="#ylihuomenna" role="tab"
@@ -115,7 +118,7 @@
                             {% if tapahtumatTanaan %}
                                 <div class="list-group" id="tanaanTapahtumat">
                                     {% for tapahtumaTanaan in tapahtumatTanaan %}
-                                        <a href="javascript:muuta('{{ tapahtumaTanaan.lat }}', '{{ tapahtumaTanaan.lon }}')"
+                                        <a href="javascript:vaihdaTila('{{ tapahtumaTanaan.lat }}', '{{ tapahtumaTanaan.lon }}')"
                                            class="list-group-item">{{ tapahtumaTanaan.paiva }}, {{ tapahtumaTanaan.paikka }}
                                             klo. {{ tapahtumaTanaan.aika }}. kuvaus: {{ tapahtumaTanaan.kuvaus }}</a>
                                     {% endfor %}
@@ -127,7 +130,7 @@
                             {% if tapahtumatHuomenna %}
                                 <div class="list-group" id="huomennaTapahtumat">
                                     {% for tapahtumaHuomenna in tapahtumatHuomenna %}
-                                        <a href="javascript:muuta('{{ tapahtumaHuomenna.lat }}', '{{ tapahtumaHuomenna.lon }}')"
+                                        <a href="javascript:vaihdaTila('{{ tapahtumaHuomenna.lat }}', '{{ tapahtumaHuomenna.lon }}')"
                                            class="list-group-item">{{ tapahtumaHuomenna.paiva }}, {{ tapahtumaHuomenna.paikka }}
                                             klo. {{ tapahtumaHuomenna.aika }}.
                                             kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
@@ -140,7 +143,7 @@
                             {% if tapahtumatYlihuomenna %}
                                 <div class="list-group" id="ylihuomennaTapahtumat">
                                     {% for tapahtumaYlihuomenna in tapahtumatYlihuomenna %}
-                                        <a href="javascript:muuta('{{ tapahtumaYlihuomenna.lat }}', '{{ tapahtumaYlihuomenna.lon }}')"
+                                        <a href="javascript:vaihdaTila('{{ tapahtumaYlihuomenna.lat }}', '{{ tapahtumaYlihuomenna.lon }}')"
                                            class="list-group-item">{{ tapahtumaYlihuomenna.paiva }}, {{ tapahtumaYlihuomenna.paikka }}
                                             klo. {{ tapahtumaYlihuomenna.aika }}.
                                             kuvaus: {{ tapahtumaYlihuomenna.kuvaus }}</a>
@@ -153,7 +156,8 @@
                             {% if tapahtumat %}
                                 <div class="list-group" id="kaikkiTapahtumat">
                                     {% for tapahtuma in tapahtumat %}
-                                        <a onClick="muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')" href="javascript:muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')"
+                                        <a onClick="vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')"
+                                           href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')"
                                            class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }}
                                             klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>
                                     {% endfor %}
@@ -164,13 +168,6 @@
                     </div>
                 </div>
             </ul>
-            {#       {% if tapahtumat %}#}
-            {#           <div class="list-group" id="tanaanTapahtumat">#}
-            {#           {%  for tapahtuma in tapahtumat %}#}
-            {#           <a href="javascript:muuta('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')" class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }} klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>#}
-            {#           {% endfor %}#}
-            {#           </div>#}
-            {#       {% endif %}#}
         </div>
     </div>
 </div>
@@ -182,17 +179,16 @@
 <script type="text/javascript">
     var matg = 62.23252728347514; // Agoran koordinaatit oletuksena
     var motg = 25.73729200674369;
-    window.onload = function(){
+    window.onload = function () {
         getLocation();
     };
 
-    function muuta(lat, lon) {
+    function vaihdaTila(lat, lon) {
         console.log("moi");
         matg = lat;
         motg = lon;
-       // getLocation();
         console.log(document.getElementById("lat").value)
-        if (document.getElementById("lat").value != "" && document.getElementById("lon").value != ""){
+        if (document.getElementById("lat").value != "" && document.getElementById("lon").value != "") {
             $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("lat").value + "&ulon=" + document.getElementById("lon").value);
         }
         else {
@@ -201,7 +197,12 @@
 
     }
 
+    function naytaRakennus(paikka) {
+        $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
+    }
+
     var x = document.getElementById("demo");
+
     function getLocation() {
         try {
             if (navigator.geolocation) {
@@ -214,21 +215,20 @@
         catch (err) {
             console.log(err.message)
         }
-}
-function showPosition(position) {
-    if (matg != undefined && motg != undefined) {
-           var lon = motg;
-           var lat = matg;
-        document.getElementById("lat").value = position.coords.latitude;
-        document.getElementById("lon").value = position.coords.longitude;
-        //sss
+    }
 
-        $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+    function showPosition(position) {
+        if (matg != undefined && motg != undefined) {
+            var lon = motg;
+            var lat = matg;
+            document.getElementById("lat").value = position.coords.latitude;
+            document.getElementById("lon").value = position.coords.longitude;
+            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+        }
+        else {
+            $("#kartta").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+        }
     }
-    else {
-        $("#kartta").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
-    }
- }
 </script>
 
 </body>
