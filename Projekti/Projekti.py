@@ -15,9 +15,8 @@ app.config.from_object('config')
 
 @app.route('/', methods=['GET', 'POST'])
 def perus():
-    #kokeilu dddddddddd
-    lat = 67
-    lon = 67
+    lat = 62.23252728347514
+    lon = 25.73729200674369
     form = LoginForm()
     tapahtumat = []
     tapahtumatTanaan = []
@@ -69,15 +68,18 @@ def perus():
 @app.route('/kartta', methods=['GET', 'POST'])
 def kartta():
     if request.args.get('lat') and request.args.get('lon'):
-
         lat = float(request.args.get("lat"))
         lon = float(request.args.get("lon"))
     else:
         listaDict = lista.listaDict()
         lat = (listaDict['Ag']['lat'])
         lon = (listaDict['Ag']['lon'])
+
     map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=17, max_zoom=18)
-    map_osm.simple_marker([lat, lon])
+
+    if request.args.get('marker'):
+        map_osm.simple_marker([lat, lon])
+
     if request.args.get('ulat') and request.args.get('ulon'):
          ulat = float(request.args.get("ulat"))
          ulon = float(request.args.get("ulon"))
