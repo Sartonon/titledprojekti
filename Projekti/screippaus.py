@@ -11,8 +11,12 @@ def screippaa():
     for linkki in range (1, len(linkit)):
         linkit = browser.find_elements_by_link_text('Kartta')
         linkit[linkki].click()
-        browser.implicitly_wait(5)
+        browser.implicitly_wait(2)
+        lat = browser.find_element_by_link_text("[Google Maps]").get_attribute("href").split("=")[1].split(",")[0]
+        lon = browser.find_element_by_link_text("[Google Maps]").get_attribute("href").split("=")[1].split("+")[1]
+        paikka = browser.find_element_by_link_text("[Google Maps]").get_attribute("href").split("(")[1].split(")")[0].replace("+", " ")
+        print("lat: " + lat + "  lon: " + lon + "  paikka: " + paikka)
         browser.back()
-        browser.implicitly_wait(5)
+        browser.implicitly_wait(2)
 
 screippaa()
