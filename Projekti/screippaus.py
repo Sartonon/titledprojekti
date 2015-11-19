@@ -10,8 +10,8 @@ def screippaa():
 
     browser.get('https://korppi.jyu.fi/kotka/reservation/searchSpace.jsp?code=&submitSearch=Hae&officialOnly=true&mapOnly=true')
     global linkit
-    linkit = browser.find_elements_by_link_text('Kartta')
-    for linkki in range (1, len(linkit)):
+    linkit = browser.find_elements_by_link_text('Kartta') #browser.find_elements_by_link_text('Rakennus') or browser.find_elements_by_link_text('Kartta')  #((By.id("foo"),By.name("bar")));# browser.find_elements_by_link_text('Kartta')
+    for linkki in range(1, len(linkit)):
         linkit = browser.find_elements_by_link_text('Kartta')
         linkit[linkki].click()
         browser.implicitly_wait(3)
