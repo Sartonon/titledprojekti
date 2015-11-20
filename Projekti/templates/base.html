@@ -185,6 +185,7 @@
 
                         <div role="tabpanel" class="tab-pane fade" id="calendar" aria-labelledby="profile-tab">
                             <div id="datepicker1"></div>
+                            <input type="hidden" id="sendDate" readonly> //TODO: muodostaa valitun päivän tapahtumat
                         </div>
 
                     </div>
@@ -208,13 +209,14 @@
 
 <script type="text/javascript">
 
-    $("#datepicker1").datepicker({
+    $("#datepicker1").datepicker({ //TODO: napit seuraaviin kuukausiin näkyviin
         firstDay: 1,
         dayNames: [ "Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai" ],
         dayNamesMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
         monthNames: [ 'Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu' ],
         monthNamesShort: [ 'Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesä', 'Heinä', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu' ],
-        showButtonPanel: true
+        showButtonPanel: true,
+        altField: '#sendDate'
     });
 
     var matg = 62.23252728347514; // Agoran koordinaatit oletuksena
