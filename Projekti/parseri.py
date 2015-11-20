@@ -19,10 +19,10 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'kuvaus': tapahtuma.get('summary'),
                                    'lat': listaDict[tapahtumaLyh]['lat'],
                                    'lon': listaDict[tapahtumaLyh]['lon'],
-                                   'areaId' : 'Mattilanniemi',
-                                   'buildingId' : 'Agora',
-                                   'floorId' : '2',
-                                   'spaceId' : 'Ag%20C222.2'})
+                                   'areaId' : parsiArea(tapahtuma.get('location')),
+                                   'buildingId' : parsiBuilding(tapahtuma.get('location')),
+                                   'floorId' : parsiFloor(tapahtuma.get('location')),
+                                   'spaceId' : parsiSpace(tapahtuma.get('location'))})
             else:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
@@ -32,6 +32,17 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'lon': ''})
     tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
 
+def parsiArea(paikka):
+    return 'Mattilanniemi'
+
+def parsiBuilding(paikka):
+    return 'Agora'
+
+def parsiFloor(paikka):
+    return  '2'
+
+def parsiSpace(paikka):
+    return 'Ag%20C222.2'
 
 def tiedotArray(data):
     today = date.today()
