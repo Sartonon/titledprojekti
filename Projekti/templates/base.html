@@ -29,26 +29,6 @@
             overflow: auto;
             max-height: 600px;
         }
-
-
-        #wrap1 {
-            width: 630px;
-            height: 300px;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        #frame {
-            -ms-zoom: 0.5;
-            -ms-transform-origin: 0 0;
-            -moz-transform: scale(0.5);
-            -moz-transform-origin: 0px 50px;
-            -o-transform: scale(0.5);
-            -o-transform-origin: 0px 50px;
-            -webkit-transform: scale(0.5);
-            -webkit-transform-origin: 0 0;
-        }
-
         #kartta {
             width: 100%;
             height: 500px;
@@ -93,9 +73,9 @@
                         rakennuksen kartta</a>
                 </p>
             </form>
-        <div id="wrap">
+            <!-- <div id="wrap"> -->
             <iframe id="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
-            </div>
+            <!-- </div>-->
         </div>
         <div class="modal fade" id="ohje">
             <div class="modal-dialog">
@@ -109,7 +89,8 @@
                         <p>{% for rivi in kayttoohjeet %}
                             {{ rivi }}<br>
                         {% endfor %}</p>
-                    <a href="https://korppi.jyu.fi/kotka/servlet/calendar/export/ui/ical" target="_blank" class="btn btn-default btn-block btn-lg">Linkki Korppiin</a>
+                        <a href="https://korppi.jyu.fi/kotka/servlet/calendar/export/ui/ical" target="_blank"
+                           class="btn btn-default btn-block btn-lg">Linkki Korppiin</a>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Sulje</button>
@@ -220,7 +201,7 @@
     }
 
     function naytaRakennus(paikka) {
-        $("#kartta").attr("src", "http://navi.jyu.fi/?viewport=big#map?areaId=Mattilanniemi&buildingId=Agora&floorId=2&spaceId=Ag%20C222.2");
+        $("#kartta").attr("src", "https://navi.jyu.fi/?viewport=big#map?areaId=Mattilanniemi&buildingId=Agora&floorId=2&spaceId=Ag%20C222.2");
     }
 
     function getLocation() {
