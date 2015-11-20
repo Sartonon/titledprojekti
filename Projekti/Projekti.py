@@ -15,6 +15,9 @@ app.config.from_object('config')
 
 @app.route('/', methods=['GET', 'POST'])
 def perus():
+    listaD = lista.listaDict()
+    for key in sorted(listaD):
+        print('"' + "%s\": %s" % (key, listaD[key]) + ",")
     lat = 62.23252728347514
     lon = 25.73729200674369
     form = LoginForm()
