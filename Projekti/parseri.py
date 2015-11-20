@@ -18,7 +18,11 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
                                    'kuvaus': tapahtuma.get('summary'),
                                    'lat': listaDict[tapahtumaLyh]['lat'],
-                                   'lon': listaDict[tapahtumaLyh]['lon']})
+                                   'lon': listaDict[tapahtumaLyh]['lon'],
+                                   'areaId' : 'Mattilanniemi',
+                                   'buildingId' : 'Agora',
+                                   'floorId' : '2',
+                                   'spaceId' : 'Ag%20C222.2'})
             else:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
                                    'paiva': tapahtuma.get('dtstart').dt.date(),

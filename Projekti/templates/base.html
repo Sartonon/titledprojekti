@@ -118,11 +118,13 @@
                         </li>
                     </ul>
                     <div id="myTabContent" class="tab-content">
+
                         <div role="tabpanel" class="tab-pane fade active in" id="tanaan" aria-labelledby="home-tab">
                             {% if tapahtumatTanaan %}
                                 <div class="list-group" id="tanaanTapahtumat">
                                     {% for tapahtumaTanaan in tapahtumatTanaan %}
-                                        <a href="javascript:vaihdaTila('{{ tapahtumaTanaan.lat }}', '{{ tapahtumaTanaan.lon }}')"
+                                        <a href="javascript:vaihdaTila('{{ tapahtumaTanaan.lat }}', '{{ tapahtumaTanaan.lon }}', '{{ tapahtumaTanaan.areaId }}',
+                                         '{{ tapahtumaTanaan.buildingId }}', '{{ tapahtumaTanaan.floorId }}', '{{ tapahtumaTanaan.spaceId }}' )"
                                            class="list-group-item">{{ tapahtumaTanaan.paiva }}, {{ tapahtumaTanaan.paikka }}
                                             klo. {{ tapahtumaTanaan.aika }}. kuvaus: {{ tapahtumaTanaan.kuvaus }}</a>
                                     {% endfor %}
@@ -134,7 +136,8 @@
                             {% if tapahtumatHuomenna %}
                                 <div class="list-group" id="huomennaTapahtumat">
                                     {% for tapahtumaHuomenna in tapahtumatHuomenna %}
-                                        <a href="javascript:vaihdaTila('{{ tapahtumaHuomenna.lat }}', '{{ tapahtumaHuomenna.lon }}')"
+                                        <a href="javascript:vaihdaTila('{{ tapahtumaHuomenna.lat }}', '{{ tapahtumaHuomenna.lon }}', '{{ tapahtumaHuomenna.areaId }}',
+                                         '{{ tapahtumaHuomenna.buildingId }}', '{{ tapahtumaHuomenna.floorId }}', '{{ tapahtumaHuomenna.spaceId }}' )"
                                            class="list-group-item">{{ tapahtumaHuomenna.paiva }}, {{ tapahtumaHuomenna.paikka }}
                                             klo. {{ tapahtumaHuomenna.aika }}.
                                             kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
@@ -147,7 +150,8 @@
                             {% if tapahtumatYlihuomenna %}
                                 <div class="list-group" id="ylihuomennaTapahtumat">
                                     {% for tapahtumaYlihuomenna in tapahtumatYlihuomenna %}
-                                        <a href="javascript:vaihdaTila('{{ tapahtumaYlihuomenna.lat }}', '{{ tapahtumaYlihuomenna.lon }}')"
+                                        <a href="javascript:vaihdaTila('{{ tapahtumaYlihuomenna.lat }}', '{{ tapahtumaYlihuomenna.lon }}', '{{ tapahtumaYlihuomenna.areaId }}',
+                                         '{{ tapahtumaYlihuomenna.buildingId }}', '{{ tapahtumaYlihuomenna.floorId }}', '{{ tapahtumaYlihuomenna.spaceId }}' )"
                                            class="list-group-item">{{ tapahtumaYlihuomenna.paiva }}, {{ tapahtumaYlihuomenna.paikka }}
                                             klo. {{ tapahtumaYlihuomenna.aika }}.
                                             kuvaus: {{ tapahtumaYlihuomenna.kuvaus }}</a>
@@ -160,8 +164,8 @@
                             {% if tapahtumat %}
                                 <div class="list-group" id="kaikkiTapahtumat">
                                     {% for tapahtuma in tapahtumat %}
-                                        <a onClick="vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')"
-                                           href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}')"
+                                        <a href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}', '{{ tapahtuma.areaId }}',
+                                         '{{ tapahtuma.buildingId }}', '{{ tapahtuma.floorId }}', '{{ tapahtuma.spaceId }}' )"
                                            class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }}
                                             klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>
                                     {% endfor %}
@@ -177,21 +181,30 @@
 </div>
 <input type="hidden" value="" id="lat">
 <input type="hidden" value="" id="lon">
+<input type="hidden" value="" id="area">
+<input type="hidden" value="" id="building">
+<input type="hidden" value="" id="floor">
+<input type="hidden" value="" id="space">
 <script src="../static/jquery-2.1.4.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     var matg = 62.23252728347514; // Agoran koordinaatit oletuksena
     var motg = 25.73729200674369;
+
     window.onload = function () {
         getLocation();
     };
 
-    function vaihdaTila(lat, lon) {
-        console.log("moi");
+    function vaihdaTila(lat, lon, area, building, floor, space) {
+        console.log("Tilan tiedot ladattu");
         matg = lat;
         motg = lon;
-        console.log(document.getElementById("lat").value)
+        document.getElementById("area").value = area;
+        document.getElementById("building").value = building;
+        document.getElementById("floor").value = floor;
+        document.getElementById("space").value = space;
+
         if (document.getElementById("lat").value != "" && document.getElementById("lon").value != "") {
             $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("lat").value + "&ulon=" + document.getElementById("lon").value);
         }
@@ -201,7 +214,7 @@
     }
 
     function naytaRakennus(paikka) {
-        $("#kartta").attr("src", "https://navi.jyu.fi/?viewport=big#map?areaId=Mattilanniemi&buildingId=Agora&floorId=2&spaceId=Ag%20C222.2");
+        $("#kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + document.getElementById("area").value + "&buildingId=" + document.getElementById("building").value+ "&floorId=" + document.getElementById("floor").value + "&spaceId=" + document.getElementById("space").value));
     }
 
     function getLocation() {
