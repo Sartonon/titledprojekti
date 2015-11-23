@@ -3,6 +3,7 @@ import datetime
 import operator
 from icalendar import Calendar
 import lista
+import tilahierarkia
 
 
 def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki=False):
@@ -33,16 +34,34 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
     tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
 
 def parsiArea(paikka):
-    return 'Mattilanniemi'
+    rakennus = parsiBuilding(paikka)
+    if rakennus is not None:
+        alueet = tilahierarkia.alueet()
+        return alueet[rakennus]
+    return None
 
 def parsiBuilding(paikka):
-    return 'Agora'
+    if paikka is not None:
+        patka = paikka.split(' ')
+        lyhenne = patka[0]
+        rakennukset = tilahierarkia.rakennukset()
+        if lyhenne in rakennukset:
+            return rakennukset[lyhenne]
+    return None
 
 def parsiFloor(paikka):
-    return  '2'
+    if paikka is not None:
+        patka = paikka.split(' ')
+        kerros = patka[1][0]
+        try:
+            kerros = int(kerros)
+        except:
+            return None
+        return kerros
+    return None
 
 def parsiSpace(paikka):
-    return 'Ag%20C222.2'
+    return paikka
 
 def tiedotArray(data):
     today = date.today()
@@ -64,7 +83,6 @@ def tiedotArrayTanaan(data):
 
 def tiedotArrayHuomenna(data):
     huomenna = datetime.date.today() + datetime.timedelta(days=1)
-    print(huomenna)
     listaDict = lista.listaDict()
     huomennaTapahtumat = []
     cal = Calendar.from_ical(data.text)
@@ -74,12 +92,10 @@ def tiedotArrayHuomenna(data):
 
 def tiedotArrayYlihuomenna(data):
     ylihuomenna = datetime.date.today() + datetime.timedelta(days=2)
-    print(ylihuomenna)
     listaDict = lista.listaDict()
     ylihuomennaTapahtumat = []
     cal = Calendar.from_ical(data.text)
     lisaaTapahtumatListaan(ylihuomennaTapahtumat, cal, listaDict, ylihuomenna)
-    print(ylihuomennaTapahtumat)
     return ylihuomennaTapahtumat
 
 
