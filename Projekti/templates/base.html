@@ -216,8 +216,8 @@
         altField: '#sendDate'
     });
 
-    var matg = 62.23252728347514; // Agoran koordinaatit oletuksena
-    var motg = 25.73729200674369;
+    var tlat = 62.23252728347514; // Agoran koordinaatit oletuksena
+    var tlon = 25.73729200674369;
     var rakennusnaytetty = false;
     var areaId = 'None';
     var buildingId = 'None';
@@ -231,8 +231,8 @@
     function vaihdaTila(lat, lon, area, building, floor, space) {
         console.log("Tilan tiedot ladattu");
         rakennusnaytetty = false;
-        matg = lat;
-        motg = lon;
+        tlat = lat;
+        tlon = lon;
         //document.getElementById("area").value = area;
         //document.getElementById("building").value = building;
         //document.getElementById("floor").value = floor;
@@ -252,8 +252,9 @@
 
     function naytaRakennus() {
         if (rakennusnaytetty) {
-            rakennusnaytetty = false;
-            $("#kartta").attr("src", "/kartta?lat=" + matg + "&lon=" + motg + "&marker=1");
+            //rakennusnaytetty = false;
+            vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId)
+            //$("#kartta").attr("src", "/kartta?lat=" + tlat + "&lon=" + tlon + "&marker=1");
         }
         else {
             rakennusnaytetty = true;
@@ -283,9 +284,9 @@
     }
 
     function showPosition(position) {
-        if (matg != undefined && motg != undefined) {
-            var lon = motg;
-            var lat = matg;
+        if (tlat != undefined && tlon != undefined) {
+            var lon = tlon;
+            var lat = tlat;
             document.getElementById("ulat").value = position.coords.latitude;
             document.getElementById("ulon").value = position.coords.longitude;
             $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
