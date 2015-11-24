@@ -206,10 +206,10 @@
 
     $("#datepicker1").datepicker({ //TODO: napit seuraaviin kuukausiin näkyviin
         firstDay: 1,
-        dayNames: [ "Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai" ],
+        dayNames: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
         dayNamesMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
-        monthNames: [ 'Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu' ],
-        monthNamesShort: [ 'Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesä', 'Heinä', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu' ],
+        monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
+        monthNamesShort: ['Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesä', 'Heinä', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
         showButtonPanel: true,
         altField: '#sendDate'
     });
@@ -239,7 +239,15 @@
     }
 
     function naytaRakennus(paikka) {
-        $("#kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + document.getElementById("area").value + "&buildingId=" + document.getElementById("building").value + "&floorId=" + document.getElementById("floor").value + "&spaceId=" + document.getElementById("space").value));
+        if (document.getElementById("area").value != 'None' &&
+                document.getElementById("building").value != 'None' &&
+                document.getElementById("floor").value != 'None' &&
+                document.getElementById("space").value != 'None') {
+            $("#kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + document.getElementById("area").value + "&buildingId=" + document.getElementById("building").value + "&floorId=" + document.getElementById("floor").value + "&spaceId=" + document.getElementById("space").value));
+        }
+        else {
+            $("#kartta").attr("src", "/virhe");
+        }
     }
 
     function getLocation() {
