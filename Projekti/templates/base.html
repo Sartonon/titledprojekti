@@ -218,6 +218,11 @@
 
     var matg = 62.23252728347514; // Agoran koordinaatit oletuksena
     var motg = 25.73729200674369;
+    var rakennusnaytetty = false;
+    var areaId = 'None';
+    var buildingId = 'None';
+    var floorId = 'None';
+    var spaceId = 'None';
 
     window.onload = function () {
         getLocation();
@@ -225,12 +230,17 @@
 
     function vaihdaTila(lat, lon, area, building, floor, space) {
         console.log("Tilan tiedot ladattu");
+        rakennusnaytetty = false;
         matg = lat;
         motg = lon;
-        document.getElementById("area").value = area;
-        document.getElementById("building").value = building;
-        document.getElementById("floor").value = floor;
-        document.getElementById("space").value = space;
+        //document.getElementById("area").value = area;
+        //document.getElementById("building").value = building;
+        //document.getElementById("floor").value = floor;
+        //document.getElementById("space").value = space;
+        areaId = area;
+        buildingId = building;
+        floorId = floor;
+        spaceId = space;
 
         if (document.getElementById("ulat").value != "" && document.getElementById("ulon").value != "") {
             $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("ulat").value + "&ulon=" + document.getElementById("ulon").value);
@@ -241,14 +251,21 @@
     }
 
     function naytaRakennus() {
-        if (document.getElementById("area").value != 'None' &&
-                document.getElementById("building").value != 'None' &&
-                document.getElementById("floor").value != 'None' &&
-                document.getElementById("space").value != 'None') {
-            $("#kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + document.getElementById("area").value + "&buildingId=" + document.getElementById("building").value + "&floorId=" + document.getElementById("floor").value + "&spaceId=" + document.getElementById("space").value));
+        if (rakennusnaytetty) {
+            rakennusnaytetty = false;
+            $("#kartta").attr("src", "/kartta?lat=" + matg + "&lon=" + motg + "&marker=1");
         }
         else {
-            $("#kartta").attr("src", "/virhe");
+            rakennusnaytetty = true;
+            if (areaId != 'None' &&
+                    buildingId != 'None' &&
+                    floorId != 'None' &&
+                    spaceId != 'None') {
+                $("#kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId + "&buildingId=" + buildingId + "&floorId=" + floorId + "&spaceId=" + spaceId));
+            }
+            else {
+                $("#kartta").attr("src", "/virhe");
+            }
         }
     }
 
