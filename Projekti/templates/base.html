@@ -71,7 +71,7 @@
                     <input type="submit" class="btn btn-default" value="Hae">
                     <a type="button" class="btn btn-default" href="#ohje" data-toggle="modal">?</a>
                     <a type="button" class="btn btn-default pull-right" href="#pohjap" data-toggle="modal"
-                       onclick="naytaRakennus('Foo')">Näytä
+                       onclick="naytaRakennus()">Näytä
                         rakennuksen kartta</a>
                 </p>
             </form>
@@ -191,6 +191,8 @@
 </div>
 <input type="hidden" value="" id="lat">
 <input type="hidden" value="" id="lon">
+<input type="hidden" value="" id="ulat">
+<input type="hidden" value="" id="ulon">
 <input type="hidden" value="" id="area">
 <input type="hidden" value="" id="building">
 <input type="hidden" value="" id="floor">
@@ -230,15 +232,15 @@
         document.getElementById("floor").value = floor;
         document.getElementById("space").value = space;
 
-        if (document.getElementById("lat").value != "" && document.getElementById("lon").value != "") {
-            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("lat").value + "&ulon=" + document.getElementById("lon").value);
+        if (document.getElementById("ulat").value != "" && document.getElementById("ulon").value != "") {
+            $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("ulat").value + "&ulon=" + document.getElementById("ulon").value);
         }
         else {
             $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
         }
     }
 
-    function naytaRakennus(paikka) {
+    function naytaRakennus() {
         if (document.getElementById("area").value != 'None' &&
                 document.getElementById("building").value != 'None' &&
                 document.getElementById("floor").value != 'None' &&
@@ -267,8 +269,8 @@
         if (matg != undefined && motg != undefined) {
             var lon = motg;
             var lat = matg;
-            document.getElementById("lat").value = position.coords.latitude;
-            document.getElementById("lon").value = position.coords.longitude;
+            document.getElementById("ulat").value = position.coords.latitude;
+            document.getElementById("ulon").value = position.coords.longitude;
             $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
         }
         else {
