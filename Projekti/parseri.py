@@ -7,19 +7,19 @@ import tilahierarkia
 
 
 def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki=False):
-    tapahtumaLyh = ""
+    tapahtumapaikka = ""
     for tapahtuma in cal.walk('vevent'):
         alku = tapahtuma.get('dtstart').dt.date()
         if (alku == paiva or kaikki) and alku >= date.today():
             if tapahtuma.get('location') is not None:
-                tapahtumaLyh = tapahtuma.get('location')
-            if tapahtumaLyh in listaDict:
+                tapahtumapaikka = tapahtuma.get('location')
+            if tapahtumapaikka in listaDict:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
                                    'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
                                    'kuvaus': tapahtuma.get('summary'),
-                                   'lat': listaDict[tapahtumaLyh]['lat'],
-                                   'lon': listaDict[tapahtumaLyh]['lon'],
+                                   'lat': listaDict[tapahtumapaikka]['lat'],
+                                   'lon': listaDict[tapahtumapaikka]['lon'],
                                    'areaId' : parsiArea(tapahtuma.get('location')),
                                    'buildingId' : parsiBuilding(tapahtuma.get('location')),
                                    'floorId' : parsiFloor(tapahtuma.get('location')),

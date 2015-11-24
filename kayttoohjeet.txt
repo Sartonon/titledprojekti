@@ -1,11 +1,10 @@
 ﻿Tämän sovelluksen tarkoitus on näyttää minkä tahansa iCal formaattia käyttävän 
 kalenterin tiedot nopeasti ja helposti. Tätä varten sovellus tarvitsee iCal kalenterisi 
-vientiosoitteen, jonka avulla saat kaikki tiedot mukavastinäkyville. Korpissa tämä 
-tapahtuu kirjautumalla sisään omilla tunnuksillasi ja tämän jälkeen valitsemalla 
+vientiosoitteen, jonka saat oheista linkkiä painamalla Korpistasi.
 
-> Kalenteri > Tuonti/vienti > iCal
+Ensimmäisellä kerralla valitse "Luo kalenterin vientiosoite".
 
-Näkyvissäsi pitäisi nyt olla kalenterisi url-osoite muodossa:
+Tämän jälkeen näkyvissäsi on kalenterisi url-osoite muodossa:
 
 https://korppi.jyu.fi/calendar/ical/xxxxxxxx
 

@@ -36,19 +36,18 @@ def perus():
                 tapahtumatHuomenna = tiedotArrayHuomenna(data)
             except:
                 print("virhe huomenna")
-
             try:
                 tapahtumatYlihuomenna = tiedotArrayYlihuomenna(data)
             except:
                 print("virhe ylihuomenna")
-
             try:
                 tapahtumat = tiedotArray(data)
             except:
                 print("virhe kaikkien listaamisessa")
+                flash("URL:ssa virhe, kokeile uudelleen.")
     except:
         print("virhe")
-        flash("URL:ssa virhe, kokeile uudelleen.")
+        flash("Anna toimiva url osoite.")
     try:
         with open(tiedosto, encoding='UTF-8') as t:
             kayttoohjeet = t.readlines()
@@ -69,7 +68,6 @@ def perus():
 
 @app.route('/kartta', methods=['GET', 'POST'])
 def kartta():
-
     if request.args.get('marker'):
         showMarker = True
     else:
@@ -102,7 +100,6 @@ def kartta():
 
 @app.route('/pohjapiirrustus', methods=['GET', 'POST'])
 def pohjapiirrustus():
-
     return ("http://navi.jyu.fi/?viewport=big#map?areaId=Mattilanniemi&buildingId=Agora&floorId=2&spaceId=Ag%20C222.2")
 
 
