@@ -70,9 +70,8 @@
                 <p>
                     <input type="submit" class="btn btn-default" value="Hae">
                     <a type="button" class="btn btn-default" href="#ohje" data-toggle="modal">?</a>
-                    <a type="button" class="btn btn-default pull-right" href="#pohjap" data-toggle="modal"
-                       onclick="naytaRakennus()">Näytä
-                        rakennuksen kartta</a>
+                    <input id="nappinayta" type="button" class="btn btn-default pull-right" data-toggle="modal"
+                       onclick="naytaRakennus()" value="Näytä rakennuksen kartta">
                 </p>
             </form>
             <!-- <div id="wrap"> -->
@@ -189,14 +188,8 @@
         </div>
     </div>
 </div>
-<input type="hidden" value="" id="lat">
-<input type="hidden" value="" id="lon">
 <input type="hidden" value="" id="ulat">
 <input type="hidden" value="" id="ulon">
-<input type="hidden" value="" id="area">
-<input type="hidden" value="" id="building">
-<input type="hidden" value="" id="floor">
-<input type="hidden" value="" id="space">
 <script src="../static/jquery-2.1.4.min.js"></script>
 <script src="../static/jquery-ui.min.js"></script>
 <script src="../static/jquery-ui.js"></script>
@@ -233,10 +226,6 @@
         rakennusnaytetty = false;
         tlat = lat;
         tlon = lon;
-        //document.getElementById("area").value = area;
-        //document.getElementById("building").value = building;
-        //document.getElementById("floor").value = floor;
-        //document.getElementById("space").value = space;
         areaId = area;
         buildingId = building;
         floorId = floor;
@@ -252,11 +241,11 @@
 
     function naytaRakennus() {
         if (rakennusnaytetty) {
-            //rakennusnaytetty = false;
+            $ ("#nappinayta").attr("value", "Näytä rakennuksen kartta")
             vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId)
-            //$("#kartta").attr("src", "/kartta?lat=" + tlat + "&lon=" + tlon + "&marker=1");
         }
         else {
+            $ ("#nappinayta").attr("value", "Näytä rakennus kartalla")
             rakennusnaytetty = true;
             if (areaId != 'None' &&
                     buildingId != 'None' &&
