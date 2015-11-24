@@ -4,7 +4,7 @@ import operator
 from icalendar import Calendar
 import lista
 import tilahierarkia
-
+import re
 
 def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki=False):
     tapahtumapaikka = ""
@@ -51,9 +51,11 @@ def parsiBuilding(paikka):
 
 def parsiFloor(paikka):
     if paikka is not None:
-        patka = paikka.split(' ')
-        kerros = patka[1][0]
+
+        numerot = re.findall(r'\d+[\.]?\d*', paikka)
         try:
+            eka = numerot[0]
+            kerros = eka[1]
             kerros = int(kerros)
         except:
             return None
