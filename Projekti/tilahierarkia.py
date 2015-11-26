@@ -73,3 +73,13 @@ def alueet():
         'Y33': 'Ylistönrinne',
     }
     return alueet
+
+def agora():
+    agora = {
+        'Alfa' : 1,
+        'Beeta' : 1,
+        'Gamma' : 2,
+        'Delta': 2,
+        'Ag Auditorio' : 1
+    }
+    return agora

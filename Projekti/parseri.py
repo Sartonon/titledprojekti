@@ -51,12 +51,15 @@ def parsiBuilding(paikka):
 
 def parsiFloor(paikka):
     if paikka is not None:
-
+        tila = paikka.split()
         numerot = re.findall(r'\d+[\.]?\d*', paikka)
         try:
-            eka = numerot[0]
-            kerros = eka[1]
-            kerros = int(kerros)
+            if tila[0] == "Ag":
+                return agorakerros(paikka)
+            else:
+                eka = numerot[0]
+                kerros = eka[1]
+                kerros = int(kerros)
         except:
             return None
         return kerros
@@ -64,6 +67,19 @@ def parsiFloor(paikka):
 
 def parsiSpace(paikka):
     return paikka
+
+def agorakerros(paikka):
+    tila = paikka.split()
+    agora = tilahierarkia.agora()
+    print(agora)
+    try:
+        #print(tila[1])
+        if tila[1] in agora:
+            return agora[tila[1]]
+        else:
+            return parsiFloor(tila[1:])
+    except:
+        return parsiFloor(tila[1:])
 
 def tiedotArray(data):
     today = date.today()
