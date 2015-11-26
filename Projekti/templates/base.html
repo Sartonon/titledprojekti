@@ -13,12 +13,19 @@
     <link href="../static/bootstrap/css/jquery-ui.theme.css" rel="stylesheet">
     <link href="../static/bootstrap/css/jquery-ui.theme.min.css" rel="stylesheet">
     <style>
+
+        /* Smartphones ----------- */
+        @media only screen and (max-width: 760px) {
+            #desktop { display: none; }
+        }
+
+        @media screen and (min-width: 760px) {
+            #mobile { display: none; }
+        }
+
         iframe {
             height: 100%;
             width: 100%;
-        }
-
-        @media (min-width: 600px) {
         }
 
         .jumbotron {
@@ -44,12 +51,14 @@
         <h1>Karttaprojekti</h1>
     </div>
 </div>
-<div class="container-fluid">
+<div id="mobile" display="none">
+    <p>Hupsista... nyt meni liian pieneksi, ei näytetä mitään....</p>
+</div>
+<div class="container-fluid" id="desktop">
     <div class="row-fluid">
         <div class="col-lg-8">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
-
                     {% for message in messages %}
                         <div class="alert alert-danger" role="alert">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -99,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" id="navigointi">
             <ul class="test2 nav nav-pills">
                 <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
                     <ul id="myTabs" class="nav nav-tabs" role="tablist">
