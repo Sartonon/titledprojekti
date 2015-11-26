@@ -18,11 +18,14 @@ def screippaa():
         linkit = browser.find_elements_by_link_text('Kartta')
         linkit[linkki].click()
         browser.implicitly_wait(3)
-        lat = browser.find_element_by_link_text('[Google Maps]').get_attribute('href').split('=')[1].split(',')[0]
-        lon = browser.find_element_by_link_text('[Google Maps]').get_attribute('href').split('=')[1].split('+')[1]
-        paikka = browser.find_element_by_link_text('[Google Maps]').get_attribute('href').split('(')[1].split(')')[0].replace('+', ' ')
-        print('lat: ' + lat + '  lon: ' + lon + '  paikka: ' + paikka)
-        listassa.__setitem__(paikka, {'lat': Decimal(lat), 'lon': Decimal(lon)})
+        try:
+            lat = browser.find_element_by_link_text('[Google Maps]').get_attribute('href').split('=')[1].split(',')[0]
+            lon = browser.find_element_by_link_text('[Google Maps]').get_attribute('href').split('=')[1].split('+')[1]
+            paikka = browser.find_element_by_link_text('[Google Maps]').get_attribute('href').split('(')[1].split(')')[0].replace('+', ' ')
+            print('lat: ' + lat + '  lon: ' + lon + '  paikka: ' + paikka)
+            listassa.__setitem__(paikka, {'lat': Decimal(lat), 'lon': Decimal(lon)})
+        except:
+            pass
         browser.back()
         browser.implicitly_wait(3)
     print(listassa)
