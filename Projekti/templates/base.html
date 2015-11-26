@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../static/bootstrap/css/jquery-ui.css" rel="stylesheet">
     <link href="../static/bootstrap/css/jquery-ui.min.css" rel="stylesheet">
@@ -53,6 +53,7 @@
 </div>
 <div class="container-fluid" id="mobile">
     <div class="row-fluid">
+     <div class="col-md-12">
         <div>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -79,6 +80,7 @@
                 </div>
             </form>
         </div>
+     </div>
     </div>
     <p>Hupsista... nyt meni liian pieneksi, ei näytetä mitään....</p>
 
