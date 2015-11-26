@@ -42,6 +42,11 @@
             width: 100%;
             height: 500px;
         }
+
+        #ohjelinkki {
+            margin-top: -20px;
+            margin-bottom: 5px;
+        }
     </style>
     <title>Karttaprojekti</title>
 </head>
@@ -69,13 +74,12 @@
                 <div class="form-group">
                      {{ form.hidden_tag() }}
                      <p>
-                         <label for="korppiosoite">Anna korpin kalenterin URL:</label> <a type="button" class="btn btn-default btn-lg btn-danger pull-right" href="#ohjemobiili" data-toggle="modal">?</a>
+                         <label for="korppiosoite">Anna korpin kalenterin URL:</label> <a type="button" id="ohjelinkki" class="btn btn-default btn-lg btn-danger pull-right" href="#ohjemobiili" data-toggle="modal">?</a>
                          {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL", id="korppiosoite") }}
                      </p>
 
                      <p>
                          <input type="submit" class="btn btn-primary btn-lg btn-block" value="Hae">
-
                      </p>
                 </div>
             </form>
