@@ -15,11 +15,11 @@
     <style>
 
         /* Smartphones ----------- */
-        @media only screen and (max-width: 1000px) {
+        @media only screen and (max-width: 980px) {
             #desktop { display: none; }
         }
 
-        @media screen and (min-width: 1000px) {
+        @media screen and (min-width: 980px) {
             #mobile { display: none; }
         }
 
@@ -51,8 +51,37 @@
         <h1>Karttaprojekti</h1>
     </div>
 </div>
-<div id="mobile" display="none">
+<div class="container-fluid" id="mobile">
+    <div class="row-fluid">
+        <div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action="" method="post" name="login">
+                <div class="form-group">
+                     {{ form.hidden_tag() }}
+                     <p>
+                         <label for="korppiosoite">Anna korpin kalenterin URL:</label>
+                         {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL", id="korppiosoite") }}
+                     </p>
+
+                     <p>
+                         <input type="submit" class="btn btn-default btn-lg btn-block" value="Hae">
+                     </p>
+                </div>
+            </form>
+        </div>
+    </div>
     <p>Hupsista... nyt meni liian pieneksi, ei näytetä mitään....</p>
+
 </div>
 <div class="container-fluid" id="desktop">
     <div class="row-fluid">
