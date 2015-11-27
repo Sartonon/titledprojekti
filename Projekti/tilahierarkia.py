@@ -80,6 +80,6 @@ def agora():
         'Beeta' : 1,
         'Gamma' : 2,
         'Delta': 2,
-        'Ag Auditorio' : 1
+        'Auditorio' : 1
     }
     return agora

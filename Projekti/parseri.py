@@ -66,14 +66,23 @@ def parsiFloor(paikka):
     return None
 
 def parsiSpace(paikka):
+    if paikka is not None:
+        tila = paikka.split()
+        print(tila[0:3])
+        #TODO: Kuntoon
+        if tila[0:2] == 'Ag Auditorio 1':
+            return 'Ag A102'
+        if tila[0:2] == 'Ag Auditorio 2':
+            return 'Ag B103'
+        if tila[0:2] == 'Ag Auditorio 3':
+            return 'Ag B105'
     return paikka
+
 
 def agorakerros(paikka):
     tila = paikka.split()
     agora = tilahierarkia.agora()
-    print(agora)
     try:
-        #print(tila[1])
         if tila[1] in agora:
             return agora[tila[1]]
         else:
