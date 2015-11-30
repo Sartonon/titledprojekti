@@ -68,13 +68,11 @@ def parsiFloor(paikka):
 def parsiSpace(paikka):
     if paikka is not None:
         tila = paikka.split()
-        print(tila[0:3])
-        #TODO: Kuntoon
-        if tila[0:2] == 'Ag Auditorio 1':
+        if ' '.join(tila[0:3]) == 'Ag Auditorio 1':
             return 'Ag A102'
-        if tila[0:2] == 'Ag Auditorio 2':
+        if ' '.join(tila[0:3]) == 'Ag Auditorio 2':
             return 'Ag B103'
-        if tila[0:2] == 'Ag Auditorio 3':
+        if ' '.join(tila[0:3]) == 'Ag Auditorio 3':
             return 'Ag B105'
     return paikka
 
