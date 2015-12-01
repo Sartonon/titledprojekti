@@ -15,16 +15,19 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                 paikka = tapahtuma.get('location')
             if paikka in listaDict:
                 huone = parsiSpace(paikka)
+                kerros = parsiFloor(paikka)
+                rakennus = parsiBuilding(huone)
+                alue = parsiArea(rakennus)
                 tapahtumat.append({'paikka': paikka,
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
                                    'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
                                    'kuvaus': tapahtuma.get('summary'),
                                    'lat': listaDict[paikka]['lat'],
                                    'lon': listaDict[paikka]['lon'],
-                                   'areaId' : parsiArea(paikka),
-                                   'buildingId' : parsiBuilding(paikka),
-                                   'floorId' : parsiFloor(paikka),
-                                   'spaceId' : parsiSpace(paikka)})
+                                   'areaId' : alue,
+                                   'buildingId' : rakennus,
+                                   'floorId' : kerros,
+                                   'spaceId' : huone})
             else:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
@@ -34,8 +37,7 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'lon': ''})
     tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
 
-def parsiArea(paikka):
-    rakennus = parsiBuilding(paikka)
+def parsiArea(rakennus):
     if rakennus is not None:
         alueet = tilahierarkia.alueet()
         return alueet[rakennus]
@@ -57,8 +59,6 @@ def parsiFloor(paikka):
         try:
             if tila[0] == "Ag":
                 return agorakerros(paikka)
-            elif tila[:-1] == "Ylistökem":
-                return ylistokerros(paikka)
             else:
                 eka = numerot[0]
                 kerros = eka[1]
@@ -83,13 +83,9 @@ def agorakerros(paikka):
         if tila[1] in agora:
             return agora[tila[1]]
         else:
-            return parsiFloor(tila[1:])
+            return parsiFloor(' '.join(tila[1:]))
     except:
-        return parsiFloor(tila[1:])
-
-def ylistokerros(paikka):
-    #TODO: Mieti kuinka käyttää hyväksi aiempia parsifunktioita
-    return
+        return parsiFloor(' '.join(tila[1:]))
 
 def tiedotArray(data):
     today = date.today()
