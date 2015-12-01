@@ -98,12 +98,6 @@ def kartta():
 
     return render_template('osm.html')
 
-
-@app.route('/pohjapiirrustus', methods=['GET', 'POST'])
-def pohjapiirrustus():
-    return ("http://navi.jyu.fi/?viewport=big#map?areaId=Mattilanniemi&buildingId=Agora&floorId=2&spaceId=Ag%20C222.2")
-
-
 @app.route('/virhe', methods=['GET', 'POST'])
 def virhe():
     return render_template('virhe.html')

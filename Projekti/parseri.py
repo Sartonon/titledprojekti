@@ -61,7 +61,7 @@ def parsiFloor(paikka):
                 return agorakerros(paikka)
             else:
                 eka = numerot[0]
-                kerros = eka[1]
+                kerros = eka[0]
                 kerros = int(kerros)
         except:
             return None
@@ -69,6 +69,7 @@ def parsiFloor(paikka):
     return None
 
 def parsiSpace(paikka):
+    print(paikka)
     erikoistilat = tilahierarkia.erikoistilat()
     if paikka is not None and paikka in erikoistilat:
         return erikoistilat[paikka]
