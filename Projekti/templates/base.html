@@ -292,6 +292,7 @@
     var tlat = 62.23252728347514; // Agoran koordinaatit oletuksena
     var tlon = 25.73729200674369;
     var rakennusnaytetty = false;
+    var naytaoletus = true;
     var areaId = 'None';
     var buildingId = 'None';
     var floorId = 'None';
@@ -299,9 +300,15 @@
 
     window.onload = function () {
         getLocation();
+         {%  if tapahtumatTanaan %}
+             if (naytaoletus) {
+                 vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}', '{{ tapahtumatTanaan[0].areaId }}',
+                         '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
+             }
+        {% endif %}
     };
 
-    function vaihdaTila(lat, lon, area, building, floor, space) {
+    function vaihdaTila(lat, lon, area, building, floor, space, klik) {
         console.log("Tilan tiedot ladattu");
         rakennusnaytetty = false;
         tlat = lat;
@@ -310,6 +317,7 @@
         buildingId = building;
         floorId = floor;
         spaceId = space;
+        if (klik) naytaoletus = false;
         if (document.getElementById("ulat").value != "" && document.getElementById("ulon").value != "") {
             $("#kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("ulat").value + "&ulon=" + document.getElementById("ulon").value);
         }
@@ -362,6 +370,12 @@
         else {
             $("#kartta").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
         }
+         {%  if tapahtumatTanaan %}
+             if (naytaoletus) {
+                 vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}', '{{ tapahtumatTanaan[0].areaId }}',
+                         '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
+             }
+        {% endif %}
     }
 </script>
 
