@@ -1,6 +1,8 @@
 from datetime import date, timezone
 import datetime
 import operator
+
+from dateutil import tz
 from icalendar import Calendar
 import lista
 import tilahierarkia
@@ -125,5 +127,5 @@ def tiedotArrayYlihuomenna(data):
 
 
 def utc_to_local(utc_dt):
-    return utc_dt.replace(tzinfo=timezone.utc).astimezone(tz=None)
-    # TODO: aikavy�hykkeen kovakoodaaminen (ei voi tiet�� miss� p�in maailmaa serveri tulee sijaitsemaan)
+    to_zone = tz.gettz('Europe/Helsinki')
+    return utc_dt.replace(tzinfo=timezone.utc).astimezone(to_zone)
