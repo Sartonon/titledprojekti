@@ -98,6 +98,7 @@ def kartta():
 
     return render_template('osm.html')
 
+
 @app.route('/virhe', methods=['GET', 'POST'])
 def virhe():
     return render_template('virhe.html')
