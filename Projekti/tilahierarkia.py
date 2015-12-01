@@ -83,3 +83,14 @@ def agora():
         'Auditorio' : 1
     }
     return agora
+
+def erikoistilat():
+    erikoistilat = {
+        'Ag Auditorio 1' : 'Ag A102',
+        'Ag Auditorio 2' : 'Ag B103',
+        'Ag Auditorio 3' : 'Ag B105',
+        'YlistoKem1' : 'YK 306',
+        'YlistoKem2' : 'YK 305',
+        'YlistoKem3' : 'YK 205'
+    }
+    return erikoistilat

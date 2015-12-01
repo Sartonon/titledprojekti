@@ -12,18 +12,22 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
         alku = tapahtuma.get('dtstart').dt.date()
         if (alku == paiva or kaikki) and alku >= date.today():
             if tapahtuma.get('location') is not None:
-                tapahtumapaikka = tapahtuma.get('location')
-            if tapahtumapaikka in listaDict:
-                tapahtumat.append({'paikka': tapahtuma.get('location'),
+                paikka = tapahtuma.get('location')
+            if paikka in listaDict:
+                huone = parsiSpace(paikka)
+                kerros = parsiFloor(paikka)
+                rakennus = parsiBuilding(huone)
+                alue = parsiArea(rakennus)
+                tapahtumat.append({'paikka': paikka,
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
                                    'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
                                    'kuvaus': tapahtuma.get('summary'),
-                                   'lat': listaDict[tapahtumapaikka]['lat'],
-                                   'lon': listaDict[tapahtumapaikka]['lon'],
-                                   'areaId' : parsiArea(tapahtuma.get('location')),
-                                   'buildingId' : parsiBuilding(tapahtuma.get('location')),
-                                   'floorId' : parsiFloor(tapahtuma.get('location')),
-                                   'spaceId' : parsiSpace(tapahtuma.get('location'))})
+                                   'lat': listaDict[paikka]['lat'],
+                                   'lon': listaDict[paikka]['lon'],
+                                   'areaId' : alue,
+                                   'buildingId' : rakennus,
+                                   'floorId' : kerros,
+                                   'spaceId' : huone})
             else:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
@@ -33,8 +37,7 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'lon': ''})
     tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
 
-def parsiArea(paikka):
-    rakennus = parsiBuilding(paikka)
+def parsiArea(rakennus):
     if rakennus is not None:
         alueet = tilahierarkia.alueet()
         return alueet[rakennus]
@@ -66,15 +69,11 @@ def parsiFloor(paikka):
     return None
 
 def parsiSpace(paikka):
-    if paikka is not None:
-        tila = paikka.split()
-        if ' '.join(tila[0:3]) == 'Ag Auditorio 1':
-            return 'Ag A102'
-        if ' '.join(tila[0:3]) == 'Ag Auditorio 2':
-            return 'Ag B103'
-        if ' '.join(tila[0:3]) == 'Ag Auditorio 3':
-            return 'Ag B105'
-    return paikka
+    erikoistilat = tilahierarkia.erikoistilat()
+    if paikka is not None and paikka in erikoistilat:
+        return erikoistilat[paikka]
+    else:
+        return paikka
 
 
 def agorakerros(paikka):
@@ -84,9 +83,9 @@ def agorakerros(paikka):
         if tila[1] in agora:
             return agora[tila[1]]
         else:
-            return parsiFloor(tila[1:])
+            return parsiFloor(' '.join(tila[1:]))
     except:
-        return parsiFloor(tila[1:])
+        return parsiFloor(' '.join(tila[1:]))
 
 def tiedotArray(data):
     today = date.today()
