@@ -74,23 +74,33 @@ def alueet():
     }
     return alueet
 
+
 def agora():
     agora = {
-        'Alfa' : 1,
-        'Beeta' : 1,
-        'Gamma' : 2,
+        'Alfa': 1,
+        'Beeta': 1,
+        'Gamma': 2,
         'Delta': 2,
-        'Auditorio' : 1
+        'Auditorio': 1
     }
     return agora
 
+
 def erikoistilat():
     erikoistilat = {
-        'Ag Auditorio 1' : 'Ag A102',
-        'Ag Auditorio 2' : 'Ag B103',
-        'Ag Auditorio 3' : 'Ag B105',
-        'YlistoKem1' : 'YK 306',
-        'YlistoKem2' : 'YK 305',
-        'YlistoKem3' : 'YK 205'
+        'Ag Auditorio 1': 'Ag A102',
+        'Ag Auditorio 2': 'Ag B103',
+        'Ag Auditorio 3': 'Ag B105',
+        'Ag B212.2 (Mountains)': 'Ag B212.2',
+        'Ag B113.1 (Europe)': 'Ag B113.1',
+        'Ag B112.2 (Latin)': 'Ag B112.2',
+        'Ag B213.1 (Lakes)': 'Ag B213.1',
+        'Ag B212.1 (Finland)': 'Ag B212.1',
+        'Ag B112.1 (Africa)': 'Ag B112.1',
+        'Ag B111.1 (Asia)': 'Ag B111.1',
+        'Ag B211.1 (Sovjet)': 'Ag B211.1',
+        'YlistoKem1': 'YK 306',
+        'YlistoKem2': 'YK 305',
+        'YlistoKem3': 'YK 205'
     }
     return erikoistilat
