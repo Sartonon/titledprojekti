@@ -1,12 +1,13 @@
 from datetime import date, timezone
 import datetime
 import operator
-
 from dateutil import tz
 from icalendar import Calendar
 import lista
 import tilahierarkia
 import re
+import time
+
 
 def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki=False):
     tapahtumapaikka = ""
@@ -26,10 +27,10 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'kuvaus': tapahtuma.get('summary'),
                                    'lat': listaDict[paikka]['lat'],
                                    'lon': listaDict[paikka]['lon'],
-                                   'areaId' : alue,
-                                   'buildingId' : rakennus,
-                                   'floorId' : kerros,
-                                   'spaceId' : huone})
+                                   'areaId': alue,
+                                   'buildingId': rakennus,
+                                   'floorId': kerros,
+                                   'spaceId': huone})
             else:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
                                    'paiva': tapahtuma.get('dtstart').dt.date(),
@@ -39,11 +40,13 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'lon': ''})
     tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
 
+
 def parsiArea(rakennus):
     if rakennus is not None:
         alueet = tilahierarkia.alueet()
         return alueet[rakennus]
     return None
+
 
 def parsiBuilding(paikka):
     if paikka is not None:
@@ -53,6 +56,7 @@ def parsiBuilding(paikka):
         if lyhenne in rakennukset:
             return rakennukset[lyhenne]
     return None
+
 
 def parsiFloor(paikka):
     if paikka is not None:
@@ -69,6 +73,7 @@ def parsiFloor(paikka):
             return None
         return kerros
     return None
+
 
 def parsiSpace(paikka):
     print(paikka)
@@ -89,6 +94,7 @@ def agorakerros(paikka):
             return parsiFloor(' '.join(tila[1:]))
     except:
         return parsiFloor(' '.join(tila[1:]))
+
 
 def tiedotArray(data):
     today = date.today()
@@ -124,6 +130,20 @@ def tiedotArrayYlihuomenna(data):
     cal = Calendar.from_ical(data.text)
     lisaaTapahtumatListaan(ylihuomennaTapahtumat, cal, listaDict, ylihuomenna)
     return ylihuomennaTapahtumat
+
+
+def tiedotArrayValittu(paiva, data):
+    yy = paiva.split('-')[0]
+    mm = paiva.split('-')[1]
+    dd = paiva.split('-')[2]
+    print('vuosi: ' + yy + 'kuukausi: ' + mm + 'paiva: ' + dd)
+    print("Paiva parseri.py:ssa: " + paiva)
+    d1 = datetime.date(int(yy), int(mm), int(dd))
+    listaDict = lista.listaDict()
+    valitutTapahtumat = []
+    cal = Calendar.from_ical(data.text)
+    lisaaTapahtumatListaan(valitutTapahtumat, cal, listaDict, d1)
+    return valitutTapahtumat
 
 
 def utc_to_local(utc_dt):

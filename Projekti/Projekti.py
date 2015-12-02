@@ -1,16 +1,40 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask import render_template, flash, redirect
 import folium
 from forms import LoginForm
 from flask import request
 import requests
 import lista
-from parseri import tiedotArray, tiedotArrayTanaan, tiedotArrayHuomenna, tiedotArrayYlihuomenna
+from parseri import tiedotArray, tiedotArrayTanaan, tiedotArrayHuomenna, tiedotArrayYlihuomenna, tiedotArrayValittu
 import os
+import json
 
 app = Flask(__name__)
 app.config.from_object('config')
 
+
+@app.route('/calday')
+def hae_valittu_paiva():
+    selected_date = request.args.get('selected_date')
+    print("Valittu paiva: " + selected_date)
+    valittupaiva = []
+    form = LoginForm()
+    try:
+        data = urldata
+        try:
+            valittupaiva = tiedotArrayValittu(selected_date, data)
+        except:
+            print("virhe valitussa paivassa")
+    except:
+        print("virhe valitus paivas")
+
+    print(valittupaiva)
+    return jsonify(result=str(valittupaiva))
+
+
+# @app.route('/paiva<kalenteripaiva>', methods=['GET', 'POST'])
+# def paiva():
+#     print(kalenteripaiva)
 
 @app.route('/', methods=['GET', 'POST'])
 def perus():
@@ -25,10 +49,12 @@ def perus():
     tapahtumatTanaan = []
     tapahtumatHuomenna = []
     tapahtumatYlihuomenna = []
+    global urldata
     tiedosto = '../kayttoohjeet.txt'
     try:
         if form.url.data is not None:
             data = requests.get(form.url.data)
+            urldata = data
             try:
                 tapahtumatTanaan = tiedotArrayTanaan(data)
             except:
@@ -97,6 +123,7 @@ def kartta():
     map_osm.create_map(path='templates/osm.html')
 
     return render_template('osm.html')
+
 
 @app.route('/virhe', methods=['GET', 'POST'])
 def virhe():
