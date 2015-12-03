@@ -99,6 +99,7 @@ def erikoistilat():
         'Ag B112.1 (Africa)': 'Ag B112.1',
         'Ag B111.1 (Asia)': 'Ag B111.1',
         'Ag B211.1 (Sovjet)': 'Ag B211.1',
+        'Ag C231': 'Ag C231.1',
         'YlistoKem1': 'YK 306',
         'YlistoKem2': 'YK 305',
         'YlistoKem3': 'YK 205'
