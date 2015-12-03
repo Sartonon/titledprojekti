@@ -113,12 +113,12 @@
             </div>
         </div>
     </div>
-{% if tapahtumat %}
-    <!--
+    {% if tapahtumat %}
+        <!--
     <div class="row-fluid">
          <iframe id="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
     </div> TODO: Jostain syystä rikkoo desktop toiminnallisuuden-->
-{% endif %}
+    {% endif %}
 </div>
 <div class="container-fluid" id="desktop">
     <div class="row-fluid">
@@ -254,7 +254,8 @@
 
                         <div role="tabpanel" class="tab-pane fade" id="calendar" aria-labelledby="profile-tab">
                             <div id="datepicker1"></div>
-                            <input type="hidden" id="sendDate" readonly> //TODO: muodostaa valitun päivän tapahtumat
+                            <input type="hidden" id="sendDate" readonly>
+                            <span id=result>?</span>
                         </div>
 
                     </div>
@@ -274,18 +275,29 @@
 
 <script type="text/javascript">
 
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
     $(function () {
-        $("#datepicker1").datepicker({ //TODO: napit seuraaviin kuukausiin näkyviin
+        $("#datepicker1").datepicker({ //TODO: napit kuukausien vaihtamiseen näkyvii
             firstDay: 1,
             dayNames: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
             dayNamesMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
             monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
             monthNamesShort: ['Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesä', 'Heinä', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
             showButtonPanel: true,
-            altField: '#sendDate'
+            dateFormat: 'yy-mm-dd',
+            altField: '#sendDate',
+            onSelect: function () {
+                $(function () {
+                    $.getJSON($SCRIPT_ROOT + '/calday', {
+                        selected_date: document.getElementById("sendDate").value
+                    }, function (data) {
+                        $("#result").text(data.result);
+                    });
+                    return false;
+                });
+            },
         });
-
     })
     ;
 
@@ -300,11 +312,11 @@
 
     window.onload = function () {
         getLocation();
-         {%  if tapahtumatTanaan %}
-             if (naytaoletus) {
-                 vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}', '{{ tapahtumatTanaan[0].areaId }}',
-                         '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
-             }
+        {%  if tapahtumatTanaan %}
+            if (naytaoletus) {
+                vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}', '{{ tapahtumatTanaan[0].areaId }}',
+                        '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
+            }
         {% endif %}
     };
 
@@ -370,11 +382,11 @@
         else {
             $("#kartta").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
         }
-         {%  if tapahtumatTanaan %}
-             if (naytaoletus) {
-                 vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}', '{{ tapahtumatTanaan[0].areaId }}',
-                         '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
-             }
+        {%  if tapahtumatTanaan %}
+            if (naytaoletus) {
+                vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}', '{{ tapahtumatTanaan[0].areaId }}',
+                        '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
+            }
         {% endif %}
     }
 </script>
