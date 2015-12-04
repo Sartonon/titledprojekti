@@ -115,7 +115,7 @@
         </div>
     </div>
     {% if tapahtumat %}
-     {{ self.valikko() }}
+     {{ self.valikkomobile() }}
     <div class="row-fluid">
          <iframe class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
     </div>
@@ -176,7 +176,7 @@
                 </div>
             </div>
         </div>
-        {% block valikko %}{% endblock %}
+       {{ self.valikko() }}
     </div>
 </div>
 <input type="hidden" value="" id="ulat">
