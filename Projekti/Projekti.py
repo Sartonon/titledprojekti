@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from flask import Flask, jsonify
 from flask import render_template, flash, redirect
 import folium
@@ -81,7 +84,7 @@ def perus():
     except:
         print("Virhe tiedoston lukemisessa.")
         kayttoohjeet = ["Pahoittelemme. Kayttoohjeiden lukemisessa tapahtui virhe."]
-    return render_template('base.html',
+    return render_template('valikkotemplate.html',
                            title='Sign In',
                            form=form,
                            tapahtumat=tapahtumat,
