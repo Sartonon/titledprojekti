@@ -34,6 +34,8 @@
                                             klo. {{ tapahtumaTanaan.aika }}. kuvaus: {{ tapahtumaTanaan.kuvaus }}</a>
                                     {% endfor %}
                                 </div>
+                                {% else %}
+                                 <p>Ei tapahtumia</p>
                             {% endif %}
                         </div>
 
@@ -48,6 +50,9 @@
                                             kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
                                     {% endfor %}
                                 </div>
+
+                                {% else %}
+                                 <p>Ei tapahtumia</p>
                             {% endif %}
                         </div>
 
@@ -62,6 +67,8 @@
                                             kuvaus: {{ tapahtumaYlihuomenna.kuvaus }}</a>
                                     {% endfor %}
                                 </div>
+                                {% else %}
+                                 <p>Ei tapahtumia</p>
                             {% endif %}
                         </div>
 
@@ -75,6 +82,8 @@
                                             klo. {{ tapahtuma.aika }}. kuvaus: {{ tapahtuma.kuvaus }}</a>
                                     {% endfor %}
                                 </div>
+                                {% else %}
+                                 <p>Ei tapahtumia</p>
                             {% endif %}
                         </div>
 
