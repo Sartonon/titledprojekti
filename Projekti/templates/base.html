@@ -114,10 +114,12 @@
         </div>
     </div>
     {% if tapahtumat %}
+     {{ self.valikko() }}
     <div class="row-fluid">
          <iframe class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
     </div>
     {% endif %}
+
 </div>
 <div class="container-fluid" id="desktop">
     <div class="row-fluid">
