@@ -20,7 +20,7 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
         if (alku == paiva or kaikki) and alku >= date.today():
             if tapahtuma.get('location') is not None:
                 paikka = tapahtuma.get('location').lower()
-
+               #lol muutettu lower jotta toimii pienten kanssa
             else:
                 paikka = "eiole"
             if paikka in listaDict:
