@@ -42,6 +42,11 @@
             max-height: 200px;
         }
 
+        #kaikkimob {
+            overflow: auto;
+            max-height: 200px;
+        }
+
         .kartta {
             margin-top: 5px;
             width: 100%;
@@ -57,11 +62,14 @@
 </head>
 <body>
 <div class="jumbotron">
-    <div class="container">
-        <h1>Karttaprojekti</h1>
+        <div class="container">
+            <h1>Karttaprojekti</h1>
+        </div>
     </div>
-</div>
-<div class="container-fluid" id="mobile">
+<div id="mobile">
+<div class="container-fluid">
+{% if tapahtumat %}
+    {% else %}
     <div class="row-fluid">
         <div>
             {% with messages = get_flashed_messages() %}
@@ -93,6 +101,11 @@
             </form>
         </div>
     </div>
+{% endif %}
+
+
+
+
     <div class="modal fade" id="ohjemobiili">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -115,12 +128,13 @@
         </div>
     </div>
     {% if tapahtumat %}
-     {{ self.valikkomobile() }}
-    <div class="row-fluid">
-         <iframe class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
-    </div>
+        {{ self.valikkomobile() }}
+        <div class="row-fluid">
+            <iframe class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+        </div>
     {% endif %}
 
+</div>
 </div>
 <div class="container-fluid" id="desktop">
     <div class="row-fluid">
@@ -176,7 +190,7 @@
                 </div>
             </div>
         </div>
-       {{ self.valikko() }}
+        {{ self.valikko() }}
     </div>
 </div>
 <input type="hidden" value="" id="ulat">
@@ -190,23 +204,28 @@
 
 <script type="text/javascript">
 
-$.fn.scrollTo = function( target, options, callback ){
-  if(typeof options == 'function' && arguments.length == 2){ callback = options; options = target; }
-  var settings = $.extend({
-    scrollTarget  : target,
-    offsetTop     : 50,
-    duration      : 500,
-    easing        : 'swing'
-  }, options);
-  return this.each(function(){
-    var scrollPane = $(this);
-    var scrollTarget = (typeof settings.scrollTarget == "number") ? settings.scrollTarget : $(settings.scrollTarget);
-    var scrollY = (typeof scrollTarget == "number") ? scrollTarget : scrollTarget.offset().top + scrollPane.scrollTop() - parseInt(settings.offsetTop);
-    scrollPane.animate({scrollTop : scrollY }, parseInt(settings.duration), settings.easing, function(){
-      if (typeof callback == 'function') { callback.call(this); }
-    });
-  });
-}
+    $.fn.scrollTo = function (target, options, callback) {
+        if (typeof options == 'function' && arguments.length == 2) {
+            callback = options;
+            options = target;
+        }
+        var settings = $.extend({
+            scrollTarget: target,
+            offsetTop: 50,
+            duration: 500,
+            easing: 'swing'
+        }, options);
+        return this.each(function () {
+            var scrollPane = $(this);
+            var scrollTarget = (typeof settings.scrollTarget == "number") ? settings.scrollTarget : $(settings.scrollTarget);
+            var scrollY = (typeof scrollTarget == "number") ? scrollTarget : scrollTarget.offset().top + scrollPane.scrollTop() - parseInt(settings.offsetTop);
+            scrollPane.animate({scrollTop: scrollY}, parseInt(settings.duration), settings.easing, function () {
+                if (typeof callback == 'function') {
+                    callback.call(this);
+                }
+            });
+        });
+    }
 
     var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
@@ -257,7 +276,9 @@ $.fn.scrollTo = function( target, options, callback ){
 
     function vaihdaTila(lat, lon, area, building, floor, space, klik) {
         $('body').scrollTo('.kartta');
-        console.log("Tilan tiedot ladattu");
+
+        setTimeout(function (){
+            console.log("Tilan tiedot ladattu");
         rakennusnaytetty = false;
         tlat = lat;
         tlon = lon;
@@ -272,6 +293,9 @@ $.fn.scrollTo = function( target, options, callback ){
         else {
             $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
         }
+        }, 500);
+
+
     }
 
     function naytaRakennus() {
