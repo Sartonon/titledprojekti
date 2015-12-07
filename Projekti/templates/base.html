@@ -37,6 +37,11 @@
             padding-bottom: 10px;
         }
 
+        #jumbotronmobiili {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
         #kaikki {
             overflow: auto;
             max-height: 200px;
@@ -45,6 +50,11 @@
         #kaikkimob {
             overflow: auto;
             max-height: 200px;
+        }
+
+        #uusihaku {
+            margin-top: -20px;
+            margin-bottom: 10px;
         }
 
         .kartta {
@@ -61,14 +71,16 @@
     <title>Karttaprojekti</title>
 </head>
 <body>
-<div class="jumbotron">
+
+<div id="mobile">
+<div id="jumbotronmobiili" class="jumbotron">
         <div class="container">
             <h1>Karttaprojekti</h1>
         </div>
     </div>
-<div id="mobile">
 <div class="container-fluid">
 {% if tapahtumat %}
+    <button type="button" id="uusihaku" class="btn btn-primary btn-lg btn-block">Hae uudella korppiosoitteella</button>
     {% else %}
     <div class="row-fluid">
         <div>
@@ -136,7 +148,13 @@
 
 </div>
 </div>
-<div class="container-fluid" id="desktop">
+<div id="desktop">
+<div id="jumbotronmobiili" class="jumbotron">
+        <div class="container">
+            <h1>Karttaprojekti</h1>
+        </div>
+    </div>
+<div class="container-fluid">
     <div class="row-fluid">
         <div class="col-lg-8">
             {% with messages = get_flashed_messages() %}
@@ -193,6 +211,7 @@
         {{ self.valikko() }}
     </div>
 </div>
+</div>
 <input type="hidden" value="" id="ulat">
 <input type="hidden" value="" id="ulon">
 <script src="../static/jquery-2.1.4.min.js"></script>
@@ -212,7 +231,7 @@
         var settings = $.extend({
             scrollTarget: target,
             offsetTop: 50,
-            duration: 500,
+            duration: 300,
             easing: 'swing'
         }, options);
         return this.each(function () {
