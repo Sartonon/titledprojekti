@@ -270,14 +270,42 @@
                     $.getJSON($SCRIPT_ROOT + '/calday', {
                         selected_date: document.getElementById("sendDate").value
                     }, function (data) {
-                        $("#result").text(data.result);
+                        for (pussy in data) {
+                            var element = document.createElement("BUTTON");
+                            var text = document.createTextNode(pussy.kuvaus);
+                            element.appendChild(text);
+                            document.getElementById("result").appendChild(element);
+
+                        }
                     });
                     return false;
                 });
             },
         });
-    })
-    ;
+    });
+
+  $(function () {
+        $("#datepickermob").datepicker({ //TODO: napit kuukausien vaihtamiseen näkyvii
+            firstDay: 1,
+            dayNames: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
+            dayNamesMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
+            monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
+            monthNamesShort: ['Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesä', 'Heinä', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
+            showButtonPanel: true,
+            dateFormat: 'yy-mm-dd',
+            altField: '#sendDate',
+            onSelect: function () {
+                $(function () {
+                    $.getJSON($SCRIPT_ROOT + '/calday', {
+                        selected_date: document.getElementById("sendDate").value
+                    }, function (data) {
+                        $("#resultmobiili").text(data);
+                    });
+                    return false;
+                });
+            },
+        });
+    });
 
     var tlat = 62.23252728347514; // Agoran koordinaatit oletuksena
     var tlon = 25.73729200674369;

@@ -37,7 +37,7 @@ def hae_valittu_paiva():
         print("virhe valitus paivas")
 
     print(valittupaiva)
-    return jsonify(result=str(valittupaiva))
+    return json.dumps(valittupaiva)
 
 
 # @app.route('/paiva<kalenteripaiva>', methods=['GET', 'POST'])

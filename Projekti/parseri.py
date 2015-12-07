@@ -10,6 +10,7 @@ import lista
 import tilahierarkia
 import re
 import time
+from bottle import unicode
 
 
 def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki=False):
@@ -19,14 +20,16 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
         if (alku == paiva or kaikki) and alku >= date.today():
             if tapahtuma.get('location') is not None:
                 paikka = tapahtuma.get('location')
+            else:
+                paikka = "eiole"
             if paikka in listaDict:
                 huone = parsiSpace(paikka)
                 kerros = parsiFloor(paikka)
                 rakennus = parsiBuilding(huone)
                 alue = parsiArea(rakennus)
                 tapahtumat.append({'paikka': paikka,
-                                   'paiva': tapahtuma.get('dtstart').dt.date(),
-                                   'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
+                                   'paiva': unicode(tapahtuma.get('dtstart').dt.date()),
+                                   'aika': unicode(utc_to_local(tapahtuma.get('dtstart').dt).time()),
                                    'kuvaus': tapahtuma.get('summary'),
                                    'lat': listaDict[paikka]['lat'],
                                    'lon': listaDict[paikka]['lon'],
@@ -36,8 +39,8 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'spaceId': huone})
             else:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
-                                   'paiva': tapahtuma.get('dtstart').dt.date(),
-                                   'aika': utc_to_local(tapahtuma.get('dtstart').dt).time(),
+                                   'paiva': unicode(tapahtuma.get('dtstart').dt.date()),
+                                   'aika': unicode(utc_to_local(tapahtuma.get('dtstart').dt).time()),
                                    'kuvaus': tapahtuma.get('summary'),
                                    'lat': '',
                                    'lon': ''})
