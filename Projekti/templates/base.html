@@ -141,17 +141,18 @@
     </div>
     {% if tapahtumat %}
         {{ self.valikkomobile() }}
+         <input id="nappinaytamob" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
+                           onclick="naytaRakennusmob()" value="Näytä rakennuksen kartta">
         <div class="row-fluid">
             <iframe class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
         </div>
-        <input id="nappinayta" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
-                           onclick="naytaRakennus()" value="Näytä rakennuksen kartta">
+
     {% endif %}
 
 </div>
 </div>
 <div id="desktop">
-<div id="jumbotronmobiili" class="jumbotron">
+<div class="jumbotron">
         <div class="container">
             <h1>Karttaprojekti</h1>
         </div>
@@ -367,6 +368,26 @@
         }
         else {
             $("#nappinayta").attr("value", "Näytä rakennus kartalla")
+            rakennusnaytetty = true;
+            if (areaId != 'None' &&
+                    buildingId != 'None' &&
+                    floorId != 'None' &&
+                    spaceId != 'None') {
+                $(".kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId + "&buildingId=" + buildingId + "&floorId=" + floorId + "&spaceId=" + spaceId));
+            }
+            else {
+                $(".kartta").attr("src", "/virhe");
+            }
+        }
+    }
+
+  function naytaRakennusmob() {
+        if (rakennusnaytetty) {
+            $("#nappinaytamob").attr("value", "Näytä rakennuksen kartta")
+            vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId)
+        }
+        else {
+            $("#nappinaytamob").attr("value", "Näytä rakennus kartalla")
             rakennusnaytetty = true;
             if (areaId != 'None' &&
                     buildingId != 'None' &&
