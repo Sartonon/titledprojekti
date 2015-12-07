@@ -15,15 +15,19 @@ from bottle import unicode
 
 def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki=False):
     tapahtumapaikka = ""
+    paikka = ""
     for tapahtuma in cal.walk('vevent'):
         alku = tapahtuma.get('dtstart').dt.date()
         if (alku == paiva or kaikki) and alku >= date.today():
             if tapahtuma.get('location') is not None:
-                paikka = tapahtuma.get('location').lower()
+                paikka = tapahtuma.get('location')
+                paikka2 = tapahtuma.get('location').lower()
                #lol muutettu lower jotta toimii pienten kanssa
             else:
                 paikka = "eiole"
-            if paikka in listaDict:
+            if paikka2 in listaDict:
+                print("toimi")
+                print(paikka)
                 huone = parsiSpace(paikka)
                 kerros = parsiFloor(paikka)
                 rakennus = parsiBuilding(huone)
@@ -32,8 +36,8 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'paiva': unicode(tapahtuma.get('dtstart').dt.date()),
                                    'aika': unicode(utc_to_local(tapahtuma.get('dtstart').dt).time()),
                                    'kuvaus': tapahtuma.get('summary'),
-                                   'lat': listaDict[paikka]['lat'],
-                                   'lon': listaDict[paikka]['lon'],
+                                   'lat': listaDict[paikka2]['lat'],
+                                   'lon': listaDict[paikka2]['lon'],
                                    'areaId': alue,
                                    'buildingId': rakennus,
                                    'floorId': kerros,
