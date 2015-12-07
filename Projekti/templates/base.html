@@ -270,9 +270,15 @@
                     $.getJSON($SCRIPT_ROOT + '/calday', {
                         selected_date: document.getElementById("sendDate").value
                     }, function (data) {
-                        for (pussy in data) {
+                        var div = document.getElementById("result");
+                        while(div.firstChild) {
+                            div.removeChild(div.firstChild);
+                        }
+                        console.log(data);
+                        for (var pussy in data) {
                             var element = document.createElement("BUTTON");
-                            var text = document.createTextNode(pussy.kuvaus);
+                            var text = document.createTextNode(pussy);
+                            console.log(data[pussy]);
                             element.appendChild(text);
                             document.getElementById("result").appendChild(element);
 
