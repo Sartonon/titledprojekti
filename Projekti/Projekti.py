@@ -114,8 +114,8 @@ def kartta():
         lon = float(request.args.get("lon"))
     else:
         listaDict = lista.listaDict()
-        lat = (listaDict['Ag']['lat'])
-        lon = (listaDict['Ag']['lon'])
+        lat = (listaDict['ag']['lat'])
+        lon = (listaDict['ag']['lon'])
         showMarker = False
 
     if showMarker:
