@@ -16,6 +16,11 @@ app = Flask(__name__)
 app.config.from_object('config')
 
 
+#@app.route('/uusi')
+#def uusi_osoite():
+#    print("lol")
+
+
 @app.route('/calday')
 def hae_valittu_paiva():
     selected_date = request.args.get('selected_date')
@@ -39,6 +44,7 @@ def hae_valittu_paiva():
 # def paiva():
 #     print(kalenteripaiva)
 
+@app.route('/uusi', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def perus():
     # listaD = lista.listaDict()

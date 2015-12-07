@@ -80,7 +80,7 @@
     </div>
 <div class="container-fluid">
 {% if tapahtumat %}
-    <button type="button" id="uusihaku" class="btn btn-primary btn-lg btn-block">Hae uudella korppiosoitteella</button>
+    <a type="button" id="uusihaku" class="btn btn-primary btn-lg btn-block" href="/">Hae uudella korppiosoitteella</a>
     {% else %}
     <div class="row-fluid">
         <div>
@@ -222,6 +222,13 @@
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+  function uusiOsoite () {
+     var input = document.getElementById("url");
+     input.value =  input.getAttribute("value");
+     input.value = "";
+      location.reload()
+
+  }
 
     $.fn.scrollTo = function (target, options, callback) {
         if (typeof options == 'function' && arguments.length == 2) {
@@ -230,8 +237,8 @@
         }
         var settings = $.extend({
             scrollTarget: target,
-            offsetTop: 50,
-            duration: 300,
+            offsetTop: 0,
+            duration: 500,
             easing: 'swing'
         }, options);
         return this.each(function () {
