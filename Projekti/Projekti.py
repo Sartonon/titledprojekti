@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from flask import Flask, jsonify
 from flask import render_template, flash, redirect
 import folium
@@ -11,6 +14,11 @@ import json
 
 app = Flask(__name__)
 app.config.from_object('config')
+
+
+#@app.route('/uusi')
+#def uusi_osoite():
+#    print("lol")
 
 
 @app.route('/calday')
@@ -29,13 +37,14 @@ def hae_valittu_paiva():
         print("virhe valitus paivas")
 
     print(valittupaiva)
-    return jsonify(result=str(valittupaiva))
+    return json.dumps(valittupaiva)
 
 
 # @app.route('/paiva<kalenteripaiva>', methods=['GET', 'POST'])
 # def paiva():
 #     print(kalenteripaiva)
 
+@app.route('/uusi', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def perus():
     # listaD = lista.listaDict()
@@ -81,7 +90,7 @@ def perus():
     except:
         print("Virhe tiedoston lukemisessa.")
         kayttoohjeet = ["Pahoittelemme. Kayttoohjeiden lukemisessa tapahtui virhe."]
-    return render_template('base.html',
+    return render_template('valikkotemplate.html',
                            title='Sign In',
                            form=form,
                            tapahtumat=tapahtumat,
