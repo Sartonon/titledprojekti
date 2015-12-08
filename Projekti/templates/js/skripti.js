@@ -1,4 +1,4 @@
-    function uusiOsoite() {
+function uusiOsoite() {
         var input = document.getElementById("url");
         input.value = input.getAttribute("value");
         input.value = "";
@@ -50,6 +50,7 @@
                         while (divi.firstChild) {
                             divi.removeChild(divi.firstChild);
                         }
+                        console.log(data.length)
                         console.log(data);
                         for (var pussy in data) {
                             var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[pussy].lat + "'" + "," + "'" + data[pussy].lon + "'" + "," + "'" + data[pussy].areaId + "'" + "," + "'" + data[pussy].buildingId + "'" + "," + "'" + data[pussy].floorId + "'" + "," + "'" + data[pussy].spaceId + "')";
@@ -84,7 +85,30 @@
                     $.getJSON($SCRIPT_ROOT + '/calday', {
                         selected_date: document.getElementById("sendDate").value
                     }, function (data) {
-                        $("#resultmobiili").text(data);
+                        divi = document.getElementById("valitutTapahtumatmob");
+                        while (divi.firstChild) {
+                            divi.removeChild(divi.firstChild);
+                        }
+                        console.log(data.length);
+                        if (data.length == 0) {
+                            var spanni = document.createElement("SPAN");
+                            var text = document.createTextNode("Ei tapahtumia valitulla paivalla");
+                            spanni.appendChild(text);
+                            divi.appendChild(spanni);
+                        }
+                        console.log(data);
+                        for (var pussy in data) {
+                            var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[pussy].lat + "'" + "," + "'" + data[pussy].lon + "'" + "," + "'" + data[pussy].areaId + "'" + "," + "'" + data[pussy].buildingId + "'" + "," + "'" + data[pussy].floorId + "'" + "," + "'" + data[pussy].spaceId + "')";
+                            var paikkatietotext = data[pussy].paiva + ", " + data[pussy].paikka + " klo " + data[pussy].aika + ". Kuvaus: " + data[pussy].kuvaus;
+                            var elementa = document.createElement("a");
+                            elementa.textContent = paikkatietotext;
+                            elementa.setAttribute("href", paikkatietohref);
+                            elementa.setAttribute("class", "list-group-item");
+                            document.getElementById("valitutTapahtumatmob").appendChild(elementa);
+                            //document.getElementById("valittua").href = paikkatietohref;
+                            //document.getElementById("valittua").textContent = paikkatietotext;
+                        }
+
                     });
                     return false;
                 });
