@@ -166,14 +166,12 @@ window.onresize = function(event) {
             floorId = floor;
             spaceId = space;
             if (klik) naytaoletus = false;
-            if (lat != ""){
             if (document.getElementById("ulat").value != "" && document.getElementById("ulon").value != "") {
                 $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("ulat").value + "&ulon=" + document.getElementById("ulon").value);
             }
             else {
                 $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
             }
-                }
         }, 500);
 
 
