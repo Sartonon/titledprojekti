@@ -9,8 +9,8 @@ function uusiOsoite() {
 window.onresize = function(event) {
     console.log("moro");
     var korkeus = $(window).height();
-    $("#karttamobiili").css("height", korkeus/2);
-    $(".kartta").css("height", korkeus * 0.8);
+    $("#karttamobiili").css("height", korkeus * 0.7);
+    $(".kartta").css("height", korkeus * 0.7);
 
 }
 
@@ -136,8 +136,8 @@ window.onresize = function(event) {
 
     window.onload = function () {
         var korkeus = $(window).height();
-        console.log(korkeus/2);
-        $("#karttamobiili").css("height", korkeus/2)
+        console.log(korkeus * 0.7);
+        $("#karttamobiili").css("height", korkeus * 0.7)
 
         console.log("haetaan sijaintia");
         $("#loaderi").css("display", "block")
@@ -152,24 +152,28 @@ window.onresize = function(event) {
 
 
     function vaihdaTila(lat, lon, area, building, floor, space, klik) {
-        $('body').scrollTo('.kartta');
-
+        if (window.innerWidth < 981) {
+               $('body').scrollTo('#karttamobiili');
+        }
         setTimeout(function () {
             console.log("Tilan tiedot ladattu");
             rakennusnaytetty = false;
             tlat = lat;
             tlon = lon;
+            console.log(lat + " " + lon);
             areaId = area;
             buildingId = building;
             floorId = floor;
             spaceId = space;
             if (klik) naytaoletus = false;
+            if (lat != ""){
             if (document.getElementById("ulat").value != "" && document.getElementById("ulon").value != "") {
                 $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("ulat").value + "&ulon=" + document.getElementById("ulon").value);
             }
             else {
                 $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
             }
+                }
         }, 500);
 
 
