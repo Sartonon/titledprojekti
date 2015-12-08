@@ -25,6 +25,7 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                #lol muutettu lower jotta toimii pienten kanssa
             else:
                 paikka = "eiole"
+                paikka2 = "eiole"
             if paikka2 in listaDict:
                 print("toimi")
                 print(paikka)

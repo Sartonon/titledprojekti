@@ -26,7 +26,7 @@
                 display: none;
             }
         }
-
+        
         iframe {
             height: 100%;
             width: 100%;
@@ -67,6 +67,129 @@
             margin-top: -18px;
             margin-bottom: 5px;
         }
+
+        #movingBallG{
+	position:relative;
+	width:250px;
+	height:19px;
+	margin:auto;
+            display: none;
+}
+
+.movingBallLineG{
+	position:absolute;
+	left:0px;
+	top:8px;
+	height:4px;
+	width:250px;
+	background-color:rgb(217,35,217);
+}
+
+.movingBallG{
+	background-color:rgb(24,32,196);
+	position:absolute;
+	top:0;
+	left:0;
+	width:19px;
+	height:19px;
+	border-radius:10px;
+		-o-border-radius:10px;
+		-ms-border-radius:10px;
+		-webkit-border-radius:10px;
+		-moz-border-radius:10px;
+	animation-name:bounce_movingBallG;
+		-o-animation-name:bounce_movingBallG;
+		-ms-animation-name:bounce_movingBallG;
+		-webkit-animation-name:bounce_movingBallG;
+		-moz-animation-name:bounce_movingBallG;
+	animation-duration:1.5s;
+		-o-animation-duration:1.5s;
+		-ms-animation-duration:1.5s;
+		-webkit-animation-duration:1.5s;
+		-moz-animation-duration:1.5s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-direction:normal;
+		-o-animation-direction:normal;
+		-ms-animation-direction:normal;
+		-webkit-animation-direction:normal;
+		-moz-animation-direction:normal;
+}
+
+
+
+@keyframes bounce_movingBallG{
+	0%{
+		left:0px;
+	}
+
+	50%{
+		left:230px;
+	}
+
+	100%{
+		left:0px;
+	}
+}
+
+@-o-keyframes bounce_movingBallG{
+	0%{
+		left:0px;
+	}
+
+	50%{
+		left:230px;
+	}
+
+	100%{
+		left:0px;
+	}
+}
+
+@-ms-keyframes bounce_movingBallG{
+	0%{
+		left:0px;
+	}
+
+	50%{
+		left:230px;
+	}
+
+	100%{
+		left:0px;
+	}
+}
+
+@-webkit-keyframes bounce_movingBallG{
+	0%{
+		left:0px;
+	}
+
+	50%{
+		left:230px;
+	}
+
+	100%{
+		left:0px;
+	}
+}
+
+@-moz-keyframes bounce_movingBallG{
+	0%{
+		left:0px;
+	}
+
+	50%{
+		left:230px;
+	}
+
+	100%{
+		left:0px;
+	}
+}
     </style>
     <title>Karttaprojekti</title>
 </head>
@@ -142,8 +265,15 @@
             </div>
         </div>
         {% if tapahtumat %}
-            {{ self.valikkomobile() }}
+
             <div class="row-fluid">
+                {{ self.valikkomobile() }}
+                <input id="nappinaytamob" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
+                               onclick="naytaRakennusmob()" value="Näytä rakennuksen kartta">
+                <div id="movingBallG">
+	<div  class="movingBallLineG"><span>Haetaan sijaintiasi</span></div>
+	<div id="movingBallG_1" class="movingBallG"></div>
+</div>
                 <iframe class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
             </div>
         {% endif %}
@@ -318,6 +448,8 @@
         });
     });
 
+
+
     var tlat = 62.23252728347514; // Agoran koordinaatit oletuksena
     var tlon = 25.73729200674369;
     var rakennusnaytetty = false;
@@ -328,7 +460,8 @@
     var spaceId = 'None';
 
     window.onload = function () {
-
+        console.log("haetaan sijaintia");
+        $("#movingBallG").css("display","block")
         getLocation();
         {%  if tapahtumatTanaan %}
             if (naytaoletus) {
@@ -383,6 +516,26 @@
         }
     }
 
+    function naytaRakennusmob() {
+        if (rakennusnaytetty) {
+            $("#nappinaytamob").attr("value", "Näytä rakennuksen kartta")
+            vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId)
+        }
+        else {
+            $("#nappinaytamob").attr("value", "Näytä rakennus kartalla")
+            rakennusnaytetty = true;
+            if (areaId != 'None' &&
+                    buildingId != 'None' &&
+                    floorId != 'None' &&
+                    spaceId != 'None') {
+                $(".kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId + "&buildingId=" + buildingId + "&floorId=" + floorId + "&spaceId=" + spaceId));
+            }
+            else {
+                $(".kartta").attr("src", "/virhe");
+            }
+        }
+    }
+
     function getLocation() {
         try {
             if (navigator.geolocation) {
@@ -397,6 +550,8 @@
     }
 
     function showPosition(position) {
+        console.log("sijainti haettu");
+        $("#movingBallG").css("display","none")
         if (tlat != undefined && tlon != undefined) {
             var lon = tlon;
             var lat = tlat;
