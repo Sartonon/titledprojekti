@@ -6,6 +6,14 @@ function uusiOsoite() {
 
     }
 
+window.onresize = function(event) {
+    console.log("moro");
+    var korkeus = $(window).height();
+    $("#karttamobiili").css("height", korkeus/2);
+    $(".kartta").css("height", korkeus * 0.8);
+
+}
+
     $.fn.scrollTo = function (target, options, callback) {
         if (typeof options == 'function' && arguments.length == 2) {
             callback = options;
