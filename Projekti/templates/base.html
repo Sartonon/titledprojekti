@@ -72,6 +72,16 @@
             margin-top: -18px;
             margin-bottom: 5px;
         }
+
+        .loaderspan {
+            font-size: 20px;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+
+        .cssload-container {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
     </style>
     <title>Karttaprojekti</title>
 </head>
@@ -153,7 +163,7 @@
                 <input id="nappinaytamob" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
                        onclick="naytaRakennusmob()" value="Näytä rakennuksen kartta">
 
-                <div id="loaderi" class="cssload-wrap">
+               <div id="loaderi" class="cssload-wrap"> <span class="loaderspan">Haetaan</span>
                     <div class="cssload-container">
                         <span class="cssload-dots"></span>
                         <span class="cssload-dots"></span>
@@ -166,6 +176,7 @@
                         <span class="cssload-dots"></span>
                         <span class="cssload-dots"></span>
                     </div>
+                   <span class="loaderspan">Sijaintiasi</span>
                 </div>
                 <iframe id="karttamobiili" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
             </div>
@@ -447,7 +458,7 @@
 
     function showPosition(position) {
         console.log("sijainti haettu");
-        $("#loaderi").css("display", "none")
+        //$("#loaderi").css("display", "none")
         if (tlat != undefined && tlon != undefined) {
             var lon = tlon;
             var lat = tlat;
