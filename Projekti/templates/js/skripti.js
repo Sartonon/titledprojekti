@@ -167,6 +167,7 @@ window.onresize = function(event) {
             floorId = floor;
             spaceId = space;
             if (klik) naytaoletus = false;
+            $(".kartta").attr("id", "perus");
             if (document.getElementById("ulat").value != "" && document.getElementById("ulon").value != "") {
                 $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat=" + document.getElementById("ulat").value + "&ulon=" + document.getElementById("ulon").value);
             }
