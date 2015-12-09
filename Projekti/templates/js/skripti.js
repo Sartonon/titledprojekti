@@ -8,10 +8,10 @@ function uusiOsoite() {
 
 window.onresize = function(event) {
     var korkeus = $(window).height();
-    $("#perusmobiili").css("height", korkeus * 0.7);
+    /**$("#perusmobiili").css("height", korkeus * 0.7);
     $("#zoommobiili").css("height", korkeus * 0.7);
     $(".kartta").css("height", korkeus * 0.7);
-    $(".karttamobiili").css("height", korkeus * 0.7);
+    $(".karttamobiili").css("height", korkeus * 0.7);**/
 
 
 }
