@@ -1,0 +1,617 @@
+.cssload-wrap {
+	text-align: center;
+	line-height: 50px;
+}
+	
+.cssload-container {
+	display: inline-block;
+}
+
+.cssload-dots {
+	display: inline-block;
+	position: relative;
+}
+.cssload-dots:not(:last-child) {
+	margin-right: 9px;
+}
+.cssload-dots:before, .cssload-dots:after {
+	content: "";
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	position: absolute;
+}
+.cssload-dots:nth-child(1):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -0.765s;
+		-o-animation-delay: -0.765s;
+		-ms-animation-delay: -0.765s;
+		-webkit-animation-delay: -0.765s;
+		-moz-animation-delay: -0.765s;
+	background-color: rgb(255,0,0);
+}
+.cssload-dots:nth-child(1):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -0.765s;
+		-o-animation-delay: -0.765s;
+		-ms-animation-delay: -0.765s;
+		-webkit-animation-delay: -0.765s;
+		-moz-animation-delay: -0.765s;
+	background-color: rgb(119,119,119);
+}
+.cssload-dots:nth-child(2):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -1.53s;
+		-o-animation-delay: -1.53s;
+		-ms-animation-delay: -1.53s;
+		-webkit-animation-delay: -1.53s;
+		-moz-animation-delay: -1.53s;
+	background-color: rgb(255,0,0);
+}
+.cssload-dots:nth-child(2):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -1.53s;
+		-o-animation-delay: -1.53s;
+		-ms-animation-delay: -1.53s;
+		-webkit-animation-delay: -1.53s;
+		-moz-animation-delay: -1.53s;
+	background-color: rgb(119,119,119);
+}
+.cssload-dots:nth-child(3):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -2.295s;
+		-o-animation-delay: -2.295s;
+		-ms-animation-delay: -2.295s;
+		-webkit-animation-delay: -2.295s;
+		-moz-animation-delay: -2.295s;
+	background-color: rgb(255,0,0);
+}
+.cssload-dots:nth-child(3):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -2.295s;
+		-o-animation-delay: -2.295s;
+		-ms-animation-delay: -2.295s;
+		-webkit-animation-delay: -2.295s;
+		-moz-animation-delay: -2.295s;
+	background-color: rgb(119,119,119);
+}
+.cssload-dots:nth-child(4):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -3.06s;
+		-o-animation-delay: -3.06s;
+		-ms-animation-delay: -3.06s;
+		-webkit-animation-delay: -3.06s;
+		-moz-animation-delay: -3.06s;
+	background-color: rgb(255,0,0);
+}
+.cssload-dots:nth-child(4):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -3.06s;
+		-o-animation-delay: -3.06s;
+		-ms-animation-delay: -3.06s;
+		-webkit-animation-delay: -3.06s;
+		-moz-animation-delay: -3.06s;
+	background-color: rgb(119,119,119);
+}
+.cssload-dots:nth-child(5):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -3.825s;
+		-o-animation-delay: -3.825s;
+		-ms-animation-delay: -3.825s;
+		-webkit-animation-delay: -3.825s;
+		-moz-animation-delay: -3.825s;
+	background-color: rgb(255,0,0);
+}
+.cssload-dots:nth-child(5):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -3.825s;
+		-o-animation-delay: -3.825s;
+		-ms-animation-delay: -3.825s;
+		-webkit-animation-delay: -3.825s;
+		-moz-animation-delay: -3.825s;
+	background-color: rgb(119,119,119);
+}
+.cssload-dots:nth-child(6):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -4.59s;
+		-o-animation-delay: -4.59s;
+		-ms-animation-delay: -4.59s;
+		-webkit-animation-delay: -4.59s;
+		-moz-animation-delay: -4.59s;
+	background-color: rgb(255,0,0);
+}
+.cssload-dots:nth-child(6):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -4.59s;
+		-o-animation-delay: -4.59s;
+		-ms-animation-delay: -4.59s;
+		-webkit-animation-delay: -4.59s;
+		-moz-animation-delay: -4.59s;
+	background-color: rgb(119,119,119);
+}
+.cssload-dots:nth-child(7):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -5.355s;
+		-o-animation-delay: -5.355s;
+		-ms-animation-delay: -5.355s;
+		-webkit-animation-delay: -5.355s;
+		-moz-animation-delay: -5.355s;
+	background-color: rgb(255,0,0);
+}
+.cssload-dots:nth-child(7):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -5.355s;
+		-o-animation-delay: -5.355s;
+		-ms-animation-delay: -5.355s;
+		-webkit-animation-delay: -5.355s;
+		-moz-animation-delay: -5.355s;
+	background-color: rgb(119,119,119);
+}
+.cssload-dots:nth-child(8):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -6.12s;
+		-o-animation-delay: -6.12s;
+		-ms-animation-delay: -6.12s;
+		-webkit-animation-delay: -6.12s;
+		-moz-animation-delay: -6.12s;
+	background-color: rgb(255,0,0);
+}
+.cssload-dots:nth-child(8):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -6.12s;
+		-o-animation-delay: -6.12s;
+		-ms-animation-delay: -6.12s;
+		-webkit-animation-delay: -6.12s;
+		-moz-animation-delay: -6.12s;
+	background-color: rgb(119,119,119);
+}
+.cssload-dots:nth-child(9):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -6.885s;
+		-o-animation-delay: -6.885s;
+		-ms-animation-delay: -6.885s;
+		-webkit-animation-delay: -6.885s;
+		-moz-animation-delay: -6.885s;
+	background-color: #F00;
+}
+.cssload-dots:nth-child(9):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -6.885s;
+		-o-animation-delay: -6.885s;
+		-ms-animation-delay: -6.885s;
+		-webkit-animation-delay: -6.885s;
+		-moz-animation-delay: -6.885s;
+	background-color: #777;
+}
+.cssload-dots:nth-child(10):before {
+	transform: translateY(-200%);
+		-o-transform: translateY(-200%);
+		-ms-transform: translateY(-200%);
+		-webkit-transform: translateY(-200%);
+		-moz-transform: translateY(-200%);
+	animation: cssload-animBefore 0.85s linear infinite;
+		-o-animation: cssload-animBefore 0.85s linear infinite;
+		-ms-animation: cssload-animBefore 0.85s linear infinite;
+		-webkit-animation: cssload-animBefore 0.85s linear infinite;
+		-moz-animation: cssload-animBefore 0.85s linear infinite;
+	animation-delay: -7.65s;
+		-o-animation-delay: -7.65s;
+		-ms-animation-delay: -7.65s;
+		-webkit-animation-delay: -7.65s;
+		-moz-animation-delay: -7.65s;
+	background-color: #F00;
+}
+.cssload-dots:nth-child(10):after {
+	transform: translateY(200%);
+		-o-transform: translateY(200%);
+		-ms-transform: translateY(200%);
+		-webkit-transform: translateY(200%);
+		-moz-transform: translateY(200%);
+	animation: cssload-animAfter 0.85s linear infinite;
+		-o-animation: cssload-animAfter 0.85s linear infinite;
+		-ms-animation: cssload-animAfter 0.85s linear infinite;
+		-webkit-animation: cssload-animAfter 0.85s linear infinite;
+		-moz-animation: cssload-animAfter 0.85s linear infinite;
+	animation-delay: -7.65s;
+		-o-animation-delay: -7.65s;
+		-ms-animation-delay: -7.65s;
+		-webkit-animation-delay: -7.65s;
+		-moz-animation-delay: -7.65s;
+	background-color: #777;
+}
+
+
+
+
+@keyframes cssload-animBefore {
+	0% {
+		transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	25% {
+		transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	50% {
+		transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	75% {
+		transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	100% {
+		transform: scale(1) translateY(-200%);
+		z-index: -1;
+	}
+}
+
+@-o-keyframes cssload-animBefore {
+	0% {
+		-o-transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	25% {
+		-o-transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	50% {
+		-o-transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	75% {
+		-o-transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	100% {
+		-o-transform: scale(1) translateY(-200%);
+		z-index: -1;
+	}
+}
+
+@-ms-keyframes cssload-animBefore {
+	0% {
+		-ms-transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	25% {
+		-ms-transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	50% {
+		-ms-transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	75% {
+		-ms-transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	100% {
+		-ms-transform: scale(1) translateY(-200%);
+		z-index: -1;
+	}
+}
+
+@-webkit-keyframes cssload-animBefore {
+	0% {
+		-webkit-transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	25% {
+		-webkit-transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	50% {
+		-webkit-transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	75% {
+		-webkit-transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	100% {
+		-webkit-transform: scale(1) translateY(-200%);
+		z-index: -1;
+	}
+}
+
+@-moz-keyframes cssload-animBefore {
+	0% {
+		-moz-transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	25% {
+		-moz-transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	50% {
+		-moz-transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	75% {
+		-moz-transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	100% {
+		-moz-transform: scale(1) translateY(-200%);
+		z-index: -1;
+	}
+}
+
+@keyframes cssload-animAfter {
+	0% {
+		transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	25% {
+		transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	50% {
+		transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	75% {
+		transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	100% {
+		transform: scale(1) translateY(200%);
+		z-index: 1;
+	}
+}
+
+@-o-keyframes cssload-animAfter {
+	0% {
+		-o-transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	25% {
+		-o-transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	50% {
+		-o-transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	75% {
+		-o-transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	100% {
+		-o-transform: scale(1) translateY(200%);
+		z-index: 1;
+	}
+}
+
+@-ms-keyframes cssload-animAfter {
+	0% {
+		-ms-transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	25% {
+		-ms-transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	50% {
+		-ms-transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	75% {
+		-ms-transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	100% {
+		-ms-transform: scale(1) translateY(200%);
+		z-index: 1;
+	}
+}
+
+@-webkit-keyframes cssload-animAfter {
+	0% {
+		-webkit-transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	25% {
+		-webkit-transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	50% {
+		-webkit-transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	75% {
+		-webkit-transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	100% {
+		-webkit-transform: scale(1) translateY(200%);
+		z-index: 1;
+	}
+}
+
+@-moz-keyframes cssload-animAfter {
+	0% {
+		-moz-transform: scale(1) translateY(200%);
+		z-index: -1;
+	}
+	25% {
+		-moz-transform: scale(0.7) translateY(0);
+		z-index: -1;
+	}
+	50% {
+		-moz-transform: scale(1) translateY(-200%);
+		z-index: 1;
+	}
+	75% {
+		-moz-transform: scale(1.3) translateY(0);
+		z-index: 1;
+	}
+	100% {
+		-moz-transform: scale(1) translateY(200%);
+		z-index: 1;
+	}
+}
