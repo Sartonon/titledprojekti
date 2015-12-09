@@ -148,6 +148,8 @@ window.onresize = function(event) {
                         '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
             }
         {% endif %}
+
+        $('iframe.demo').zoomer({ width: 1000, height: 1000, zoom: 0.8 });
     };
 
 
