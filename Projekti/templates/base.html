@@ -33,6 +33,17 @@
             width: 100%;
         }
 
+        #zoom {
+            -webkit-transform: scale(0.5); /* Safari and Chrome */
+            -webkit-transform-origin: 0 0;
+            transform: scale(0.5);
+            transform-origin: 0 0;
+            width: 200%; /* half of iframe width */
+            height: 1000px; /* half of iframe height */
+
+            overflow: hidden; /* remove scrollbars */
+        }
+
         .jumbotron {
             padding-top: 10px;
             padding-bottom: 10px;
@@ -209,28 +220,7 @@
                                onclick="naytaRakennus()" value="Näytä rakennuksen kartta">
                     </p>
                 </form>
-                    <style>
-                        iframe {
-                            margin-top: 5px;
-                            width: 100%;
-                            height: 500px;
-                        }
-
-                        .demo {
-                            -webkit-transform: scale(0.5); /* Safari and Chrome */
-                            -webkit-transform-origin: 0 0;
-                            transform: scale(0.5); /* zoom factor - prefix if needed */
-                            transform-origin: 0 0;
-                            width: 200%; /* half of iframe width */
-                            height: 1000px; /* half of iframe height */
-
-                            overflow: hidden; /* remove big-ass scrollbars */
-                        }
-                    </style>
-                    <iframe class="demo" src="../static/iframe.html"></iframe>
-                <!--
-                <iframe class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
-                -->
+                <iframe id="perus" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
             </div>
             <div class="modal fade" id="ohje">
                 <div class="modal-dialog">
@@ -262,8 +252,6 @@
 <script src="../static/jquery-2.1.4.min.js"></script>
 <script src="../static/jquery-ui.min.js"></script>
 <script src="../static/jquery-ui.js"></script>
-<!--<script src="../static/jquery.zoomer.js"></script>
-<script src="../static/demo.js"></script>-->
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>

@@ -149,7 +149,6 @@ window.onresize = function(event) {
             }
         {% endif %}
 
-        $('iframe.demo').zoomer({ width: 1000, height: 1000, zoom: 0.8 });
     };
 
 
@@ -181,17 +180,20 @@ window.onresize = function(event) {
 
     function naytaRakennus() {
         if (rakennusnaytetty) {
-            $("#nappinayta").attr("value", "Nayta rakennuksen kartta")
-            vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId)
+            $("#nappinayta").attr("value", "Nayta rakennuksen kartta");
+            $(".kartta").attr("id", "perus");
+            vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
         }
         else {
-            $("#nappinayta").attr("value", "Nayta rakennus kartalla")
+            $("#nappinayta").attr("value", "Nayta rakennus kartalla");
             rakennusnaytetty = true;
             if (areaId != 'None' &&
                     buildingId != 'None' &&
                     floorId != 'None' &&
                     spaceId != 'None') {
-                $(".kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId + "&buildingId=" + buildingId + "&floorId=" + floorId + "&spaceId=" + spaceId));
+                $(".kartta").attr("id", "zoom");
+                $(".kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId +
+                    "&buildingId=" + buildingId + "&floorId=" + floorId + "&spaceId=" + spaceId));
             }
             else {
                 $(".kartta").attr("src", "/virhe");
@@ -201,8 +203,8 @@ window.onresize = function(event) {
 
     function naytaRakennusmob() {
         if (rakennusnaytetty) {
-            $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta")
-            vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId)
+            $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta");
+            vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
         }
         else {
             $("#nappinaytamob").attr("value", "Nayta rakennus kartalla")
