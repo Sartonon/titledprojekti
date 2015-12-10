@@ -10,24 +10,6 @@ function uusiOsoite() {
 
 }
 
-window.onresize = function (event) {
-    var korkeus = $(window).height();
-
-    if (boolmobiili) {
-        $("#perusmobiili").css("height", korkeus * 0.7 * 2);
-       $("#zoommobiili").css("height", korkeus * 0.7 * 2);
-       $(".kartta").css("height", korkeus * 0.7 * 2);
-       $(".karttamobiili").css("height", korkeus * 0.7 * 2);
-    }
-    else {
-       $("#perusmobiili").css("height", korkeus * 0.7);
-       $("#zoommobiili").css("height", korkeus * 0.7);
-       $(".kartta").css("height", korkeus * 0.7);
-       $(".karttamobiili").css("height", korkeus * 0.7);
-    }
-
-
-}
 
 $.fn.scrollTo = function (target, options, callback) {
     if (typeof options == 'function' && arguments.length == 2) {
