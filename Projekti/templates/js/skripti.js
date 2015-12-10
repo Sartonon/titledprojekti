@@ -1,6 +1,6 @@
 var boolmobiili;
 var booldesktop;
-//äääöööååå
+
 
 function uusiOsoite() {
     var input = document.getElementById("url");
@@ -12,6 +12,7 @@ function uusiOsoite() {
 
 window.onresize = function (event) {
     var korkeus = $(window).height();
+
     if (boolmobiili) {
         $("#perusmobiili").css("height", korkeus * 0.7 * 2);
        $("#zoommobiili").css("height", korkeus * 0.7 * 2);
@@ -249,6 +250,7 @@ function naytaRakennusmob() {
         var korkeus = $(".karttamobiili").height();
         $("#karttadiv").css("height", "");
         $("#perusmobiili").css("height", korkeus/2);
+        boolmobiili = false;
     }
     else {
         $("#nappinaytamob").attr("value", "Nayta rakennus kartalla")
