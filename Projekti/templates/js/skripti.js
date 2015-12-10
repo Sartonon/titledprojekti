@@ -164,7 +164,7 @@ window.onload = function () {
     $("#zoommobiili").css("height", korkeus * 0.7);
 
     console.log("haetaan sijaintia");
-    $("#loaderi").css("display", "block")
+    /*$("#loaderi").css("display", "block")*/
     getLocation();
     {% if tapahtumatTanaan %}
     if (naytaoletus) {
@@ -308,7 +308,7 @@ function getLocation() {
 
 function showPosition(position) {
     console.log("sijainti haettu");
-    $("#loaderi").css("display", "none")
+    /*$("#loaderi").css("display", "none")*/
     rakennusnaytetty = true;
     $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta");
     $("#nappinayta").attr("value", "Nayta rakennuksen kartta");
