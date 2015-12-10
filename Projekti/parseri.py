@@ -18,7 +18,8 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
     paikka = ""
     nykyhetki= utc_to_local(datetime.datetime.today())
     for tapahtuma in cal.walk('vevent'):
-        alkupaiva = tapahtuma.get('dtstart').dt.date()
+        alku = tapahtuma.get('dtstart')
+        alkupaiva = alku.dt.date()
         loppuaika = tapahtuma.get('dtend').dt
         if (alkupaiva == paiva or kaikki) and loppuaika >= nykyhetki:
             if tapahtuma.get('location') is not None:
@@ -33,8 +34,8 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                 rakennus = parsiBuilding(huone)
                 alue = parsiArea(rakennus)
                 tapahtumat.append({'paikka': paikka,
-                                   'paiva': unicode(tapahtuma.get('dtstart').dt.date()),
-                                   'aika': unicode(utc_to_local(tapahtuma.get('dtstart').dt).time()),
+                                   'paiva': unicode(alkupaiva),
+                                   'aika': unicode(utc_to_local(alku.dt).time()),
                                    'kuvaus': tapahtuma.get('summary'),
                                    'lat': listaDict[paikka2]['lat'],
                                    'lon': listaDict[paikka2]['lon'],
@@ -44,8 +45,8 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'spaceId': huone})
             else:
                 tapahtumat.append({'paikka': tapahtuma.get('location'),
-                                   'paiva': unicode(tapahtuma.get('dtstart').dt.date()),
-                                   'aika': unicode(utc_to_local(tapahtuma.get('dtstart').dt).time()),
+                                   'paiva': unicode(alkupaiva),
+                                   'aika': unicode(utc_to_local(alku.dt).time()),
                                    'kuvaus': tapahtuma.get('summary'),
                                    'lat': '',
                                    'lon': ''})
