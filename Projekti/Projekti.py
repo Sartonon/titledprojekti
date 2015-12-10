@@ -111,11 +111,6 @@ def kartta():
     if showMarker:
         map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=17, max_zoom=18)
         map_osm.simple_marker([lat, lon])
-
-        if request.args.get('lat1') and request.args.get('lon1'):
-            lat1 = float(request.args.get("lat1"))
-            lon1 = float(request.args.get("lon1"))
-            map_osm.simple_marker([lat1, lon1])
     else:
         map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=15, max_zoom=18)
 

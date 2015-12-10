@@ -14,42 +14,41 @@ from bottle import unicode
 
 
 def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki=False):
-    tapahtumapaikka = ""
-    paikka = ""
-    nykyhetki= utc_to_local(datetime.datetime.today())
+    tapahtumat = []
+    nykyhetki = utc_to_local(datetime.datetime.today())
     for tapahtuma in cal.walk('vevent'):
         alku = tapahtuma.get('dtstart')
         alkupaiva = alku.dt.date()
         loppuaika = tapahtuma.get('dtend').dt
         if (alkupaiva == paiva or kaikki) and loppuaika >= nykyhetki:
             if tapahtuma.get('location') is not None:
-                paikka = tapahtuma.get('location')
-                paikka2 = tapahtuma.get('location').lower() #paikat listadictissa kaikki pienellä
+                paikat1 = tapahtuma.get('location').split(',')  # Käyttäjälle näyttimistä varten
+                paikat2 = tapahtuma.get('location').lower().split(',')  # listadictiin vertaamista varten
             else:
-                paikka = "eiole"
-                paikka2 = "eiole"
-            if paikka2 in listaDict:
-                huone = parsiSpace(paikka)
-                kerros = parsiFloor(paikka)
-                rakennus = parsiBuilding(huone)
-                alue = parsiArea(rakennus)
-                tapahtumat.append({'paikka': paikka,
-                                   'paiva': unicode(alkupaiva),
-                                   'aika': unicode(utc_to_local(alku.dt).time()),
-                                   'kuvaus': tapahtuma.get('summary'),
-                                   'lat': listaDict[paikka2]['lat'],
-                                   'lon': listaDict[paikka2]['lon'],
+                paikat1 = "eiole"
+                paikat2 = "eiole"
+            paikat = []
+            for p in range(0, paikat2.length()):
+                if paikat2[p] in listaDict:
+                    huone = parsiSpace(paikat1[p])
+                    kerros = parsiFloor(paikat1[p])
+                    rakennus = parsiBuilding(huone)
+                    alue = parsiArea(rakennus)
+                    paikat.append({'paikka': paikat1[p],
+                                   'lat': listaDict[paikat2[p]]['lat'],
+                                   'lon': listaDict[paikat2[p]]['lon'],
                                    'areaId': alue,
                                    'buildingId': rakennus,
                                    'floorId': kerros,
                                    'spaceId': huone})
-            else:
-                tapahtumat.append({'paikka': tapahtuma.get('location'),
-                                   'paiva': unicode(alkupaiva),
-                                   'aika': unicode(utc_to_local(alku.dt).time()),
-                                   'kuvaus': tapahtuma.get('summary'),
+                else:
+                    paikat.append({'paikka': tapahtuma.get('location'),
                                    'lat': '',
                                    'lon': ''})
+            tapahtumat.append({'paikat': paikat,
+                               'paiva': unicode(alkupaiva),
+                               'aika': unicode(utc_to_local(alku.dt).time()),
+                               'kuvaus': tapahtuma.get('summary')})
     tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
 
 
