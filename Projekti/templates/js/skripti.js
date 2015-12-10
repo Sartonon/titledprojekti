@@ -1,6 +1,7 @@
 var boolmobiili;
 var booldesktop;
-//�
+//äääöööååå
+
 function uusiOsoite() {
     var input = document.getElementById("url");
     input.value = input.getAttribute("value");
