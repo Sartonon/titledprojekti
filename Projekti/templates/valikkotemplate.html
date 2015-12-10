@@ -79,7 +79,9 @@
                                     <a href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}', '{{ tapahtuma.areaId }}',
                                          '{{ tapahtuma.buildingId }}', '{{ tapahtuma.floorId }}', '{{ tapahtuma.spaceId }}' )"
                                        class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }}
-                                        klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}</a>
+                                        klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}
+                                        <a class="list-group-item">lisarivi<span class="glyphicon glyphicon-chevron-left pull-right"></span></a>
+                                    </a>
                                 {% endfor %}
                             </div>
                         {% else %}

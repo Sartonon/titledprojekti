@@ -16,19 +16,18 @@ from bottle import unicode
 def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki=False):
     tapahtumapaikka = ""
     paikka = ""
+    nykyhetki= utc_to_local(datetime.datetime.today())
     for tapahtuma in cal.walk('vevent'):
-        alku = tapahtuma.get('dtstart').dt.date()
-        if (alku == paiva or kaikki) and alku >= date.today():
+        alkupaiva = tapahtuma.get('dtstart').dt.date()
+        alkuaika = tapahtuma.get('dtstart').dt
+        if (alkupaiva == paiva or kaikki) and alkuaika >= nykyhetki:
             if tapahtuma.get('location') is not None:
                 paikka = tapahtuma.get('location')
-                paikka2 = tapahtuma.get('location').lower()
-               #lol muutettu lower jotta toimii pienten kanssa
+                paikka2 = tapahtuma.get('location').lower() #paikat listadictissa kaikki pienellä
             else:
                 paikka = "eiole"
                 paikka2 = "eiole"
             if paikka2 in listaDict:
-                print("toimi")
-                print(paikka)
                 huone = parsiSpace(paikka)
                 kerros = parsiFloor(paikka)
                 rakennus = parsiBuilding(huone)
@@ -88,7 +87,6 @@ def parsiFloor(paikka):
 
 
 def parsiSpace(paikka):
-    print(paikka)
     erikoistilat = tilahierarkia.erikoistilat()
     if paikka is not None and paikka in erikoistilat:
         return erikoistilat[paikka]
@@ -149,7 +147,6 @@ def tiedotArrayValittu(paiva, data):
     mm = paiva.split('-')[1]
     dd = paiva.split('-')[2]
     print('vuosi: ' + yy + 'kuukausi: ' + mm + 'paiva: ' + dd)
-    print("Paiva parseri.py:ssa: " + paiva)
     d1 = datetime.date(int(yy), int(mm), int(dd))
     listaDict = lista.listaDict()
     valitutTapahtumat = []
