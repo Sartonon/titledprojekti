@@ -251,6 +251,20 @@ function naytaRakennusmob() {
         $("#karttadiv").css("height", "");
         $("#perusmobiili").css("height", korkeus/2);
         boolmobiili = false;
+        var korkeus = $(window).height();
+
+    if (boolmobiili) {
+        $("#perusmobiili").css("height", korkeus * 0.7 * 2);
+       $("#zoommobiili").css("height", korkeus * 0.7 * 2);
+       $(".kartta").css("height", korkeus * 0.7 * 2);
+       $(".karttamobiili").css("height", korkeus * 0.7 * 2);
+    }
+    else {
+       $("#perusmobiili").css("height", korkeus * 0.7);
+       $("#zoommobiili").css("height", korkeus * 0.7);
+       $(".kartta").css("height", korkeus * 0.7);
+       $(".karttamobiili").css("height", korkeus * 0.7);
+    }
     }
     else {
         $("#nappinaytamob").attr("value", "Nayta rakennus kartalla")
