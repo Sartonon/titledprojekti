@@ -28,9 +28,41 @@
             }
         }
 
+
         iframe {
             height: 100%;
             width: 100%;
+        }
+
+        .kartta {
+            margin-top: 5px;
+            width: 100%;
+            height: 500px;
+        }
+
+        #zoom {
+            -webkit-transform: scale(0.5); /* Safari and Chrome */
+            -webkit-transform-origin: 0 0;
+            transform: scale(0.5);
+            transform-origin: 0 0;
+            width: 200%; /* tuplasti iframen width */
+            height: 1000px; /* tuplasti iframen height */
+            overflow: hidden; /* scrollbarit pois=*/
+        }
+
+        .karttamobiili {
+            width: 100%;
+        }
+
+        #zoommobiili {
+            -webkit-transform: scale(0.5); /* Safari and Chrome */
+            -webkit-transform-origin: 0 0;
+            transform: scale(0.5);
+            transform-origin: 0 0;
+            width: 200%; /* tuplasti iframen width */
+            /*height: 600px; */ /* tuplasti iframen height */
+
+            overflow: hidden; /* remove scrollbars */
         }
 
         .jumbotron {
@@ -58,16 +90,6 @@
             margin-bottom: 10px;
         }
 
-        .kartta {
-            margin-top: 5px;
-            width: 100%;
-            height: 500px;
-        }
-
-        #karttamobiili {
-            height: 300px;
-        }
-
         #ohjelinkki {
             margin-top: -18px;
             margin-bottom: 5px;
@@ -90,11 +112,18 @@
         .ui-datepicker {
             margin: auto;
         }
+
+        #karttadiv {
+            overflow: hidden;
+        }
+
+        #desktopdiv {
+            overflow: hidden;
+        }
     </style>
-    <title>Karttaprojekti</title>
+    <title>Karttakotka</title>
 </head>
 <body>
-
 <div id="mobile">
     <div id="jumbotronmobiili" class="jumbotron">
         <div class="container">
@@ -168,8 +197,10 @@
                 <input id="nappinaytamob" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
                        onclick="naytaRakennusmob()" value="Näytä rakennuksen kartta">
 
-               {% include 'loader.html' %}
-                <iframe id="karttamobiili" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                {% include 'loader.html' %}
+                <div id="karttadiv">
+                <iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                </div>
             </div>
         {% endif %}
 
@@ -210,9 +241,9 @@
                                onclick="naytaRakennus()" value="Näytä rakennuksen kartta">
                     </p>
                 </form>
-                <!-- <div id="wrap"> -->
-                <iframe class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
-                <!-- </div>-->
+            <div id="desktopdiv">
+                <iframe id="perus" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                </div>
             </div>
             <div class="modal fade" id="ohje">
                 <div class="modal-dialog">
@@ -247,8 +278,7 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
-
-<script  type="text/javascript" charset="utf-8">{% include 'js/skripti.js' %}</script>
+<script type="text/javascript" charset="utf-8">{% include 'js/skripti.js' %}</script>
 
 </body>
 </html>
