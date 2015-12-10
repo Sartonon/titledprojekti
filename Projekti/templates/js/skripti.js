@@ -10,24 +10,6 @@ function uusiOsoite() {
 
 }
 
-window.onresize = function (event) {
-    var korkeus = $(window).height();
-
-    if (boolmobiili) {
-        $("#perusmobiili").css("height", korkeus * 0.7 * 2);
-       $("#zoommobiili").css("height", korkeus * 0.7 * 2);
-       $(".kartta").css("height", korkeus * 0.7 * 2);
-       $(".karttamobiili").css("height", korkeus * 0.7 * 2);
-    }
-    else {
-       $("#perusmobiili").css("height", korkeus * 0.7);
-       $("#zoommobiili").css("height", korkeus * 0.7);
-       $(".kartta").css("height", korkeus * 0.7);
-       $(".karttamobiili").css("height", korkeus * 0.7);
-    }
-
-
-}
 
 $.fn.scrollTo = function (target, options, callback) {
     if (typeof options == 'function' && arguments.length == 2) {
@@ -180,6 +162,23 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
     if (window.innerWidth < 981) {
         $('body').scrollTo('.karttamobiili');
     }
+    if (boolmobiili == true){
+        var korkeus = $(window).height();
+        $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta");
+        $(".kartta").attr("id", "perus");
+        $(".karttamobiili").attr("id", "perusmobiili");
+
+        var korkeus = $(".karttamobiili").height();
+        $("#karttadiv").css("height", "");
+        $("#perusmobiili").css("height", korkeus/2);
+        boolmobiili = false;
+        var korkeus = $(window).height();
+        $("#perusmobiili").css("height", korkeus * 0.7);
+       $("#zoommobiili").css("height", korkeus * 0.7);
+       $(".kartta").css("height", korkeus * 0.7);
+       $(".karttamobiili").css("height", korkeus * 0.7);
+
+    }
     setTimeout(function () {
         console.log("Tilan tiedot ladattu");
         rakennusnaytetty = false;
@@ -244,6 +243,7 @@ function naytaRakennus() {
 
 function naytaRakennusmob() {
     if (rakennusnaytetty) {
+        var korkeus = $(window).height();
         $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta");
         $(".kartta").attr("id", "perus");
         $(".karttamobiili").attr("id", "perusmobiili");
@@ -252,7 +252,7 @@ function naytaRakennusmob() {
         $("#karttadiv").css("height", "");
         $("#perusmobiili").css("height", korkeus/2);
         boolmobiili = false;
-        var korkeus = $(window).height();
+
 
     if (boolmobiili) {
         $("#perusmobiili").css("height", korkeus * 0.7 * 2);
