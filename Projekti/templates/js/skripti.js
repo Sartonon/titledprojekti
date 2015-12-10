@@ -261,7 +261,8 @@ function naytaRakennusmob() {
        $(".karttamobiili").css("height", korkeus * 0.7 * 2);
     }
     else {
-       $("#perusmobiili").css("height", korkeus * 0.7);
+        var korkeus = $(window).height();
+        $("#perusmobiili").css("height", korkeus * 0.7);
        $("#zoommobiili").css("height", korkeus * 0.7);
        $(".kartta").css("height", korkeus * 0.7);
        $(".karttamobiili").css("height", korkeus * 0.7);
