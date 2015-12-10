@@ -179,11 +179,11 @@ window.onresize = function(event) {
 
     function naytaRakennus() {
         if (rakennusnaytetty) {
-            $("#nappinayta").attr("value", "Nayta rakennuksen kartta")
+            $("#nappinayta").attr("value", "Nayta rakennuksen kartta");
             vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId)
         }
         else {
-            $("#nappinayta").attr("value", "Nayta rakennus kartalla")
+            $("#nappinayta").attr("value", "Nayta rakennus kartalla");
             rakennusnaytetty = true;
             if (areaId != 'None' &&
                     buildingId != 'None' &&
