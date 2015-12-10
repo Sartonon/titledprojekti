@@ -6,7 +6,7 @@
                 <ul id="myTabs" class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#tanaan" id="home-tab" role="tab"
                                                               data-toggle="tab"
-                                                              aria-controls="home" aria-expanded="true">Tanaan</a>
+                                                              aria-controls="home" aria-expanded="true">Tanaan tulossa</a>
                     </li>
                     <li class="" role="presentation">
                         <a aria-expanded="false" href="#huomenna" role="tab"
@@ -79,7 +79,9 @@
                                     <a href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}', '{{ tapahtuma.areaId }}',
                                          '{{ tapahtuma.buildingId }}', '{{ tapahtuma.floorId }}', '{{ tapahtuma.spaceId }}' )"
                                        class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }}
-                                        klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}</a>
+                                        klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}
+                                        <a class="list-group-item">lisarivi<span class="glyphicon glyphicon-chevron-left pull-right"></span></a>
+                                    </a>
                                 {% endfor %}
                             </div>
                         {% else %}
@@ -109,7 +111,7 @@
                 <ul id="myTabs" class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#tanaanmob" id="home-tab" role="tab"
                                                               data-toggle="tab"
-                                                              aria-controls="home" aria-expanded="true">Tanaan</a>
+                                                              aria-controls="home" aria-expanded="true">Tanaan tulevat</a>
                     </li>
                     <li class="" role="presentation">
                         <a aria-expanded="false" href="#huomennamob" role="tab"

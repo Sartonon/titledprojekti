@@ -69,8 +69,6 @@ $(function () {
                         elementa.setAttribute("href", paikkatietohref);
                         elementa.setAttribute("class", "list-group-item");
                         document.getElementById("valitutTapahtumat").appendChild(elementa);
-                        //document.getElementById("valittua").href = paikkatietohref;
-                        //document.getElementById("valittua").textContent = paikkatietotext;
                     }
                 });
                 return false;
@@ -203,6 +201,9 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
         else {
             $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
             $(".karttamobiili").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
+        }
+        if (tlat == '') {
+            $('#flash').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Tapahtumasi tilaa ei löydy</div>');
         }
     }, 500);
 
