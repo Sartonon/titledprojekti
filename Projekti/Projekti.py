@@ -90,7 +90,7 @@ def perus():
     except:
         print("Virhe tiedoston lukemisessa.")
         kayttoohjeet = ["Pahoittelemme. Kayttoohjeiden lukemisessa tapahtui virhe."]
-    return render_template('valikkotemplate.html',
+    return render_template('collapsevalikko.html',
                            title='Sign In',
                            form=form,
                            tapahtumat=tapahtumat,
