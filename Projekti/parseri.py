@@ -19,8 +19,8 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
     nykyhetki= utc_to_local(datetime.datetime.today())
     for tapahtuma in cal.walk('vevent'):
         alkupaiva = tapahtuma.get('dtstart').dt.date()
-        alkuaika = tapahtuma.get('dtstart').dt
-        if (alkupaiva == paiva or kaikki) and alkuaika >= nykyhetki:
+        loppuaika = tapahtuma.get('dtend').dt
+        if (alkupaiva == paiva or kaikki) and loppuaika >= nykyhetki:
             if tapahtuma.get('location') is not None:
                 paikka = tapahtuma.get('location')
                 paikka2 = tapahtuma.get('location').lower() #paikat listadictissa kaikki pienellä
