@@ -124,10 +124,8 @@ def kartta():
         ulon = float(request.args.get("ulon"))
         map_osm.polygon_marker(location=[ulat, ulon], popup='Sinun sijaintisi(Suuntaa antava)',
                                fill_color='red', num_sides=0, radius=10, rotation=60)
-        map_osm.polygon_marker(location=[62.229904223751795, 25.74093488105821], popup='Fysiikan Laitos (FYS,FL)',
-                     fill_color='#132b5e', num_sides=7, radius=5, rotation=60)
-        map_osm.polygon_marker(location=[62.22947153171101, 25.742469621826316], popup='Nanolaitos (YN)',
-                     fill_color='#132b5e', num_sides=7, radius=5, rotation=60)
+       # map_osm.polygon_marker(location=[62.22979, 25.74098], popup='Nanolaitos (testimerkki)',
+                #     fill_color='#132b5e', num_sides=7, radius=5, rotation=60)
     map_osm.create_map(path='templates/osm.html')
 
     return render_template('osm.html')
