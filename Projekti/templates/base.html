@@ -134,6 +134,18 @@
     -webkit-transition: none;
     transition: none;
 }
+
+        #nappinaytamob {
+            margin-bottom: 10px;
+        }
+
+        #accordion {
+            margin-bottom: 10px;
+        }
+
+        #nappinaytasijainti {
+            margin-bottom: 10px;
+        }
     </style>
     <title>Karttakotka</title>
 </head>
@@ -204,15 +216,25 @@
                 </div>
             </div>
         </div>
+
         {% if tapahtumat %}
 
             <div class="row-fluid">
                 {% block valikkomobile %}{% endblock %}
                 {% block valikko2 %}{% endblock %}
-                <input id="nappinaytamob" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+     <input id="nappinaytamob" type="button" class="btn btn-primary" data-toggle="modal"
                        onclick="naytaRakennusmob()" value="Näytä rakennuksen kartta">
+  </div>
+  <div class="btn-group" role="group">
+    <input id="nappinaytasijainti" type="button" class="btn btn-primary" data-toggle="modal" value="Hae sijaintini kartalle">
+  </div>
+</div>
+
 
                 {% include 'loader.html' %}
+                <div class="flash"></div>
                 <div id="karttadiv">
                 <iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
                 </div>

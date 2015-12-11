@@ -1,6 +1,9 @@
 var boolmobiili;
 var booldesktop;
 
+window.onresize = function() {
+    $("#kaikkiTapahtumat").css("height", "500px");
+}
 
 function uusiOsoite() {
     var input = document.getElementById("url");
