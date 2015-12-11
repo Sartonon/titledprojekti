@@ -15,12 +15,6 @@ import json
 app = Flask(__name__)
 app.config.from_object('config')
 
-
-#@app.route('/uusi')
-#def uusi_osoite():
-#    print("lol")
-
-
 @app.route('/calday')
 def hae_valittu_paiva():
     selected_date = request.args.get('selected_date')
@@ -39,10 +33,6 @@ def hae_valittu_paiva():
     print(valittupaiva)
     return json.dumps(valittupaiva)
 
-
-# @app.route('/paiva<kalenteripaiva>', methods=['GET', 'POST'])
-# def paiva():
-#     print(kalenteripaiva)
 
 @app.route('/uusi', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
@@ -90,7 +80,7 @@ def perus():
     except:
         print("Virhe tiedoston lukemisessa.")
         kayttoohjeet = ["Pahoittelemme. Kayttoohjeiden lukemisessa tapahtui virhe."]
-    return render_template('valikkotemplate.html',
+    return render_template('collapsevalikko.html',
                            title='Sign In',
                            form=form,
                            tapahtumat=tapahtumat,
@@ -121,6 +111,11 @@ def kartta():
     if showMarker:
         map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=17, max_zoom=18)
         map_osm.simple_marker([lat, lon])
+
+        if request.args.get('lat1') and request.args.get('lon1'):
+            lat1 = float(request.args.get("lat1"))
+            lon1 = float(request.args.get("lon1"))
+            map_osm.simple_marker([lat1, lon1])
     else:
         map_osm = folium.Map(location=[lat, lon], width="100%", height="100%", zoom_start=15, max_zoom=18)
 

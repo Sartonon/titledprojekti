@@ -1,6 +1,7 @@
 var boolmobiili;
 var booldesktop;
-//‰
+
+
 function uusiOsoite() {
     var input = document.getElementById("url");
     input.value = input.getAttribute("value");
@@ -9,23 +10,6 @@ function uusiOsoite() {
 
 }
 
-window.onresize = function (event) {
-    var korkeus = $(window).height();
-    if (boolmobiili) {
-        $("#perusmobiili").css("height", korkeus * 0.7 * 2);
-       $("#zoommobiili").css("height", korkeus * 0.7 * 2);
-       $(".kartta").css("height", korkeus * 0.7 * 2);
-       $(".karttamobiili").css("height", korkeus * 0.7 * 2);
-    }
-    else {
-       $("#perusmobiili").css("height", korkeus * 0.7);
-       $("#zoommobiili").css("height", korkeus * 0.7);
-       $(".kartta").css("height", korkeus * 0.7);
-       $(".karttamobiili").css("height", korkeus * 0.7);
-    }
-
-
-}
 
 $.fn.scrollTo = function (target, options, callback) {
     if (typeof options == 'function' && arguments.length == 2) {
@@ -85,8 +69,6 @@ $(function () {
                         elementa.setAttribute("href", paikkatietohref);
                         elementa.setAttribute("class", "list-group-item");
                         document.getElementById("valitutTapahtumat").appendChild(elementa);
-                        //document.getElementById("valittua").href = paikkatietohref;
-                        //document.getElementById("valittua").textContent = paikkatietotext;
                     }
                 });
                 return false;
@@ -180,6 +162,23 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
     if (window.innerWidth < 981) {
         $('body').scrollTo('.karttamobiili');
     }
+    if (boolmobiili == true){
+        var korkeus = $(window).height();
+        $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta");
+        $(".kartta").attr("id", "perus");
+        $(".karttamobiili").attr("id", "perusmobiili");
+
+        var korkeus = $(".karttamobiili").height();
+        $("#karttadiv").css("height", "");
+        $("#perusmobiili").css("height", korkeus/2);
+        boolmobiili = false;
+        var korkeus = $(window).height();
+        $("#perusmobiili").css("height", korkeus * 0.7);
+       $("#zoommobiili").css("height", korkeus * 0.7);
+       $(".kartta").css("height", korkeus * 0.7);
+       $(".karttamobiili").css("height", korkeus * 0.7);
+
+    }
     setTimeout(function () {
         console.log("Tilan tiedot ladattu");
         rakennusnaytetty = false;
@@ -202,6 +201,9 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
         else {
             $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
             $(".karttamobiili").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
+        }
+        if (tlat == '') {
+            $('#flash').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Tapahtumasi tilaa ei l√∂ydy</div>');
         }
     }, 500);
 
@@ -241,6 +243,7 @@ function naytaRakennus() {
 
 function naytaRakennusmob() {
     if (rakennusnaytetty) {
+        var korkeus = $(window).height();
         $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta");
         $(".kartta").attr("id", "perus");
         $(".karttamobiili").attr("id", "perusmobiili");
@@ -248,6 +251,22 @@ function naytaRakennusmob() {
         var korkeus = $(".karttamobiili").height();
         $("#karttadiv").css("height", "");
         $("#perusmobiili").css("height", korkeus/2);
+        boolmobiili = false;
+
+
+    if (boolmobiili) {
+        $("#perusmobiili").css("height", korkeus * 0.7 * 2);
+       $("#zoommobiili").css("height", korkeus * 0.7 * 2);
+       $(".kartta").css("height", korkeus * 0.7 * 2);
+       $(".karttamobiili").css("height", korkeus * 0.7 * 2);
+    }
+    else {
+        var korkeus = $(window).height();
+        $("#perusmobiili").css("height", korkeus * 0.7);
+       $("#zoommobiili").css("height", korkeus * 0.7);
+       $(".kartta").css("height", korkeus * 0.7);
+       $(".karttamobiili").css("height", korkeus * 0.7);
+    }
     }
     else {
         $("#nappinaytamob").attr("value", "Nayta rakennus kartalla")
@@ -279,7 +298,7 @@ function naytaRakennusmob() {
 function getLocation() {
     try {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(showPosition, failed, {enableHighAccuracy: true});
         } else {
             // TODO: Kerrro kayttajalle
         }
@@ -288,6 +307,10 @@ function getLocation() {
         console.log(err.message)
     }
 }
+
+    function failed () {
+
+    }
 
 function showPosition(position) {
     console.log("sijainti haettu");
