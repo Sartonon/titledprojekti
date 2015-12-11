@@ -134,6 +134,14 @@
     -webkit-transition: none;
     transition: none;
 }
+
+        #nappinaytamob {
+            margin-bottom: 10px;
+        }
+
+        #accordion {
+            margin-bottom: 10px;
+        }
     </style>
     <title>Karttakotka</title>
 </head>
@@ -204,6 +212,7 @@
                 </div>
             </div>
         </div>
+
         {% if tapahtumat %}
 
             <div class="row-fluid">
@@ -213,6 +222,7 @@
                        onclick="naytaRakennusmob()" value="Näytä rakennuksen kartta">
 
                 {% include 'loader.html' %}
+                <div class="flash"></div>
                 <div id="karttadiv">
                 <iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
                 </div>
@@ -241,7 +251,7 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-            <div id="flash"></div>
+            <div class="flash"></div>
                 <form action="" method="post" name="login">
                     {{ form.hidden_tag() }}
                     <p>

@@ -1,6 +1,9 @@
 var boolmobiili;
 var booldesktop;
 
+window.onresize = function() {
+    $("#kaikkiTapahtumat").css("height", "500px");
+}
 
 function uusiOsoite() {
     var input = document.getElementById("url");
@@ -203,7 +206,7 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
             $(".karttamobiili").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
         }
         if (tlat == '') {
-            $('#flash').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Tapahtumasi tilaa ei löydy</div>');
+            $('.flash').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Tapahtumasi tilaa ei löydy</div>');
         }
     }, 500);
 

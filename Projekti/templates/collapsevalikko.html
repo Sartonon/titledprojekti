@@ -84,7 +84,7 @@
     </div>
     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
       {% if tapahtumat %}
-                            <div class="list-group" id="kaikkiTapahtumat">
+                            <div class="list-group" id="kaikkiTapahtumatmob">
                                 {% for tapahtuma in tapahtumat %}
                                     <a href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}', '{{ tapahtuma.areaId }}',
                                          '{{ tapahtuma.buildingId }}', '{{ tapahtuma.floorId }}', '{{ tapahtuma.spaceId }}' )"
