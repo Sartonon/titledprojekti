@@ -30,7 +30,7 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
             for p in range(0, paikat2.__len__()):
                 if paikat2[p] in listaDict:
                     huone = parsiSpace(paikat1[p])
-                    kerros = parsiFloor(paikat1[p])
+                    kerros = parsiFloor(huone)
                     rakennus = parsiBuilding(huone)
                     alue = parsiArea(rakennus)
                     paikat.append({'paikka': paikat1[p],
