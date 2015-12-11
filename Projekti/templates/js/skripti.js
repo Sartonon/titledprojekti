@@ -148,7 +148,6 @@ var spaceId = 'None';
 
 window.onload = function () {
     var korkeus = $(window).height();
-    console.log(korkeus * 0.7);
     $("#perusmobiili").css("height", korkeus * 0.7);
     $("#zoommobiili").css("height", korkeus * 0.7);
 
@@ -157,10 +156,9 @@ window.onload = function () {
     getLocation();
     {% if tapahtumatTanaan %}
     if (naytaoletus) {
-        vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}',
-            '{{ tapahtumatTanaan[0].areaId }}', '{{ tapahtumatTanaan[0].buildingId }}',
-            '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
-    } // TODO: tapahtumat lukeminen uutta muotoa vastaavaksi
+        vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}', '{{ tapahtumatTanaan[0].paikat[0].areaId }}',
+            '{{ tapahtumatTanaan[0].paikat[0].buildingId }}', '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
+    }
     {% endif %}
 
 }
@@ -169,6 +167,7 @@ window.onload = function () {
 
 function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
     if (window.innerWidth < 981) {
+        console.log('liiku!')
         $('body').scrollTo('.karttamobiili');
     }
     if (boolmobiili == true){
@@ -213,6 +212,9 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
         }
         if (tlat == '') {
             $('.flash').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Tapahtumasi tilaa ei löydy</div>');
+        }
+        else {
+            $('.flash').html('');
         }
     }, 500);
 
@@ -341,8 +343,8 @@ function showPosition(position) {
     }
     {% if tapahtumatTanaan %}
     if (naytaoletus) {
-        vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}', '{{ tapahtumatTanaan[0].areaId }}',
-            '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
-    } // TODO: Tapahtuman lukeminen uutta muotoa vastaavaksi
+        vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}', '{{ tapahtumatTanaan[0].paikat[0].areaId }}',
+            '{{ tapahtumatTanaan[0].paikat[0].buildingId }}', '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
+    }
     {% endif %}
 }

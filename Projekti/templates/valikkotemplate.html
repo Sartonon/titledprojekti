@@ -6,7 +6,8 @@
                 <ul id="myTabs" class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#tanaan" id="home-tab" role="tab"
                                                               data-toggle="tab"
-                                                              aria-controls="home" aria-expanded="true">Tanaan tulossa</a>
+                                                              aria-controls="home" aria-expanded="true">Tanaan
+                        tulossa</a>
                     </li>
                     <li class="" role="presentation">
                         <a aria-expanded="false" href="#huomenna" role="tab"
@@ -50,7 +51,6 @@
                                         kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
                                 {% endfor %}
                             </div>
-                            <!-- TODO: Tapahtuman lukeminen datan uutta muotoa vastaavaksi! -->
                         {% else %}
                             <p align="center"><br><b>Ei tapahtumia</b></p>
                         {% endif %}
@@ -68,7 +68,7 @@
                                 {% endfor %}
                             </div>
                         {% else %}
-                           <p align="center"><br><b>Ei tapahtumia</b></p>
+                            <p align="center"><br><b>Ei tapahtumia</b></p>
                         {% endif %}
                     </div>
 
@@ -110,7 +110,8 @@
                 <ul id="myTabs" class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#tanaanmob" id="home-tab" role="tab"
                                                               data-toggle="tab"
-                                                              aria-controls="home" aria-expanded="true">Tanaan tulevat</a>
+                                                              aria-controls="home" aria-expanded="true">Tanaan
+                        tulevat</a>
                     </li>
                     <li class="" role="presentation">
                         <a aria-expanded="false" href="#huomennamob" role="tab"
@@ -172,7 +173,7 @@
                                 {% endfor %}
                             </div>
                         {% else %}
-                           <p align="center"><br><b>Ei tapahtumia</b></p>
+                            <p align="center"><br><b>Ei tapahtumia</b></p>
                         {% endif %}
                     </div>
 
@@ -196,13 +197,13 @@
                         <div class="list-group" id="valitutTapahtumatmob">
 
 
-                        <input type="hidden" id="sendDate" readonly>
+                            <input type="hidden" id="sendDate" readonly>
 
-                        <div id=resultmobiili></div>
+                            <div id=resultmobiili></div>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
         </ul>
     </div>
 {% endblock %}
