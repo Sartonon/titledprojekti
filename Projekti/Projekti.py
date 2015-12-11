@@ -15,6 +15,7 @@ import json
 app = Flask(__name__)
 app.config.from_object('config')
 
+
 @app.route('/calday')
 def hae_valittu_paiva():
     selected_date = request.args.get('selected_date')
@@ -119,8 +120,9 @@ def kartta():
         ulon = float(request.args.get("ulon"))
         map_osm.polygon_marker(location=[ulat, ulon], popup='Sinun sijaintisi(Suuntaa antava)',
                                fill_color='red', num_sides=0, radius=10, rotation=60)
-       # map_osm.polygon_marker(location=[62.22979, 25.74098], popup='Nanolaitos (testimerkki)',
-                #     fill_color='#132b5e', num_sides=7, radius=5, rotation=60)
+        # map_osm.polygon_marker(location=[62.22979, 25.74098], popup='Nanolaitos (testimerkki)',
+        #     fill_color='#132b5e', num_sides=7, radius=5, rotation=60)
+
     map_osm.create_map(path='templates/osm.html')
 
     return render_template('osm.html')
