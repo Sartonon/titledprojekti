@@ -66,7 +66,7 @@
             width: 200%; /* tuplasti iframen width */
             /*height: 600px; */ /* tuplasti iframen height */
 
-           /* overflow: hidden; /* remove scrollbars */
+            /* overflow: hidden; /* remove scrollbars */
         }
 
         #loaderi {
@@ -135,9 +135,9 @@
         }
 
         .collapsing {
-    -webkit-transition: none;
-    transition: none;
-}
+            -webkit-transition: none;
+            transition: none;
+        }
 
         #nappinaytamob {
             margin-bottom: 10px;
@@ -198,7 +198,6 @@
                 </div>
             </div>
         {% endif %}
-
         <div class="modal fade" id="ohjemobiili">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -220,23 +219,20 @@
                 </div>
             </div>
         </div>
-
         {% if tapahtumat %}
-
             <div class="row-fluid">
                 {% block valikkomobile %}{% endblock %}
                 {% block valikko2 %}{% endblock %}
-            <div class="btn-group btn-group-justified" role="group" aria-label="...">
-  <div class="btn-group" role="group">
-     <input id="nappinaytamob" type="button" class="btn btn-primary" data-toggle="modal"
-                       onclick="naytaRakennusmob()" value="Näytä rakennuksen kartta">
-  </div>
-  <div class="btn-group" role="group">
-    <input id="nappinaytasijainti" type="button" class="btn btn-primary" data-toggle="modal" value="Hae sijaintini kartalle">
-  </div>
-</div>
-
-
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <input id="nappinaytamob" type="button" class="btn btn-primary" data-toggle="modal"
+                               onclick="naytaRakennusmob()" value="Näytä rakennuksen kartta">
+                    </div>
+                    <div class="btn-group" role="group">
+                        <input id="nappinaytasijainti" type="button" class="btn btn-primary" data-toggle="modal"
+                               value="Hae sijaintini kartalle">
+                    </div>
+                </div>
                 {% include 'loader.html' %}
                 <div class="flash"></div>
                 <div id="karttadiv">
@@ -244,7 +240,6 @@
                 </div>
             </div>
         {% endif %}
-
     </div>
 </div>
 <div id="desktop">
@@ -267,15 +262,14 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-            <div class="flash"></div>
+                <div class="flash"></div>
                 <form action="" method="post" name="login">
                     {{ form.hidden_tag() }}
                     <p>
                         Anna Korpin kalenterin URL:<br>
                         {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL") }}
                     </p>
-
-                    <p>
+                   <p>
                         <input type="submit" class="btn btn-default" value="Hae">
                         <a type="button" class="btn btn-default" href="#ohje" data-toggle="modal">?</a>
                         <input id="nappinayta" type="button" class="btn btn-default pull-right" data-toggle="modal"
@@ -307,7 +301,7 @@
                     </div>
                 </div>
             </div>
-           {% block valikko %}{% endblock %}
+            {% block valikko %}{% endblock %}
         </div>
     </div>
 </div>

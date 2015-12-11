@@ -53,21 +53,18 @@
                                 kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
                             <div class="list-group" id="huomennapaikat">
                                 {% if tapahtumaHuomenna.paikat %}
-
                                     {% for paikka in tapahtumaHuomenna.paikat %}
                                         <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
                                          '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
                                            class="list-group-item">{{ paikka.paikka }}
                                         </a>
                                     {% endfor %}
-
                                 {% else %}
                                     <a class="list-group-item"><br><b>Ei paikkaa</b></a>
                                 {% endif %}
                             </div>
                         {% endfor %}
                     </div>
-
                 {% else %}
                     <p align="center"><br><b>Ei tapahtumia</b></p>
                 {% endif %}
@@ -99,7 +96,6 @@
                                            class="list-group-item">{{ paikka.paikka }}
                                         </a>
                                     {% endfor %}
-
                                 {% else %}
                                     <a class="list-group-item"><br><b>Ei paikkaa</b></a>
                                 {% endif %}
@@ -156,7 +152,6 @@
                 </h4>
             </div>
             <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-
                 <div id="datepickermob"></div>
                 <div class="list-group" id="valitutTapahtumatmob">
                     <div id=resultmobiili></div>
@@ -192,7 +187,6 @@
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
-
                     <div role="tabpanel" class="tab-pane fade active in" id="tanaan" aria-labelledby="home-tab">
                         {% if tapahtumatTanaan %}
                             <div class="list-group" id="tanaanTapahtumat">
@@ -217,7 +211,6 @@
                             <p align="center"><br><b>Ei tapahtumia</b></p>
                         {% endif %}
                     </div>
-
                     <div role="tabpanel" class="tab-pane fade" id="huomenna" aria-labelledby="profile-tab">
                         {% if tapahtumatHuomenna %}
                             <div class="list-group" id="huomennaTapahtumat">
@@ -246,7 +239,6 @@
                             <p align="center"><br><b>Ei tapahtumia</b></p>
                         {% endif %}
                     </div>
-
                     <div role="tabpanel" class="tab-pane fade" id="ylihuomenna" aria-labelledby="profile-tab">
                         {% if tapahtumatYlihuomenna %}
                             <div class="list-group" id="ylihuomennaTapahtumat">
@@ -275,7 +267,6 @@
                             <p align="center"><br><b>Ei tapahtumia</b></p>
                         {% endif %}
                     </div>
-
                     <div role="tabpanel" class="tab-pane fade" id="kaikki" aria-labelledby="profile-tab">
                         {% if tapahtumat %}
                             <div class="list-group" id="kaikkiTapahtumat">
@@ -301,7 +292,6 @@
                             <p align="center"><br><b>Ei tapahtumia</b></p>
                         {% endif %}
                     </div>
-
                     <div role="tabpanel" class="tab-pane fade" id="calendar" aria-labelledby="profile-tab">
                         <div id="datepicker1"></div>
                         <input type="hidden" id="sendDate" readonly>
