@@ -261,7 +261,8 @@ function naytaRakennusmob() {
        $(".karttamobiili").css("height", korkeus * 0.7 * 2);
     }
     else {
-       $("#perusmobiili").css("height", korkeus * 0.7);
+        var korkeus = $(window).height();
+        $("#perusmobiili").css("height", korkeus * 0.7);
        $("#zoommobiili").css("height", korkeus * 0.7);
        $(".kartta").css("height", korkeus * 0.7);
        $(".karttamobiili").css("height", korkeus * 0.7);
@@ -297,7 +298,7 @@ function naytaRakennusmob() {
 function getLocation() {
     try {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(showPosition, failed, {enableHighAccuracy: true});
         } else {
             // TODO: Kerrro kayttajalle
         }
@@ -306,6 +307,10 @@ function getLocation() {
         console.log(err.message)
     }
 }
+
+    function failed () {
+
+    }
 
 function showPosition(position) {
     console.log("sijainti haettu");

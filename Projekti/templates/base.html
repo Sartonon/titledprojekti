@@ -125,6 +125,11 @@
         #desktopdiv {
             overflow: hidden;
         }
+
+        #kaikkiTapahtumat {
+            height: 200px;
+            overflow: auto;
+        }
     </style>
     <title>Karttakotka</title>
 </head>
@@ -198,7 +203,8 @@
         {% if tapahtumat %}
 
             <div class="row-fluid">
-                {{ self.valikkomobile() }}
+                {% block valikkomobile %}{% endblock %}
+                {% block valikko2 %}{% endblock %}
                 <input id="nappinaytamob" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
                        onclick="naytaRakennusmob()" value="Näytä rakennuksen kartta">
 
@@ -271,12 +277,13 @@
                     </div>
                 </div>
             </div>
-            {{ self.valikko() }}
+           {% block valikko %}{% endblock %}
         </div>
     </div>
 </div>
 <input type="hidden" value="" id="ulat">
 <input type="hidden" value="" id="ulon">
+<input type="hidden" id="sendDate" readonly>
 <script src="../static/jquery-2.1.4.min.js"></script>
 <script src="../static/jquery-ui.min.js"></script>
 <script src="../static/jquery-ui.js"></script>

@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% block valikko2 %}
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Tänään
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+       {% if tapahtumatTanaan %}
+                            <div class="list-group" id="tanaanTapahtumatmob">
+                                {% for tapahtumaTanaan in tapahtumatTanaan %}
+                                    <a href="javascript:vaihdaTila('{{ tapahtumaTanaan.lat }}', '{{ tapahtumaTanaan.lon }}', '{{ tapahtumaTanaan.areaId }}',
+                                         '{{ tapahtumaTanaan.buildingId }}', '{{ tapahtumaTanaan.floorId }}', '{{ tapahtumaTanaan.spaceId }}' )"
+                                       class="list-group-item">{{ tapahtumaTanaan.paiva }}, {{ tapahtumaTanaan.paikka }}
+                                        klo. {{ tapahtumaTanaan.aika }}. kuvaus: {{ tapahtumaTanaan.kuvaus }}</a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p align="center"><br><b>Ei tapahtumia</b></p>
+                        {% endif %}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Huomenna
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        {% if tapahtumatHuomenna %}
+                            <div class="list-group" id="huomennaTapahtumat">
+                                {% for tapahtumaHuomenna in tapahtumatHuomenna %}
+                                    <a href="javascript:vaihdaTila('{{ tapahtumaHuomenna.lat }}', '{{ tapahtumaHuomenna.lon }}', '{{ tapahtumaHuomenna.areaId }}',
+                                         '{{ tapahtumaHuomenna.buildingId }}', '{{ tapahtumaHuomenna.floorId }}', '{{ tapahtumaHuomenna.spaceId }}' )"
+                                       class="list-group-item">{{ tapahtumaHuomenna.paiva }}, {{ tapahtumaHuomenna.paikka }}
+                                        klo. {{ tapahtumaHuomenna.aika }}.
+                                        kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
+                                {% endfor %}
+                            </div>
+
+                        {% else %}
+                            <p align="center"><br><b>Ei tapahtumia</b></p>
+                        {% endif %}
+
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+         Ylihuomenna
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      {% if tapahtumatYlihuomenna %}
+                            <div class="list-group" id="ylihuomennaTapahtumat">
+                                {% for tapahtumaYlihuomenna in tapahtumatYlihuomenna %}
+                                    <a href="javascript:vaihdaTila('{{ tapahtumaYlihuomenna.lat }}', '{{ tapahtumaYlihuomenna.lon }}', '{{ tapahtumaYlihuomenna.areaId }}',
+                                         '{{ tapahtumaYlihuomenna.buildingId }}', '{{ tapahtumaYlihuomenna.floorId }}', '{{ tapahtumaYlihuomenna.spaceId }}' )"
+                                       class="list-group-item">{{ tapahtumaYlihuomenna.paiva }}, {{ tapahtumaYlihuomenna.paikka }}
+                                        klo. {{ tapahtumaYlihuomenna.aika }}.
+                                        kuvaus: {{ tapahtumaYlihuomenna.kuvaus }}</a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                           <p align="center"><br><b>Ei tapahtumia</b></p>
+                        {% endif %}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+         Kaikki
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      {% if tapahtumat %}
+                            <div class="list-group" id="kaikkiTapahtumat">
+                                {% for tapahtuma in tapahtumat %}
+                                    <a href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}', '{{ tapahtuma.areaId }}',
+                                         '{{ tapahtuma.buildingId }}', '{{ tapahtuma.floorId }}', '{{ tapahtuma.spaceId }}' )"
+                                       class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }}
+                                        klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}</a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p align="center"><br><b>Ei tapahtumia</b></p>
+                        {% endif %}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFive">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+         Kalenteri
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+
+                        <div id="datepickermob"></div>
+                        <div class="list-group" id="valitutTapahtumatmob">
+                        <div id=resultmobiili></div>
+                        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block valikko %}
+    <div class="col-lg-4 col-sm-4" id="navigointi">
+        <ul class="test2 nav nav-pills">
+            <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+                <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#tanaan" id="home-tab" role="tab"
+                                                              data-toggle="tab"
+                                                              aria-controls="home" aria-expanded="true">Tanaan tulossa</a>
+                    </li>
+                    <li class="" role="presentation">
+                        <a aria-expanded="false" href="#huomenna" role="tab"
+                           id="profile-tab" data-toggle="tab" aria-controls="profile">Huomenna</a>
+                    </li>
+                    <li class="" role="presentation"><a aria-expanded="false" href="#ylihuomenna" role="tab"
+                                                        id="profile-tab" data-toggle="tab" aria-controls="profile">Ylihuomenna</a>
+                    </li>
+                    <li class="" role="presentation"><a aria-expanded="false" href="#kaikki" role="tab"
+                                                        id="profile-tab" data-toggle="tab" aria-controls="profile">Kaikki</a>
+                    </li>
+                    <li class="" role="presentation"><a aria-expanded="false" href="#calendar" role="tab"
+                                                        id="profile-tab" data-toggle="tab" aria-controls="profile">Kalenteri</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+
+                    <div role="tabpanel" class="tab-pane fade active in" id="tanaan" aria-labelledby="home-tab">
+                        {% if tapahtumatTanaan %}
+                            <div class="list-group" id="tanaanTapahtumat">
+                                {% for tapahtumaTanaan in tapahtumatTanaan %}
+                                    <a href="javascript:vaihdaTila('{{ tapahtumaTanaan.lat }}', '{{ tapahtumaTanaan.lon }}', '{{ tapahtumaTanaan.areaId }}',
+                                         '{{ tapahtumaTanaan.buildingId }}', '{{ tapahtumaTanaan.floorId }}', '{{ tapahtumaTanaan.spaceId }}' )"
+                                       class="list-group-item">{{ tapahtumaTanaan.paiva }}, {{ tapahtumaTanaan.paikka }}
+                                        klo. {{ tapahtumaTanaan.aika }}. kuvaus: {{ tapahtumaTanaan.kuvaus }}</a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p align="center"><br><b>Ei tapahtumia</b></p>
+                        {% endif %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="huomenna" aria-labelledby="profile-tab">
+                        {% if tapahtumatHuomenna %}
+                            <div class="list-group" id="huomennaTapahtumat">
+                                {% for tapahtumaHuomenna in tapahtumatHuomenna %}
+                                    <a href="javascript:vaihdaTila('{{ tapahtumaHuomenna.lat }}', '{{ tapahtumaHuomenna.lon }}', '{{ tapahtumaHuomenna.areaId }}',
+                                         '{{ tapahtumaHuomenna.buildingId }}', '{{ tapahtumaHuomenna.floorId }}', '{{ tapahtumaHuomenna.spaceId }}' )"
+                                       class="list-group-item">{{ tapahtumaHuomenna.paiva }}, {{ tapahtumaHuomenna.paikka }}
+                                        klo. {{ tapahtumaHuomenna.aika }}.
+                                        kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
+                                {% endfor %}
+                            </div>
+
+                        {% else %}
+                            <p align="center"><br><b>Ei tapahtumia</b></p>
+                        {% endif %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="ylihuomenna" aria-labelledby="profile-tab">
+                        {% if tapahtumatYlihuomenna %}
+                            <div class="list-group" id="ylihuomennaTapahtumat">
+                                {% for tapahtumaYlihuomenna in tapahtumatYlihuomenna %}
+                                    <a href="javascript:vaihdaTila('{{ tapahtumaYlihuomenna.lat }}', '{{ tapahtumaYlihuomenna.lon }}', '{{ tapahtumaYlihuomenna.areaId }}',
+                                         '{{ tapahtumaYlihuomenna.buildingId }}', '{{ tapahtumaYlihuomenna.floorId }}', '{{ tapahtumaYlihuomenna.spaceId }}' )"
+                                       class="list-group-item">{{ tapahtumaYlihuomenna.paiva }}, {{ tapahtumaYlihuomenna.paikka }}
+                                        klo. {{ tapahtumaYlihuomenna.aika }}.
+                                        kuvaus: {{ tapahtumaYlihuomenna.kuvaus }}</a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                           <p align="center"><br><b>Ei tapahtumia</b></p>
+                        {% endif %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="kaikki" aria-labelledby="profile-tab">
+                        {% if tapahtumat %}
+                            <div class="list-group" id="kaikkiTapahtumat">
+                                {% for tapahtuma in tapahtumat %}
+                                    <a href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}', '{{ tapahtuma.areaId }}',
+                                         '{{ tapahtuma.buildingId }}', '{{ tapahtuma.floorId }}', '{{ tapahtuma.spaceId }}' )"
+                                       class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }}
+                                        klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}
+                                        <a class="list-group-item">lisarivi<span class="glyphicon glyphicon-chevron-left pull-right"></span></a>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p align="center"><br><b>Ei tapahtumia</b></p>
+                        {% endif %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="calendar" aria-labelledby="profile-tab">
+                        <div id="datepicker1"></div>
+                        <input type="hidden" id="sendDate" readonly>
+
+                        <div class="list-group" id="valitutTapahtumat">
+
+                        </div>
+                        <div id=result></div>
+                    </div>
+
+                </div>
+            </div>
+        </ul>
+    </div>
+{% endblock %}
