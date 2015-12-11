@@ -140,18 +140,18 @@ var spaceId = 'None';
 window.onload = function () {
     var korkeus = $(window).height();
     console.log(korkeus * 0.7);
-    $("#perusmobiili").css("height", korkeus * 0.7)
+    $("#perusmobiili").css("height", korkeus * 0.7);
     $("#zoommobiili").css("height", korkeus * 0.7);
 
     console.log("haetaan sijaintia");
-    $("#loaderi").css("display", "block")
+    $("#loaderi").css("display", "block");
     getLocation();
     {% if tapahtumatTanaan %}
     if (naytaoletus) {
         vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}',
             '{{ tapahtumatTanaan[0].areaId }}', '{{ tapahtumatTanaan[0].buildingId }}',
             '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
-    }
+    } // TODO: tapahtumat lukeminen uutta muotoa vastaavaksi
     {% endif %}
 
 }
@@ -203,7 +203,7 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
             $(".karttamobiili").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1");
         }
         if (tlat == '') {
-            $('#flash').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Tapahtumasi tilaa ei löydy</div>');
+            $('.flash').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Tapahtumasi tilaa ei löydy</div>');
         }
     }, 500);
 
@@ -334,6 +334,6 @@ function showPosition(position) {
     if (naytaoletus) {
         vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}', '{{ tapahtumatTanaan[0].areaId }}',
             '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
-    }
+    } // TODO: Tapahtuman lukeminen uutta muotoa vastaavaksi
     {% endif %}
 }

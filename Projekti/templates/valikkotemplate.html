@@ -50,7 +50,7 @@
                                         kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
                                 {% endfor %}
                             </div>
-
+                            <!-- TODO: Tapahtuman lukeminen datan uutta muotoa vastaavaksi! -->
                         {% else %}
                             <p align="center"><br><b>Ei tapahtumia</b></p>
                         {% endif %}
@@ -76,11 +76,10 @@
                         {% if tapahtumat %}
                             <div class="list-group" id="kaikkiTapahtumat">
                                 {% for tapahtuma in tapahtumat %}
-                                    <a href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}', '{{ tapahtuma.areaId }}',
-                                         '{{ tapahtuma.buildingId }}', '{{ tapahtuma.floorId }}', '{{ tapahtuma.spaceId }}' )"
-                                       class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }}
+                                    <a href="javascript:vaihdaTila('{{ tapahtuma.paikat[0].lat }}', '{{ tapahtuma.paikat[0].lon }}', '{{ tapahtuma.paikat[0].areaId }}',
+                                         '{{ tapahtuma.paikat[0].buildingId }}', '{{ tapahtuma.paikat[0].floorId }}', '{{ tapahtuma.paikat[0].spaceId }}' )"
+                                       class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikat[0].paikka }}
                                         klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}
-                                        <a class="list-group-item">lisarivi<span class="glyphicon glyphicon-chevron-left pull-right"></span></a>
                                     </a>
                                 {% endfor %}
                             </div>

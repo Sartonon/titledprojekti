@@ -81,7 +81,6 @@
         }
 
         #kaikki {
-            overflow: auto;
             max-height: 200px;
         }
 
@@ -127,9 +126,14 @@
         }
 
         #kaikkiTapahtumat {
-            height: 200px;
+            height: 550px;
             overflow: auto;
         }
+
+        .collapsing {
+    -webkit-transition: none;
+    transition: none;
+}
     </style>
     <title>Karttakotka</title>
 </head>
@@ -237,7 +241,7 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-            <div id="flash"></div>
+            <div class="flash"></div>
                 <form action="" method="post" name="login">
                     {{ form.hidden_tag() }}
                     <p>
