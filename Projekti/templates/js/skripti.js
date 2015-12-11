@@ -298,7 +298,7 @@ function naytaRakennusmob() {
 function getLocation() {
     try {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(showPosition, failed, {enableHighAccuracy: true});
         } else {
             // TODO: Kerrro kayttajalle
         }
@@ -307,6 +307,10 @@ function getLocation() {
         console.log(err.message)
     }
 }
+
+    function failed () {
+
+    }
 
 function showPosition(position) {
     console.log("sijainti haettu");
