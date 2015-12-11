@@ -151,7 +151,7 @@ window.onload = function () {
         vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}',
             '{{ tapahtumatTanaan[0].areaId }}', '{{ tapahtumatTanaan[0].buildingId }}',
             '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
-    }
+    } // TODO: tapahtumat lukeminen uutta muotoa vastaavaksi
     {% endif %}
 
 }
@@ -334,6 +334,6 @@ function showPosition(position) {
     if (naytaoletus) {
         vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}', '{{ tapahtumatTanaan[0].areaId }}',
             '{{ tapahtumatTanaan[0].buildingId }}', '{{ tapahtumatTanaan[0].floorId }}', '{{ tapahtumatTanaan[0].spaceId }}', false)
-    }
+    } // TODO: Tapahtuman lukeminen uutta muotoa vastaavaksi
     {% endif %}
 }
