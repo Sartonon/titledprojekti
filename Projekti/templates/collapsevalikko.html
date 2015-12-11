@@ -162,148 +162,146 @@
 {% endblock %}
 {% block valikko %}
     <div class="col-lg-4 col-sm-4" id="navigointi">
-        <ul class="test2 nav nav-pills">
-            <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
-                <ul id="myTabs" class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#tanaan" id="home-tab" role="tab"
-                                                              data-toggle="tab"
-                                                              aria-controls="home" aria-expanded="true" class="btn-primary">Tanaan
-                        tulossa</a>
-                    </li>
-                    <li class="" role="presentation">
-                        <a aria-expanded="false" href="#huomenna" role="tab"
-                           id="profile-tab" data-toggle="tab" aria-controls="profile" class="btn-primary">Huomenna</a>
-                    </li>
-                    <li class="" role="presentation"><a aria-expanded="false" href="#ylihuomenna" role="tab"
-                                                        id="profile-tab" data-toggle="tab" aria-controls="profile" class="btn-primary">Ylihuomenna</a>
-                    </li>
-                    <li class="" role="presentation"><a aria-expanded="false" href="#kaikki" role="tab"
-                                                        id="profile-tab" data-toggle="tab"
-                                                        aria-controls="profile" class="btn-primary">Kaikki</a>
-                    </li>
-                    <li class="" role="presentation"><a aria-expanded="false" href="#calendar" role="tab"
-                                                        id="profile-tab" data-toggle="tab"
-                                                        aria-controls="profile" class="btn-primary">Kalenteri</a>
-                    </li>
-                </ul>
-                <div id="myTabContent" class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade active in" id="tanaan" aria-labelledby="home-tab">
-                        {% if tapahtumatTanaan %}
-                            <div class="list-group" id="tanaanTapahtumat">
-                                {% for tapahtumaTanaan in tapahtumatTanaan %}
-                                    <a class="list-group-item">{{ tapahtumaTanaan.paiva }},
-                                        klo. {{ tapahtumaTanaan.aika }}. kuvaus: {{ tapahtumaTanaan.kuvaus }}</a>
-                                    <div class="list-group" id="tanaanpaikat">
-                                        {% if tapahtumaTanaan.paikat %}
-                                            {% for paikka in tapahtumaTanaan.paikat %}
-                                                <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
+        <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+            <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#tanaan" id="home-tab" role="tab"
+                                                          data-toggle="tab"
+                                                          aria-controls="home" aria-expanded="true"
+                                                          class="btn-primary">Vielä tänään</a>
+                </li>
+                <li class="" role="presentation">
+                    <a aria-expanded="false" href="#huomenna" role="tab"
+                       id="profile-tab" data-toggle="tab" aria-controls="profile" class="btn-primary">Huomenna</a>
+                </li>
+                <li class="" role="presentation"><a aria-expanded="false" href="#ylihuomenna" role="tab"
+                                                    id="profile-tab" data-toggle="tab" aria-controls="profile"
+                                                    class="btn-primary">Ylihuomenna</a>
+                </li>
+                <li class="" role="presentation"><a aria-expanded="false" href="#kaikki" role="tab"
+                                                    id="profile-tab" data-toggle="tab"
+                                                    aria-controls="profile" class="btn-primary">Kaikki</a>
+                </li>
+                <li class="" role="presentation"><a aria-expanded="false" href="#calendar" role="tab"
+                                                    id="profile-tab" data-toggle="tab"
+                                                    aria-controls="profile" class="btn-primary">Kalenteri</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="tanaan" aria-labelledby="home-tab">
+                    {% if tapahtumatTanaan %}
+                        <div class="list-group" id="tanaanTapahtumat">
+                            {% for tapahtumaTanaan in tapahtumatTanaan %}
+                                <a class="list-group-item">{{ tapahtumaTanaan.paiva }},
+                                    klo. {{ tapahtumaTanaan.aika }}. kuvaus: {{ tapahtumaTanaan.kuvaus }}</a>
+                                <div class="list-group" id="tanaanpaikat">
+                                    {% if tapahtumaTanaan.paikat %}
+                                        {% for paikka in tapahtumaTanaan.paikat %}
+                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
                                          '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
-                                                   class="list-group-item">{{ paikka.paikka }}
-                                                </a>
-                                            {% endfor %}
-                                        {% else %}
-                                            <a class="list-group-item"><br><b>Ei paikkaa</b></a>
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <p align="center"><br><b>Ei tapahtumia</b></p>
-                        {% endif %}
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="huomenna" aria-labelledby="profile-tab">
-                        {% if tapahtumatHuomenna %}
-                            <div class="list-group" id="huomennaTapahtumat">
-                                {% for tapahtumaHuomenna in tapahtumatHuomenna %}
-                                    <a class="list-group-item">{{ tapahtumaHuomenna.paiva }},
-                                        klo. {{ tapahtumaHuomenna.aika }}.
-                                        kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
-                                    <div class="list-group" id="huomennapaikat">
-                                        {% if tapahtumaHuomenna.paikat %}
-
-                                            {% for paikka in tapahtumaHuomenna.paikat %}
-                                                <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
-                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
-                                                   class="list-group-item">{{ paikka.paikka }}
-                                                </a>
-                                            {% endfor %}
-
-                                        {% else %}
-                                            <a class="list-group-item"><br><b>Ei paikkaa</b></a>
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
-                            </div>
-
-                        {% else %}
-                            <p align="center"><br><b>Ei tapahtumia</b></p>
-                        {% endif %}
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="ylihuomenna" aria-labelledby="profile-tab">
-                        {% if tapahtumatYlihuomenna %}
-                            <div class="list-group" id="ylihuomennaTapahtumat">
-                                {% for tapahtumaYlihuomenna in tapahtumatYlihuomenna %}
-                                    <a class="list-group-item">{{ tapahtumaYlihuomenna.paiva }},
-                                        klo. {{ tapahtumaYlihuomenna.aika }}.
-                                        kuvaus: {{ tapahtumaYlihuomenna.kuvaus }}
-                                    </a>
-                                    <div class="list-group" id="ylihuomennapaikat">
-                                        {% if tapahtumaYlihuomenna.paikat %}
-
-                                            {% for paikka in tapahtumaYlihuomenna.paikat %}
-                                                <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
-                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
-                                                   class="list-group-item">{{ paikka.paikka }}
-                                                </a>
-                                            {% endfor %}
-
-                                        {% else %}
-                                            <a class="list-group-item"><br><b>Ei paikkaa</b></a>
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <p align="center"><br><b>Ei tapahtumia</b></p>
-                        {% endif %}
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="kaikki" aria-labelledby="profile-tab">
-                        {% if tapahtumat %}
-                            <div class="list-group" id="kaikkiTapahtumat">
-                                {% for tapahtuma in tapahtumat %}
-                                    <a class="list-group-item">{{ tapahtuma.paiva }},
-                                        klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}
-                                    </a>
-                                    <div class="list-group" id="kaikkipaikat">
-                                        {% if tapahtuma.paikat %}
-                                            {% for paikka in tapahtuma.paikat %}
-                                                <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
-                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
-                                                   class="list-group-item">{{ paikka.paikka }}
-                                                </a>
-                                            {% endfor %}
-                                        {% else %}
-                                            <a class="list-group-item"><br><b>Ei paikkaa</b></a>
-                                        {% endif %}
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <p align="center"><br><b>Ei tapahtumia</b></p>
-                        {% endif %}
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="calendar" aria-labelledby="profile-tab">
-                        <div id="datepicker1"></div>
-                        <input type="hidden" id="sendDate" readonly>
-
-                        <div class="list-group" id="valitutTapahtumat">
-
+                                               class="list-group-item">{{ paikka.paikka }}
+                                            </a>
+                                        {% endfor %}
+                                    {% else %}
+                                        <a class="list-group-item"><br><b>Ei paikkaa</b></a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
                         </div>
-                        <div id=result></div>
-                    </div>
-
+                    {% else %}
+                        <p align="center"><br><b>Ei tapahtumia</b></p>
+                    {% endif %}
                 </div>
+                <div role="tabpanel" class="tab-pane fade" id="huomenna" aria-labelledby="profile-tab">
+                    {% if tapahtumatHuomenna %}
+                        <div class="list-group" id="huomennaTapahtumat">
+                            {% for tapahtumaHuomenna in tapahtumatHuomenna %}
+                                <a class="list-group-item">{{ tapahtumaHuomenna.paiva }},
+                                    klo. {{ tapahtumaHuomenna.aika }}.
+                                    kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
+                                <div class="list-group" id="huomennapaikat">
+                                    {% if tapahtumaHuomenna.paikat %}
+
+                                        {% for paikka in tapahtumaHuomenna.paikat %}
+                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
+                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
+                                               class="list-group-item">{{ paikka.paikka }}
+                                            </a>
+                                        {% endfor %}
+
+                                    {% else %}
+                                        <a class="list-group-item"><br><b>Ei paikkaa</b></a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p align="center"><br><b>Ei tapahtumia</b></p>
+                    {% endif %}
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="ylihuomenna" aria-labelledby="profile-tab">
+                    {% if tapahtumatYlihuomenna %}
+                        <div class="list-group" id="ylihuomennaTapahtumat">
+                            {% for tapahtumaYlihuomenna in tapahtumatYlihuomenna %}
+                                <a class="list-group-item">{{ tapahtumaYlihuomenna.paiva }},
+                                    klo. {{ tapahtumaYlihuomenna.aika }}.
+                                    kuvaus: {{ tapahtumaYlihuomenna.kuvaus }}
+                                </a>
+                                <div class="list-group" id="ylihuomennapaikat">
+                                    {% if tapahtumaYlihuomenna.paikat %}
+
+                                        {% for paikka in tapahtumaYlihuomenna.paikat %}
+                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
+                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
+                                               class="list-group-item">{{ paikka.paikka }}
+                                            </a>
+                                        {% endfor %}
+
+                                    {% else %}
+                                        <a class="list-group-item"><br><b>Ei paikkaa</b></a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p align="center"><br><b>Ei tapahtumia</b></p>
+                    {% endif %}
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="kaikki" aria-labelledby="profile-tab">
+                    {% if tapahtumat %}
+                        <div class="list-group" id="kaikkiTapahtumat">
+                            {% for tapahtuma in tapahtumat %}
+                                <a class="list-group-item">{{ tapahtuma.paiva }},
+                                    klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}
+                                </a>
+                                <div class="list-group" id="kaikkipaikat">
+                                    {% if tapahtuma.paikat %}
+                                        {% for paikka in tapahtuma.paikat %}
+                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
+                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
+                                               class="list-group-item">{{ paikka.paikka }}
+                                            </a>
+                                        {% endfor %}
+                                    {% else %}
+                                        <a class="list-group-item"><br><b>Ei paikkaa</b></a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p align="center"><br><b>Ei tapahtumia</b></p>
+                    {% endif %}
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="calendar" aria-labelledby="profile-tab">
+                    <div id="datepicker1"></div>
+                    <input type="hidden" id="sendDate" readonly>
+
+                    <div class="list-group" id="valitutTapahtumat">
+
+                    </div>
+                    <div id=result></div>
+                </div>
+
             </div>
-        </ul>
+        </div>
     </div>
 {% endblock %}
