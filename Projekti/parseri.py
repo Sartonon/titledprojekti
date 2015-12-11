@@ -19,7 +19,7 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
         alku = tapahtuma.get('dtstart')
         alkupaiva = alku.dt.date()
         loppuaika = tapahtuma.get('dtend').dt
-        if (alkupaiva == paiva or kaikki):# and loppuaika >= nykyhetki:
+        if (alkupaiva == paiva or kaikki) and loppuaika >= nykyhetki:
             if tapahtuma.get('location') is not None:
                 paikat1 = tapahtuma.get('location').split(', ')  # Käyttäjälle näyttämistä varten
                 paikat2 = tapahtuma.get('location').lower().split(', ')  # listadictiin vertaamista varten
