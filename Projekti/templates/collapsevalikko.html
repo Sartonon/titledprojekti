@@ -154,19 +154,17 @@
                                 {% for tapahtumaTanaan in tapahtumatTanaan %}
                                     <a class="list-group-item">{{ tapahtumaTanaan.paiva }},
                                         klo. {{ tapahtumaTanaan.aika }}. kuvaus: {{ tapahtumaTanaan.kuvaus }}</a>
-                                        <div class="list-group" id="tanaanpaikat">
-                                    {% if tapahtumatTanaan.paikat %}
-
+                                    <div class="list-group" id="tanaanpaikat">
+                                        {% if tapahtumaTanaan.paikat %}
                                             {% for paikka in tapahtumaTanaan.paikat %}
                                                 <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
                                          '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
                                                    class="list-group-item">{{ paikka.paikka }}
                                                 </a>
                                             {% endfor %}
-
-                                    {% else %}
-                                        <a class="list-group-item"><br><b>Ei paikkaa</b></a>
-                                    {% endif %}
+                                        {% else %}
+                                            <a class="list-group-item"><br><b>Ei paikkaa</b></a>
+                                        {% endif %}
                                     </div>
                                 {% endfor %}
                             </div>
@@ -182,8 +180,8 @@
                                     <a class="list-group-item">{{ tapahtumaHuomenna.paiva }},
                                         klo. {{ tapahtumaHuomenna.aika }}.
                                         kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
-                                        <div class="list-group" id="huomennapaikat">
-                                    {% if tapahtumaHuomenna.paikat %}
+                                    <div class="list-group" id="huomennapaikat">
+                                        {% if tapahtumaHuomenna.paikat %}
 
                                             {% for paikka in tapahtumaHuomenna.paikat %}
                                                 <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
@@ -192,9 +190,9 @@
                                                 </a>
                                             {% endfor %}
 
-                                    {% else %}
-                                        <a class="list-group-item"><br><b>Ei paikkaa</b></a>
-                                    {% endif %}
+                                        {% else %}
+                                            <a class="list-group-item"><br><b>Ei paikkaa</b></a>
+                                        {% endif %}
                                     </div>
                                 {% endfor %}
                             </div>
@@ -213,7 +211,7 @@
                                         kuvaus: {{ tapahtumaYlihuomenna.kuvaus }}
                                     </a>
                                     <div class="list-group" id="ylihuomennapaikat">
-                                    {% if tapahtumaYlihuomenna.paikat %}
+                                        {% if tapahtumaYlihuomenna.paikat %}
 
                                             {% for paikka in tapahtumaYlihuomenna.paikat %}
                                                 <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
@@ -222,9 +220,9 @@
                                                 </a>
                                             {% endfor %}
 
-                                    {% else %}
-                                        <a class="list-group-item"><br><b>Ei paikkaa</b></a>
-                                    {% endif %}
+                                        {% else %}
+                                            <a class="list-group-item"><br><b>Ei paikkaa</b></a>
+                                        {% endif %}
                                     </div>
                                 {% endfor %}
                             </div>
