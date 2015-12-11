@@ -234,10 +234,10 @@ function naytaRakennus() {
     else {
         $("#nappinayta").attr("value", "Nayta rakennus kartalla");
         rakennusnaytetty = true;
-        if (areaId != 'None' &&
-            buildingId != 'None' &&
-            floorId != 'None' &&
-            spaceId != 'None') {
+        if (areaId != '' &&
+            buildingId != '' &&
+            floorId != '' &&
+            spaceId != '') {
             $(".kartta").attr("id", "zoom");
             $(".karttamobiili").attr("id", "zoommobiili");
             $(".kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId +
@@ -284,10 +284,10 @@ function naytaRakennusmob() {
     else {
         $("#nappinaytamob").attr("value", "Nayta rakennus kartalla")
         rakennusnaytetty = true;
-        if (areaId != 'None' &&
-            buildingId != 'None' &&
-            floorId != 'None' &&
-            spaceId != 'None') {
+        if (areaId != '' &&
+            buildingId != '' &&
+            floorId != '' &&
+            spaceId != '') {
             $(".kartta").attr("id", "zoom");
             $(".karttamobiili").attr("id", "zoommobiili");
             $(".kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId
