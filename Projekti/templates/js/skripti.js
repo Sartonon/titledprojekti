@@ -205,6 +205,9 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
         if (tlat == '') {
             $('.flash').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Tapahtumasi tilaa ei löydy</div>');
         }
+        else {
+            $('.flash').html('');
+        }
     }, 500);
 
 
