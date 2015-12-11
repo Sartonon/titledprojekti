@@ -13,6 +13,11 @@ function uusiOsoite() {
 
 }
 
+function haeppaSijainti() {
+     $("#loaderi").css("display", "block");
+    getLocation();
+}
+
 
 $.fn.scrollTo = function (target, options, callback) {
     if (typeof options == 'function' && arguments.length == 2) {
@@ -150,8 +155,8 @@ window.onload = function () {
     $("#zoommobiili").css("height", korkeus * 0.7);
 
     console.log("haetaan sijaintia");
-    $("#loaderi").css("display", "block");
-    getLocation();
+
+
     {% if tapahtumatTanaan %}
     if (naytaoletus) {
         vaihdaTila('{{ tapahtumatTanaan[0].lat }}', '{{ tapahtumatTanaan[0].lon }}',
