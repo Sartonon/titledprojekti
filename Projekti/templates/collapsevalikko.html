@@ -220,7 +220,6 @@
                                     kuvaus: {{ tapahtumaHuomenna.kuvaus }}</a>
                                 <div class="list-group" id="huomennapaikat">
                                     {% if tapahtumaHuomenna.paikat %}
-
                                         {% for paikka in tapahtumaHuomenna.paikat %}
                                             <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
                                          '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"

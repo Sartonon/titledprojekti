@@ -212,9 +212,11 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
         }
         if (tlat == '') {
             $('.flash').html('<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert">&times;</a>Tapahtumasi tilaa ei löydy</div>');
+            $(".kartta").css("height", 450);
         }
         else {
             $('.flash').html('');
+            $(".kartta").css("height", 500);
         }
     }, 500);
 
