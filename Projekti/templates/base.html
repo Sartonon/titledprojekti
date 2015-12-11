@@ -28,6 +28,10 @@
             }
         }
 
+        .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+            float: left;
+            margin-left: 35%;
+        }
 
         iframe {
             height: 100%;
@@ -236,7 +240,7 @@
                 {% include 'loader.html' %}
                 <div class="flash"></div>
                 <div id="karttadiv">
-                <iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                    <iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
                 </div>
             </div>
         {% endif %}
@@ -245,7 +249,7 @@
 </div>
 <div id="desktop">
     <div id="jumbotronmobiili" class="jumbotron">
-        <div class="container">
+        <div class="container-fluid bg-primary">
             <h1>Karttaprojekti</h1>
         </div>
     </div>
@@ -278,8 +282,8 @@
                                onclick="naytaRakennus()" value="Näytä rakennuksen kartta">
                     </p>
                 </form>
-            <div id="desktopdiv">
-                <iframe id="perus" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                <div id="desktopdiv">
+                    <iframe id="perus" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
                 </div>
             </div>
             <div class="modal fade" id="ohje">
