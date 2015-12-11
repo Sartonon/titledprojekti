@@ -158,6 +158,7 @@ window.onload = function () {
 
 function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
     if (window.innerWidth < 981) {
+        console.log('liiku!')
         $('body').scrollTo('.karttamobiili');
     }
     if (boolmobiili == true){
@@ -331,7 +332,7 @@ function showPosition(position) {
         $(".kartta").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
         $(".karttamobiili").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
     }
-    {% if tapahtumatTanaan[0]['paikat'] %}
+    {% if tapahtumatTanaan %}
     if (naytaoletus) {
         vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}', '{{ tapahtumatTanaan[0].paikat[0].areaId }}',
             '{{ tapahtumatTanaan[0].paikat[0].buildingId }}', '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
