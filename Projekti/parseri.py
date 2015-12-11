@@ -24,8 +24,8 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                 paikat1 = tapahtuma.get('location').split(', ')  # Käyttäjälle näyttimistä varten
                 paikat2 = tapahtuma.get('location').lower().split(', ')  # listadictiin vertaamista varten
             else:
-                paikat1 = "eiole"
-                paikat2 = "eiole"
+                paikat1 = ""
+                paikat2 = ""
             paikat = []
             for p in range(0, paikat2.__len__()):
                 if paikat2[p] in listaDict:
@@ -41,9 +41,9 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'floorId': kerros,
                                    'spaceId': huone})
                 else:
-                    paikat.append({'paikka': paikat1[p],
+                    '''paikat.append({'paikka': paikat1[p],
                                    'lat': '',
-                                   'lon': ''})
+                                   'lon': ''})'''
             tapahtumat.append({'paikat': paikat,
                                'paiva': unicode(alkupaiva),
                                'aika': unicode(utc_to_local(alku.dt).time()),
