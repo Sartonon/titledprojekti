@@ -86,6 +86,7 @@ def listaDict():
                  "ag alfa": {"lat": 62.23188679050459, "lon": 25.73643331872935},
                  "ag auditorio 1 martti ahtisaari -sali": {'lon': 25.736987865703245, 'lat': 62.23208179357579},
                  "ag auditorio 1, martti ahtisaari -sali": {"lat": 62.23208179357579, "lon": 25.736987865703245},
+                 "ag auditorio 1": {"lat": 62.23208179357579, "lon": 25.736987865703245},
                  "ag auditorio 2": {"lat": 62.23198196225517, "lon": 25.73663205149003},
                  "ag auditorio 3": {"lat": 62.23185499274953, "lon": 25.736929018471518},
                  "ag avoporras 3": {"lat": 62.23182264468691, "lon": 25.7366832187311},

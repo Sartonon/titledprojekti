@@ -76,9 +76,9 @@
                         {% if tapahtumat %}
                             <div class="list-group" id="kaikkiTapahtumat">
                                 {% for tapahtuma in tapahtumat %}
-                                    <a href="javascript:vaihdaTila('{{ tapahtuma.lat }}', '{{ tapahtuma.lon }}', '{{ tapahtuma.areaId }}',
-                                         '{{ tapahtuma.buildingId }}', '{{ tapahtuma.floorId }}', '{{ tapahtuma.spaceId }}' )"
-                                       class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikka }}
+                                    <a href="javascript:vaihdaTila('{{ tapahtuma.paikat[0].lat }}', '{{ tapahtuma.paikat[0].lon }}', '{{ tapahtuma.paikat[0].areaId }}',
+                                         '{{ tapahtuma.paikat[0].buildingId }}', '{{ tapahtuma.paikat[0].floorId }}', '{{ tapahtuma.paikat[0].spaceId }}' )"
+                                       class="list-group-item">{{ tapahtuma.paiva }}, {{ tapahtuma.paikat[0].paikka }}
                                         klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}
                                     </a>
                                 {% endfor %}

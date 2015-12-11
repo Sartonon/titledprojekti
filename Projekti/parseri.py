@@ -14,7 +14,6 @@ from bottle import unicode
 
 
 def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikki=False):
-    tapahtumat = []
     nykyhetki = utc_to_local(datetime.datetime.today())
     for tapahtuma in cal.walk('vevent'):
         alku = tapahtuma.get('dtstart')
@@ -22,8 +21,8 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
         loppuaika = tapahtuma.get('dtend').dt
         if (alkupaiva == paiva or kaikki) and loppuaika >= nykyhetki:
             if tapahtuma.get('location') is not None:
-                paikat1 = tapahtuma.get('location').split(',')  # Käyttäjälle näyttimistä varten
-                paikat2 = tapahtuma.get('location').lower().split(',')  # listadictiin vertaamista varten
+                paikat1 = tapahtuma.get('location').split(', ')  # Käyttäjälle näyttimistä varten
+                paikat2 = tapahtuma.get('location').lower().split(', ')  # listadictiin vertaamista varten
             else:
                 paikat1 = "eiole"
                 paikat2 = "eiole"
@@ -42,7 +41,7 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'floorId': kerros,
                                    'spaceId': huone})
                 else:
-                    paikat.append({'paikka': tapahtuma.get('location'),
+                    paikat.append({'paikka': paikat1[p],
                                    'lat': '',
                                    'lon': ''})
             tapahtumat.append({'paikat': paikat,
