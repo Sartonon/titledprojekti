@@ -13,6 +13,11 @@ function uusiOsoite() {
 
 }
 
+function haeppaSijainti() {
+     $("#loaderi").css("display", "block");
+    getLocation();
+}
+
 
 $.fn.scrollTo = function (target, options, callback) {
     if (typeof options == 'function' && arguments.length == 2) {
@@ -152,8 +157,8 @@ window.onload = function () {
     $("#zoommobiili").css("height", korkeus * 0.7);
 
     console.log("haetaan sijaintia");
-    $("#loaderi").css("display", "block");
-    getLocation();
+
+
     {% if tapahtumatTanaan %}
     if (naytaoletus) {
         vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}', '{{ tapahtumatTanaan[0].paikat[0].areaId }}',
@@ -172,7 +177,7 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
     }
     if (boolmobiili == true){
         var korkeus = $(window).height();
-        $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta");
+        $("#nappinaytamob").attr("value", "Rakennuksen kartta");
         $(".kartta").attr("id", "perus");
         $(".karttamobiili").attr("id", "perusmobiili");
 
@@ -224,7 +229,7 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
 }
 function naytaRakennus() {
     if (rakennusnaytetty) {
-        $("#nappinayta").attr("value", "Nayta rakennuksen kartta");
+        $("#nappinayta").attr("value", "Rakennuksen kartta");
         $(".kartta").attr("id", "perus");
         $(".karttamobiili").attr("id", "perusmobiili");
         vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
@@ -257,7 +262,7 @@ function naytaRakennus() {
 function naytaRakennusmob() {
     if (rakennusnaytetty) {
         var korkeus = $(window).height();
-        $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta");
+        $("#nappinaytamob").attr("value", "Rakennuksen kartta");
         $(".kartta").attr("id", "perus");
         $(".karttamobiili").attr("id", "perusmobiili");
         vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
@@ -329,8 +334,8 @@ function showPosition(position) {
     console.log("sijainti haettu");
     $("#loaderi").css("display", "none")
     rakennusnaytetty = true;
-    $("#nappinaytamob").attr("value", "Nayta rakennuksen kartta");
-    $("#nappinayta").attr("value", "Nayta rakennuksen kartta");
+    $("#nappinaytamob").attr("value", "Rakennuksen kartta");
+    $("#nappinayta").attr("value", "Rakennuksen kartta");
     if (tlat != undefined && tlon != undefined) {
         var lon = tlon;
         var lat = tlat;
