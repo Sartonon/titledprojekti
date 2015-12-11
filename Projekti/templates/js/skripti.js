@@ -140,11 +140,11 @@ var spaceId = 'None';
 window.onload = function () {
     var korkeus = $(window).height();
     console.log(korkeus * 0.7);
-    $("#perusmobiili").css("height", korkeus * 0.7)
+    $("#perusmobiili").css("height", korkeus * 0.7);
     $("#zoommobiili").css("height", korkeus * 0.7);
 
     console.log("haetaan sijaintia");
-    $("#loaderi").css("display", "block")
+    $("#loaderi").css("display", "block");
     getLocation();
     {% if tapahtumatTanaan %}
     if (naytaoletus) {
