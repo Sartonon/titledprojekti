@@ -92,6 +92,9 @@ $(function () {
         monthNamesShort: ['Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesa', 'Heina', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
         showButtonPanel: true,
         dateFormat: 'yy-mm-dd',
+        currentText: "Tänään",
+        prevText: "Edellinen",
+        nextText: "Seuraava",
         altField: '#sendDate',
         onSelect: function () {
             $(function () {
