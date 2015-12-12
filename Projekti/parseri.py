@@ -9,7 +9,6 @@ from icalendar import Calendar
 import lista
 import tilahierarkia
 import re
-import time
 from bottle import unicode
 
 
@@ -44,11 +43,13 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                     paikat.append({'paikka': paikat1[p],
                                    'lat': '',
                                    'lon': ''})
+
             tapahtumat.append({'paikat': paikat,
-                               'paiva': unicode(alkupaiva),
-                               'aika': unicode(utc_to_local(alku.dt).time()),
+                               'paivalajittelu' : alkupaiva,
+                               'paiva': unicode(alkupaiva.strftime('%d.%m.%Y')),
+                               'aika': unicode(utc_to_local(alku.dt).strftime('%H:%M')),
                                'kuvaus': tapahtuma.get('summary')})
-    tapahtumat.sort(key=operator.itemgetter('paiva', 'aika'))
+    tapahtumat.sort(key=operator.itemgetter('paivalajittelu', 'aika'))
 
 
 def parsiArea(rakennus):
