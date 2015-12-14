@@ -161,8 +161,8 @@
     </div>
 {% endblock %}
 {% block valikko %}
-    <div class="col-lg-4 col-sm-4" id="navigointi">
-        <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+    <div class="col-lg-4 col-sm-4 tayta" id="navigointi">
+        <div class="bs-example bs-example-tabs tayta" data-example-id="togglable-tabs">
             <ul id="myTabs" class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#tanaan" id="home-tab" role="tab"
                                                           data-toggle="tab"
@@ -265,9 +265,9 @@
                         <p align="center"><br><b>Ei tapahtumia</b></p>
                     {% endif %}
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="kaikki" aria-labelledby="profile-tab">
+                <div role="tabpanel" class="tab-pane fade tayta" id="kaikki" aria-labelledby="profile-tab">
                     {% if tapahtumat %}
-                        <div class="list-group" id="kaikkiTapahtumat">
+                        <div class="list-group tayta" id="kaikkiTapahtumat" style="overflow: auto">
                             {% for tapahtuma in tapahtumat %}
                                 <a class="list-group-item">{{ tapahtuma.paiva }},
                                     klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}

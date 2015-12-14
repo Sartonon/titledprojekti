@@ -19,7 +19,6 @@ app.config.from_object('config')
 @app.route('/calday')
 def hae_valittu_paiva():
     selected_date = request.args.get('selected_date')
-    print("Valittu paiva: " + selected_date)
     valittupaiva = []
     form = LoginForm()
     try:
@@ -29,9 +28,7 @@ def hae_valittu_paiva():
         except:
             print("virhe valitussa paivassa")
     except:
-        print("virhe valitus paivas")
-
-    print(valittupaiva)
+        print("virhe valitussa paivas")
     return json.dumps(valittupaiva)
 
 
@@ -100,7 +97,7 @@ def kartta():
     else:
         showMarker = False
 
-    if request.args.get('lat') and request.args.get('lon'):
+    if request.args.get('lat') and request.args.get('lon'):# and float(request.args.get('lat')) != 62.23252728347515:
         lat = float(request.args.get("lat"))
         lon = float(request.args.get("lon"))
     else:

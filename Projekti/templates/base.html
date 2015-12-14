@@ -38,118 +38,136 @@
             width: 100%;
         }
 
-        .kartta {
-            margin-top: 5px;
-            width: 100%;
-            height: 500px;
-        }
-
+        /*
+				.kartta {
+					margin-top: 5px;
+					width: 100%;
+					height: 500px;
+				}
+*/
         #zoom {
-            -webkit-transform: scale(0.5); /* Safari and Chrome */
+            -webkit-transform: scale(0.5);
             -webkit-transform-origin: 0 0;
             transform: scale(0.5);
             transform-origin: 0 0;
             width: 200%; /* tuplasti iframen width */
             height: 1000px; /* tuplasti iframen height */
-            overflow: hidden; /* scrollbarit pois=*/
+            overflow: auto; /* scrollbarit pois*/
         }
 
-        .karttamobiili {
-            width: 100%;
-        }
+        /*
 
-        #zoommobiili {
-            -webkit-transform: scale(0.5); /* Safari and Chrome */
-            -webkit-transform-origin: 0 0;
-            transform: scale(0.5);
-            transform-origin: 0 0;
-            width: 200%; /* tuplasti iframen width */
-            /*height: 600px; */ /* tuplasti iframen height */
+			.karttamobiili {
+				width: 100%;
+			}
 
-            /* overflow: hidden; /* remove scrollbars */
-        }
+			#zoommobiili {
+				-webkit-transform: scale(0.5);
+				-webkit-transform-origin: 0 0;
+				transform: scale(0.5);
+				transform-origin: 0 0;
+				width: 200%; /* tuplasti iframen width */
+        /*height: 600px; /* tuplasti iframen height */
 
-        #loaderi {
-            margin: auto;
-            height: 60px;
-            display: none;
-        }
+        /*overflow: hidden; /* remove scrollbars *//*
+	}
 
+	#loaderi {
+		margin: auto;
+		height: 60px;
+		display: none;
+	}
+*/
         .jumbotron {
             padding-top: 10px;
             padding-bottom: 10px;
         }
 
-        #jumbotronmobiili {
-            padding-top: 5px;
-            padding-bottom: 5px;
+        /*
+			#jumbotronmobiili {
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
+
+			#kaikki {
+				max-height: 200px;
+			}
+
+			#kaikkimob {
+				overflow: auto;
+				max-height: 200px;
+			}
+
+			#uusihaku {
+				margin-top: -20px;
+				margin-bottom: 10px;
+			}
+
+			#ohjelinkki {
+				margin-top: -18px;
+				margin-bottom: 5px;
+			}
+
+			.loaderspan {
+				font-size: 20px;
+				font-family: "Comic Sans MS", cursive, sans-serif;
+			}
+
+			.cssload-container {
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+
+			#datepickermob {
+				alignment: center;
+			}
+
+			.ui-datepicker {
+				margin: auto;
+			}
+
+			#karttadiv {
+				overflow: hidden;
+			}
+
+			#desktopdiv {
+				overflow: hidden;
+			}
+
+			#kaikkiTapahtumat {
+				height: 282px;
+				overflow: auto;
+			}
+
+			.collapsing {
+				-webkit-transition: none;
+				transition: none;
+			}
+
+			#nappinaytamob {
+				margin-bottom: 10px;
+			}
+
+			#accordion {
+				margin-bottom: 10px;
+			}
+
+			#nappinaytasijainti {
+				margin-bottom: 10px;
+			}*/
+        .tayta {
+            height: inherit;
         }
 
-        #kaikki {
-            max-height: 200px;
+        .levea {
+            width: 100%;
         }
 
-        #kaikkimob {
-            overflow: auto;
-            max-height: 200px;
-        }
-
-        #uusihaku {
-            margin-top: -20px;
-            margin-bottom: 10px;
-        }
-
-        #ohjelinkki {
-            margin-top: -18px;
-            margin-bottom: 5px;
-        }
-
-        .loaderspan {
-            font-size: 20px;
-            font-family: "Comic Sans MS", cursive, sans-serif;
-        }
-
-        .cssload-container {
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-
-        #datepickermob {
-            alignment: center;
-        }
-
-        .ui-datepicker {
-            margin: auto;
-        }
-
-        #karttadiv {
-            overflow: hidden;
-        }
-
-        #desktopdiv {
-            overflow: hidden;
-        }
-
-        #kaikkiTapahtumat {
-            height: 550px;
-            overflow: auto;
-        }
-
-        .collapsing {
-            -webkit-transition: none;
-            transition: none;
-        }
-
-        #nappinaytamob {
-            margin-bottom: 10px;
-        }
-
-        #accordion {
-            margin-bottom: 10px;
-        }
-
-        #nappinaytasijainti {
-            margin-bottom: 10px;
+        .row-fluid {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
         }
     </style>
     <title>Karttakotka</title>
@@ -184,7 +202,8 @@
                             {{ form.hidden_tag() }}
                             <p>
                                 <label for="korppiosoite">Anna korpin kalenterin URL:</label>
-                                <a type="button" id="ohjelinkki" class="btn btn-default btn-lg btn-danger pull-right" href="#ohjemobiili" data-toggle="modal">?</a>
+                                <a type="button" id="ohjelinkki" class="btn btn-default btn-lg btn-danger pull-right"
+                                   href="#ohjemobiili" data-toggle="modal">?</a>
                                 {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL", id="korppiosoite") }}
                             </p>
 
@@ -221,15 +240,16 @@
             <div class="row-fluid">
                 {% block valikkomobile %}{% endblock %}
                 {% block valikko2 %}{% endblock %}
-            <div class="btn-group btn-group-justified" role="group" aria-label="...">
-  <div class="btn-group" role="group">
-     <input id="nappinaytamob" type="button" class="btn btn-primary" data-toggle="modal"
-                       onclick="naytaRakennusmob()" value="Rakennuksen kartta">
-  </div>
-  <div class="btn-group" role="group">
-    <input id="nappinaytasijainti" type="button" class="btn btn-primary" data-toggle="modal" value="Hae sijaintini" onClick="haeppaSijainti()">
-  </div>
-</div>
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <input id="nappinaytamob" type="button" class="btn btn-primary" data-toggle="modal"
+                               onclick="naytaRakennusmob()" value="Rakennuksen kartta">
+                    </div>
+                    <div class="btn-group" role="group">
+                        <input id="nappinaytasijainti" type="button" class="btn btn-primary" data-toggle="modal"
+                               value="Hae sijaintini" onClick="haeppaSijainti()">
+                    </div>
+                </div>
                 {% include 'loader.html' %}
                 <div class="flash"></div>
                 <div id="karttadiv">
@@ -239,19 +259,21 @@
         {% endif %}
     </div>
 </div>
-<div id="desktop">
-    <div id="jumbotronmobiili" class="jumbotron">
-        <div class="container-fluid bg-primary">
-            <h1>Karttaprojekti</h1>
+<div id="desktop" class="container-fluid">
+    <div id="jumbotronContainer" class="row-fluid">
+        <div id="jumbotrondesktop" class="jumbotron tayta levea">
+            <div class="container-fluid bg-primary">
+                <h1>Karttaprojekti</h1>
+            </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="col-lg-8 col-sm-8">
+    <div id="sisaltodesktop" class="row-fluid tayta">
+        <div class="col-lg-8 col-sm-8 tayta">
+            <div id="ekarivi" class="row-fluid">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="alert alert-danger" role="alert">
+                            <div class="alert alert-danger col-md-12" role="alert">
                                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                 <span class="sr-only">Error:</span>
                                 {{ message }}
@@ -259,49 +281,57 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-                <div class="flash"></div>
-                <form action="" method="post" name="login">
-                    {{ form.hidden_tag() }}
-                    <p>
-                        Anna Korpin kalenterin URL:<br>
-                        {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL") }}
-                    </p>
+                <div class="flash col-md-12"></div>
+            </div>
+            <div id="tokarivi" class="row-fluid">
+                <div class="col-md-12">
+                    <form action="" method="post" name="login">
+                        {{ form.hidden_tag() }}
+                        <p>
+                            Anna Korpin kalenterin URL:<br>
+                            {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL") }}
+                        </p>
 
-                    <p>
-                        <input type="submit" class="btn btn-default" value="Hae">
-                        <a type="button" class="btn btn-default" href="#ohje" data-toggle="modal">?</a>
-                        <input id="nappinayta" type="button" class="btn btn-default pull-right" data-toggle="modal"
-                               onclick="naytaRakennus()" value="Näytä rakennuksen kartta">
-                    </p>
-                </form>
-                <div id="desktopdiv">
+                        <p>
+                            <input type="submit" class="btn btn-default" value="Hae">
+                            <a type="button" class="btn btn-default" href="#ohje" data-toggle="modal">?</a>
+                            <input id="nappinayta" type="button" class="btn btn-default pull-right"
+                                   data-toggle="modal"
+                                   onclick="naytaRakennus()" value="Näytä rakennuksen kartta">
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div id="kolmasrivi" class="row-fluid">
+                <div id="desktopdiv" class="col-md-12">
                     <iframe id="perus" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
                 </div>
             </div>
-            <div class="modal fade" id="ohje">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Käyttöhjeet</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>{% for rivi in kayttoohjeet %}
-                                {{ rivi }}<br>
-                            {% endfor %}</p>
-                            <a href="https://korppi.jyu.fi/kotka/servlet/calendar/export/ui/ical" target="_blank"
-                               class="btn btn-default btn-block btn-lg">Linkki Korppiin</a>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Sulje</button>
-                        </div>
+        </div>
+        {% block valikko %}{% endblock %}
+        <div class="modal fade" id="ohje">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Käyttöhjeet</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>{% for rivi in kayttoohjeet %}
+                            {{ rivi }}<br>
+                        {% endfor %}</p>
+                        <a href="https://korppi.jyu.fi/kotka/servlet/calendar/export/ui/ical" target="_blank"
+                           class="btn btn-default btn-block btn-lg">Linkki Korppiin</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Sulje</button>
                     </div>
                 </div>
             </div>
-            {% block valikko %}{% endblock %}
         </div>
     </div>
+</div>
 </div>
 <input type="hidden" value="" id="ulat">
 <input type="hidden" value="" id="ulon">

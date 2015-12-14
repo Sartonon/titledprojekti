@@ -1,21 +1,37 @@
 var boolmobiili;
 var booldesktop;
+var tlat = 62.23252728347515; // Agoran koordinaatit oletuksena, ei mikään oikea tila
+var tlon = 25.73729200674370;
+var rakennusnaytetty = false;
+var naytaoletus = true;
+var areaId = '';
+var buildingId = '';
+var floorId = '';
+var spaceId = '';
+
+var $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+
+
+window.onload = function () {
+    skaalaakaikki();
+    var korkeus = $(window).height();
+    $("#perusmobiili").css("height", korkeus * 0.7);
+    $("#zoommobiili").css("height", korkeus * 0.7);
+
+    console.log("haetaan sijaintia");
+
+    {% if tapahtumatTanaan %}
+    if (naytaoletus) {
+        vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}', '{{ tapahtumatTanaan[0].paikat[0].areaId }}',
+            '{{ tapahtumatTanaan[0].paikat[0].buildingId }}', '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
+    }
+    {% endif %}
+
+}
+
 
 window.onresize = function() {
-    $("#kaikkiTapahtumat").css("height", "500px");
-}
-
-function uusiOsoite() {
-    var input = document.getElementById("url");
-    input.value = input.getAttribute("value");
-    input.value = "";
-    location.reload()
-
-}
-
-function haeppaSijainti() {
-     $("#loaderi").css("display", "block");
-    getLocation();
+    skaalaakaikki();
 }
 
 
@@ -42,7 +58,6 @@ $.fn.scrollTo = function (target, options, callback) {
     });
 }
 
-var $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
 
 $(function () {
     $("#datepicker1").datepicker({ //TODO: napit kuukausien vaihtamiseen nakyvii
@@ -66,20 +81,31 @@ $(function () {
                     while (divi.firstChild) {
                         divi.removeChild(divi.firstChild);
                     }
-                    console.log(data.length)
+                    console.log(data.length);
                     console.log(data);
-                    for (var pussy in data) {
-                        var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[pussy].lat + "'" + ","
-                            + "'" + data[pussy].lon + "'" + "," + "'" + data[pussy].areaId + "'" + ","
-                            + "'" + data[pussy].buildingId + "'" + "," + "'" + data[pussy].floorId + "'" + ","
-                            + "'" + data[pussy].spaceId + "')";
-                        var paikkatietotext = data[pussy].paiva + ", " + data[pussy].paikka
-                            + " klo " + data[pussy].aika + ". Kuvaus: " + data[pussy].kuvaus;
-                        var elementa = document.createElement("a");
-                        elementa.textContent = paikkatietotext;
-                        elementa.setAttribute("href", paikkatietohref);
-                        elementa.setAttribute("class", "list-group-item");
-                        document.getElementById("valitutTapahtumat").appendChild(elementa);
+                    for (var tapahtuma in data) {
+                            var tapahtumatext = data[tapahtuma].paiva + ", "  + " klo " + data[tapahtuma].aika
+                                + ". Kuvaus: " + data[tapahtuma].kuvaus;
+                            var tapahtumadiv = document.createElement("div");
+                            tapahtumadiv.setAttribute('class', 'list-group');
+                        for (var paikka in data) {
+                            var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[tapahtuma].paikat[paikka].lat + "'" + ","
+                                + "'" + data[tapahtuma].paikat[paikka].lon + "'" + "," + "'" + data[tapahtuma].paikat[paikka].areaId + "'" + ","
+                                + "'" + data[tapahtuma].paikat[paikka].buildingId + "'" + "," + "'" + data[tapahtuma].paikat[paikka].floorId + "'" + ","
+                                + "'" + data[tapahtuma].paikat[paikka].spaceId + "')";
+                            var paikkatext = data[tapahtuma].paikat[paikka].paikka;
+                            var paikkaelem = document.createElement('a');
+                            paikkaelem.setAttribute('class', 'list-group-item');
+                            paikkaelem.setAttribute("href", paikkatietohref);
+                            paikkaelem.textContent = paikkatext;
+                            tapahtumadiv.appendChild(paikkaelem);
+                        }
+                            var elementa = document.createElement("a");
+                            elementa.textContent = tapahtumatext;
+                            elementa.setAttribute("class", "list-group-item");
+                            document.getElementById("valitutTapahtumat").appendChild(elementa);
+                            document.getElementById('valitutTapahtumat').appendChild(tapahtumadiv);
+
                     }
                 });
                 return false;
@@ -87,6 +113,7 @@ $(function () {
         },
     });
 });
+
 
 $(function () {
     $("#datepickermob").datepicker({ //TODO: napit kuukausien vaihtamiseen nakyvii
@@ -118,20 +145,29 @@ $(function () {
                         divi.appendChild(spanni);
                     }
                     console.log(data);
-                    for (var pussy in data) {
-                        var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[pussy].lat + "'" + ","
-                            + "'" + data[pussy].lon + "'" + "," + "'" + data[pussy].areaId + "'" + ","
-                            + "'" + data[pussy].buildingId + "'" + "," + "'" + data[pussy].floorId + "'" + ","
-                            + "'" + data[pussy].spaceId + "')";
-                        var paikkatietotext = data[pussy].paiva + ", " + data[pussy].paikka
-                            + " klo " + data[pussy].aika + ". Kuvaus: " + data[pussy].kuvaus;
-                        var elementa = document.createElement("a");
-                        elementa.textContent = paikkatietotext;
-                        elementa.setAttribute("href", paikkatietohref);
-                        elementa.setAttribute("class", "list-group-item");
-                        document.getElementById("valitutTapahtumatmob").appendChild(elementa);
-                        //document.getElementById("valittua").href = paikkatietohref;
-                        //document.getElementById("valittua").textContent = paikkatietotext;
+                    for (var tapahtuma in data) {
+                            var tapahtumatext = data[tapahtuma].paiva + ", "  + " klo " + data[tapahtuma].aika
+                                + ". Kuvaus: " + data[tapahtuma].kuvaus;
+                            var tapahtumadiv = document.createElement("div");
+                            tapahtumadiv.setAttribute('class', 'list-group');
+                        for (var paikka in data) {
+                            var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[tapahtuma].paikat[paikka].lat + "'" + ","
+                                + "'" + data[tapahtuma].paikat[paikka].lon + "'" + "," + "'" + data[tapahtuma].paikat[paikka].areaId + "'" + ","
+                                + "'" + data[tapahtuma].paikat[paikka].buildingId + "'" + "," + "'" + data[tapahtuma].paikat[paikka].floorId + "'" + ","
+                                + "'" + data[tapahtuma].paikat[paikka].spaceId + "')";
+                            var paikkatext = data[tapahtuma].paikat[paikka].paikka;
+                            var paikkaelem = document.createElement('a');
+                            paikkaelem.setAttribute('class', 'list-group-item');
+                            paikkaelem.setAttribute("href", paikkatietohref);
+                            paikkaelem.textContent = paikkatext;
+                            tapahtumadiv.appendChild(paikkaelem);
+                        }
+                            var elementa = document.createElement("a");
+                            elementa.textContent = tapahtumatext;
+                            elementa.setAttribute("class", "list-group-item");
+                            document.getElementById("valitutTapahtumat").appendChild(elementa);
+                            document.getElementById('valitutTapahtumat').appendChild(tapahtumadiv);
+
                     }
 
                 });
@@ -142,37 +178,89 @@ $(function () {
 });
 
 
-var tlat = 62.23252728347514; // Agoran koordinaatit oletuksena
-var tlon = 25.73729200674369;
-var rakennusnaytetty = false;
-var naytaoletus = true;
-var areaId = 'None';
-var buildingId = 'None';
-var floorId = 'None';
-var spaceId = 'None';
-
-window.onload = function () {
-    var korkeus = $(window).height();
-    $("#perusmobiili").css("height", korkeus * 0.7);
-    $("#zoommobiili").css("height", korkeus * 0.7);
-
-    console.log("haetaan sijaintia");
+function getLocation() {
+    try {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, failed, {enableHighAccuracy: true});
+        } else {
+            // TODO: Kerrro kayttajalle
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
 
 
+    function failed () {
+
+    }
+
+
+function showPosition(position) {
+    console.log("sijainti haettu");
+    $("#loaderi").css("display", "none")
+    rakennusnaytetty = true;
+    $("#nappinaytamob").attr("value", "Rakennuksen kartta");
+    $("#nappinayta").attr("value", "Rakennuksen kartta");
+    if (tlat != undefined && tlon != undefined) {
+        var lon = tlon;
+        var lat = tlat;
+        document.getElementById("ulat").value = position.coords.latitude;
+        document.getElementById("ulon").value = position.coords.longitude;
+        $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+        $(".karttamobiili").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+    }
+    else {
+        $(".kartta").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+        $(".karttamobiili").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
+    }
     {% if tapahtumatTanaan %}
     if (naytaoletus) {
         vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}', '{{ tapahtumatTanaan[0].paikat[0].areaId }}',
             '{{ tapahtumatTanaan[0].paikat[0].buildingId }}', '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
     }
     {% endif %}
+}
+
+
+function skaalaakaikki(){
+    sisalto = $('#sisaltodesktop');
+    ekarivi = $('#ekarivi');
+    tokarivi = $('#tokarivi');
+    kolmasrivi = $('#kolmasrivi');
+    sisalto.css('height', $(window).height() - $('#jumbotronContainer').height());
+    kolmasrivi.css('height', sisalto.height() - ekarivi.height() - tokarivi.height() - 10);
+
+    tabkaikki = $('#kaikkiTapahtumat')
+    tabpalkki = $('#myTabContent');;
+    tabiotsikko = $('#myTabs');
+    navigointi = $('#navigointi');
+    tabpalkki.css('height', navigointi.height() - tabiotsikko.height() - 25);
+
+    kartta = $('.kartta');
+    zoom = $('#zoom');
+    zoom.css('height', kartta.height() * 2 );
+}
+
+
+function uusiOsoite() {
+    var input = document.getElementById("url");
+    input.value = input.getAttribute("value");
+    input.value = "";
+    location.reload()
 
 }
 
 
+function haeppaSijainti() {
+     $("#loaderi").css("display", "block");
+    getLocation();
+}
+
 
 function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
-    if (window.innerWidth < 981) {
-        console.log('liiku!')
+    /*if (window.innerWidth < 981) {
         $('body').scrollTo('.karttamobiili');
     }
     if (boolmobiili == true){
@@ -191,7 +279,7 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
        $(".kartta").css("height", korkeus * 0.7);
        $(".karttamobiili").css("height", korkeus * 0.7);
 
-    }
+    }*/
     setTimeout(function () {
         console.log("Tilan tiedot ladattu");
         rakennusnaytetty = false;
@@ -205,6 +293,7 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
         if (klikattu) naytaoletus = false;
         $(".kartta").attr("id", "perus");
         $(".karttamobiili").attr("id", "perusmobiili");
+        skaalaakaikki();
         if (document.getElementById("ulat").value != "" && document.getElementById("ulon").value != "") {
             $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&marker=1" + "&ulat="
                 + document.getElementById("ulat").value + "&ulon=" + document.getElementById("ulon").value);
@@ -217,24 +306,25 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
         }
         if (tlat == '') {
             $('.flash').html('<div class="alert alert-warning">Tapahtumasi tilaa ei löydy</div>');
-           // $(".kartta").css("height", 450);
         }
         else {
             $('.flash').html('');
-            // $(".kartta").css("height", 500);
         }
     }, 500);
 
 
 }
+
+
 function naytaRakennus() {
     if (rakennusnaytetty) {
         $("#nappinayta").attr("value", "Rakennuksen kartta");
+        //TODO:???>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         $(".kartta").attr("id", "perus");
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         $(".karttamobiili").attr("id", "perusmobiili");
         vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
         $("#desktopdiv").css("height", "");
-        /*$("#perusmobiili").css("height", korkeus/2); */
     }
     else {
         $("#nappinayta").attr("value", "Nayta rakennus kartalla");
@@ -243,14 +333,19 @@ function naytaRakennus() {
             buildingId != '' &&
             floorId != '' &&
             spaceId != '') {
+            //TODO:????>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             $(".kartta").attr("id", "zoom");
             $(".karttamobiili").attr("id", "zoommobiili");
+            skaalaakaikki;
+            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             $(".kartta").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId +
                 "&buildingId=" + buildingId + "&floorId=" + floorId + "&spaceId=" + spaceId));
             $(".karttamobiili").attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId +
                 "&buildingId=" + buildingId + "&floorId=" + floorId + "&spaceId=" + spaceId));
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
              var divkorkeus = $("#desktopdiv").height();
-            $("#desktopdiv").css("height", divkorkeus/2)
+            //$("#desktopdiv").css("height", divkorkeus/2)
+            //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         }
         else {
             $(".kartta").attr("src", "/virhe");
@@ -259,16 +354,21 @@ function naytaRakennus() {
     }
 }
 
+
 function naytaRakennusmob() {
     if (rakennusnaytetty) {
         var korkeus = $(window).height();
         $("#nappinaytamob").attr("value", "Rakennuksen kartta");
+        //TODO:???>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         $(".kartta").attr("id", "perus");
         $(".karttamobiili").attr("id", "perusmobiili");
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         var korkeus = $(".karttamobiili").height();
         $("#karttadiv").css("height", "");
         $("#perusmobiili").css("height", korkeus/2);
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         boolmobiili = false;
 
 
@@ -311,47 +411,4 @@ function naytaRakennusmob() {
             $(".karttamobiili").attr("src", "/virhe");
         }
     }
-}
-
-function getLocation() {
-    try {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, failed, {enableHighAccuracy: true});
-        } else {
-            // TODO: Kerrro kayttajalle
-        }
-    }
-    catch (err) {
-        console.log(err.message)
-    }
-}
-
-    function failed () {
-
-    }
-
-function showPosition(position) {
-    console.log("sijainti haettu");
-    $("#loaderi").css("display", "none")
-    rakennusnaytetty = true;
-    $("#nappinaytamob").attr("value", "Rakennuksen kartta");
-    $("#nappinayta").attr("value", "Rakennuksen kartta");
-    if (tlat != undefined && tlon != undefined) {
-        var lon = tlon;
-        var lat = tlat;
-        document.getElementById("ulat").value = position.coords.latitude;
-        document.getElementById("ulon").value = position.coords.longitude;
-        $(".kartta").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
-        $(".karttamobiili").attr("src", "/kartta?lat=" + lat + "&lon=" + lon + "&ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
-    }
-    else {
-        $(".kartta").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
-        $(".karttamobiili").attr("src", "/kartta?" + "ulat=" + position.coords.latitude + "&ulon=" + position.coords.longitude);
-    }
-    {% if tapahtumatTanaan %}
-    if (naytaoletus) {
-        vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}', '{{ tapahtumatTanaan[0].paikat[0].areaId }}',
-            '{{ tapahtumatTanaan[0].paikat[0].buildingId }}', '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
-    }
-    {% endif %}
 }

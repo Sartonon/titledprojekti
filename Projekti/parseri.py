@@ -45,7 +45,7 @@ def lisaaTapahtumatListaan(tapahtumat, cal, listaDict, paiva=date.today(), kaikk
                                    'lon': ''})
 
             tapahtumat.append({'paikat': paikat,
-                               'paivalajittelu' : alkupaiva,
+                               'paivalajittelu' : unicode(alkupaiva),
                                'paiva': unicode(alkupaiva.strftime('%d.%m.%Y')),
                                'aika': unicode(utc_to_local(alku.dt).strftime('%H:%M')),
                                'kuvaus': tapahtuma.get('summary')})
@@ -146,7 +146,6 @@ def tiedotArrayValittu(paiva, data):
     yy = paiva.split('-')[0]
     mm = paiva.split('-')[1]
     dd = paiva.split('-')[2]
-    print('vuosi: ' + yy + 'kuukausi: ' + mm + 'paiva: ' + dd)
     d1 = datetime.date(int(yy), int(mm), int(dd))
     listaDict = lista.listaDict()
     valitutTapahtumat = []
