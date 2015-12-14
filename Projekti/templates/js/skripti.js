@@ -88,7 +88,7 @@ $(function () {
                                 + ". Kuvaus: " + data[tapahtuma].kuvaus;
                             var tapahtumadiv = document.createElement("div");
                             tapahtumadiv.setAttribute('class', 'list-group');
-                        for (var paikka in data) {
+                        for (var paikka in tapahtuma) {
                             var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[tapahtuma].paikat[paikka].lat + "'" + ","
                                 + "'" + data[tapahtuma].paikat[paikka].lon + "'" + "," + "'" + data[tapahtuma].paikat[paikka].areaId + "'" + ","
                                 + "'" + data[tapahtuma].paikat[paikka].buildingId + "'" + "," + "'" + data[tapahtuma].paikat[paikka].floorId + "'" + ","
@@ -150,7 +150,7 @@ $(function () {
                                 + ". Kuvaus: " + data[tapahtuma].kuvaus;
                             var tapahtumadiv = document.createElement("div");
                             tapahtumadiv.setAttribute('class', 'list-group');
-                        for (var paikka in data) {
+                        for (var paikka in tapahtuma) {
                             var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[tapahtuma].paikat[paikka].lat + "'" + ","
                                 + "'" + data[tapahtuma].paikat[paikka].lon + "'" + "," + "'" + data[tapahtuma].paikat[paikka].areaId + "'" + ","
                                 + "'" + data[tapahtuma].paikat[paikka].buildingId + "'" + "," + "'" + data[tapahtuma].paikat[paikka].floorId + "'" + ","
@@ -165,11 +165,10 @@ $(function () {
                             var elementa = document.createElement("a");
                             elementa.textContent = tapahtumatext;
                             elementa.setAttribute("class", "list-group-item");
-                            document.getElementById("valitutTapahtumat").appendChild(elementa);
-                            document.getElementById('valitutTapahtumat').appendChild(tapahtumadiv);
+                            document.getElementById("valitutTapahtumatmob").appendChild(elementa);
+                            document.getElementById('valitutTapahtumatmob').appendChild(tapahtumadiv);
 
                     }
-
                 });
                 return false;
             });
