@@ -38,13 +38,6 @@
             width: 100%;
         }
 
-        /*
-				.kartta {
-					margin-top: 5px;
-					width: 100%;
-					height: 500px;
-				}
-*/
         #zoom {
             -webkit-transform: scale(0.5);
             -webkit-transform-origin: 0 0;
@@ -55,108 +48,68 @@
             overflow: auto; /* scrollbarit pois*/
         }
 
-        /*
+        #zoommobiili {
+            -webkit-transform: scale(0.5);
+            -webkit-transform-origin: 0 0;
+            transform: scale(0.5);
+            transform-origin: 0 0;
+            width: 200%; /* tuplasti iframen width */
+            height: 600px; /* tuplasti iframen height */
+            overflow: auto; /* remove scrollbars */
+        }
 
-			.karttamobiili {
-				width: 100%;
-			}
+        #loaderi {
+            margin: auto;
+            height: 60px;
+            display: none;
+        }
 
-			#zoommobiili {
-				-webkit-transform: scale(0.5);
-				-webkit-transform-origin: 0 0;
-				transform: scale(0.5);
-				transform-origin: 0 0;
-				width: 200%; /* tuplasti iframen width */
-        /*height: 600px; /* tuplasti iframen height */
-
-        /*overflow: hidden; /* remove scrollbars *//*
-	}
-
-	#loaderi {
-		margin: auto;
-		height: 60px;
-		display: none;
-	}
-*/
         .jumbotron {
             padding-top: 10px;
             padding-bottom: 10px;
+            background-color: #337AB7;
         }
 
-        /*
-			#jumbotronmobiili {
-				padding-top: 5px;
-				padding-bottom: 5px;
-			}
+        #jumbotronmobiili {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
 
-			#kaikki {
-				max-height: 200px;
-			}
+        #uusihaku {
+            margin-top: -20px;
+            margin-bottom: 10px;
+        }
 
-			#kaikkimob {
-				overflow: auto;
-				max-height: 200px;
-			}
+        #ohjelinkki {
+            margin-top: -18px;
+            margin-bottom: 5px;
+        }
 
-			#uusihaku {
-				margin-top: -20px;
-				margin-bottom: 10px;
-			}
+        .ui-datepicker {
+            margin: auto;
+        }
 
-			#ohjelinkki {
-				margin-top: -18px;
-				margin-bottom: 5px;
-			}
+        .collapsing {
+            -webkit-transition: none;
+            transition: none;
+        }
 
-			.loaderspan {
-				font-size: 20px;
-				font-family: "Comic Sans MS", cursive, sans-serif;
-			}
+        .iframediv {
+            overflow: hidden;
+        }
 
-			.cssload-container {
-				margin-left: 10px;
-				margin-right: 10px;
-			}
+        .btn {
+            margin-bottom: 10px;
+        }
 
-			#datepickermob {
-				alignment: center;
-			}
+        h4,
+        a {
+            text-align: center;
+        }
 
-			.ui-datepicker {
-				margin: auto;
-			}
-
-			#karttadiv {
-				overflow: hidden;
-			}
-
-			#desktopdiv {
-				overflow: hidden;
-			}
-
-			#kaikkiTapahtumat {
-				height: 282px;
-				overflow: auto;
-			}
-
-			.collapsing {
-				-webkit-transition: none;
-				transition: none;
-			}
-
-			#nappinaytamob {
-				margin-bottom: 10px;
-			}
-
-			#accordion {
-				margin-bottom: 10px;
-			}
-
-			#nappinaytasijainti {
-				margin-bottom: 10px;
-			}*/
         .tayta {
             height: inherit;
+            overflow: auto;
         }
 
         .levea {
@@ -185,7 +138,7 @@
                 korppiosoitteella</a>
         {% else %}
             <div class="row-fluid">
-                <div>
+                <div class="levea">
                     {% with messages = get_flashed_messages() %}
                         {% if messages %}
                             {% for message in messages %}
@@ -215,6 +168,35 @@
                 </div>
             </div>
         {% endif %}
+        {% if tapahtumat %}
+            <div class="row-fluid">
+                {% block valikkomobile %}{% endblock %}
+                {% block valikko2 %}{% endblock %}
+            </div>
+            <div class="row-fluid">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <input id="nappinaytamob" type="button" class="btn btn-primary btn-block btn-lg"
+                               data-toggle="modal"
+                               onclick="naytaRakennus()" value="Rakennuksen kartta">
+                    </div>
+                    <div class="btn-group" role="group">
+                        <input id="nappinaytasijainti" type="button" class="btn btn-primary btn-block btn-lg"
+                               data-toggle="modal"
+                               value="Hae sijaintini" onClick="haeppaSijainti()">
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                {% include 'loader.html' %}
+            </div>
+            <div class="flash row-fluid"></div>
+            <div class="row-fluid">
+                <div id="karttadiv" class="iframediv levea">
+                    <iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                </div>
+            </div>
+        {% endif %}
         <div class="modal fade" id="ohjemobiili">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -236,102 +218,82 @@
                 </div>
             </div>
         </div>
-        {% if tapahtumat %}
-            <div class="row-fluid">
-                {% block valikkomobile %}{% endblock %}
-                {% block valikko2 %}{% endblock %}
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                    <div class="btn-group" role="group">
-                        <input id="nappinaytamob" type="button" class="btn btn-primary" data-toggle="modal"
-                               onclick="naytaRakennusmob()" value="Rakennuksen kartta">
-                    </div>
-                    <div class="btn-group" role="group">
-                        <input id="nappinaytasijainti" type="button" class="btn btn-primary" data-toggle="modal"
-                               value="Hae sijaintini" onClick="haeppaSijainti()">
-                    </div>
-                </div>
-                {% include 'loader.html' %}
-                <div class="flash"></div>
-                <div id="karttadiv">
-                    <iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
-                </div>
-            </div>
-        {% endif %}
     </div>
 </div>
-<div id="desktop" class="container-fluid">
-    <div id="jumbotronContainer" class="row-fluid">
+<div id="desktop">
+    <div id="jumbotron" class="row-fluid tayta levea">
         <div id="jumbotrondesktop" class="jumbotron tayta levea">
-            <div class="container-fluid bg-primary">
+            <div class="container-fluid bg-primary tayta levea">
                 <h1>Karttaprojekti</h1>
             </div>
         </div>
     </div>
-    <div id="sisaltodesktop" class="row-fluid tayta">
-        <div class="col-lg-8 col-sm-8 tayta">
-            <div id="ekarivi" class="row-fluid">
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-danger col-md-12" role="alert">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Error:</span>
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-                <div class="flash col-md-12"></div>
-            </div>
-            <div id="tokarivi" class="row-fluid">
-                <div class="col-md-12">
-                    <form action="" method="post" name="login">
-                        {{ form.hidden_tag() }}
-                        <p>
-                            Anna Korpin kalenterin URL:<br>
-                            {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL") }}
-                        </p>
+    <div class="container-fluid">
+        <div id="sisaltodesktop" class="row-fluid tayta">
+            <div class="col-lg-8 col-sm-8 tayta">
+                <div id="ekarivi" class="row-fluid">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger col-md-12" role="alert">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error:</span>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <div class="flash col-md-12"></div>
+                </div>
+                <div id="tokarivi" class="row-fluid">
+                    <div class="col-md-12">
+                        <form action="" method="post" name="login">
+                            {{ form.hidden_tag() }}
+                            <p>
+                                Anna Korpin kalenterin URL:<br>
+                                {{ form.url(size=80, class="form-control", placeholder="Kalenterin URL") }}
+                            </p>
 
-                        <p>
-                            <input type="submit" class="btn btn-default" value="Hae">
-                            <a type="button" class="btn btn-default" href="#ohje" data-toggle="modal">?</a>
-                            <input id="nappinayta" type="button" class="btn btn-default pull-right"
-                                   data-toggle="modal"
-                                   onclick="naytaRakennus()" value="Näytä rakennuksen kartta">
-                        </p>
-                    </form>
+                            <p>
+                                <input type="submit" class="btn btn-default" value="Hae">
+                                <a type="button" class="btn btn-default" href="#ohje" data-toggle="modal">?</a>
+                                <input id="nappinayta" type="button" class="btn btn-default pull-right"
+                                       data-toggle="modal"
+                                       onclick="naytaRakennus()" value="Näytä rakennuksen kartta">
+                            </p>
+                        </form>
+                    </div>
+                </div>
+                <div id="kolmasrivi" class="row-fluid">
+                    <div id="desktopdiv" class="col-md-12 iframediv">
+                        <iframe id="perus" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                    </div>
                 </div>
             </div>
-            <div id="kolmasrivi" class="row-fluid">
-                <div id="desktopdiv" class="col-md-12">
-                    <iframe id="perus" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
-                </div>
-            </div>
-        </div>
-        {% block valikko %}{% endblock %}
-        <div class="modal fade" id="ohje">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Käyttöhjeet</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>{% for rivi in kayttoohjeet %}
-                            {{ rivi }}<br>
-                        {% endfor %}</p>
-                        <a href="https://korppi.jyu.fi/kotka/servlet/calendar/export/ui/ical" target="_blank"
-                           class="btn btn-default btn-block btn-lg">Linkki Korppiin</a>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Sulje</button>
+            {% block valikko %}{% endblock %}
+            <div class="modal fade" id="ohje">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Käyttöhjeet</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>{% for rivi in kayttoohjeet %}
+                                {{ rivi }}<br>
+                            {% endfor %}</p>
+                            <a href="https://korppi.jyu.fi/kotka/servlet/calendar/export/ui/ical" target="_blank"
+                               class="btn btn-default btn-block btn-lg">Linkki Korppiin</a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Sulje</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <input type="hidden" value="" id="ulat">
 <input type="hidden" value="" id="ulon">

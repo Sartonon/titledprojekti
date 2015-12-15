@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block valikko2 %}
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
+    <div class="panel-group levea" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default levea">
             <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                    <a class="btn-block btn-lg" role="button" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseOne"
                        aria-expanded="true" aria-controls="collapseOne">
                         Tänään
                     </a>
@@ -35,10 +36,10 @@
                 {% endif %}
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default levea">
             <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                    <a class="btn-block btn-lg collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         Huomenna
                     </a>
@@ -70,10 +71,10 @@
                 {% endif %}
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default levea">
             <div class="panel-heading" role="tab" id="headingThree">
                 <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                    <a class="btn-block btn-lg collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Ylihuomenna
                     </a>
@@ -107,10 +108,10 @@
                 {% endif %}
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default levea">
             <div class="panel-heading" role="tab" id="headingFour">
                 <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                    <a class="btn-block btn-lg collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         Kaikki
                     </a>
@@ -142,10 +143,10 @@
                 {% endif %}
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default levea">
             <div class="panel-heading" role="tab" id="headingFive">
                 <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                    <a class="btn-block btn-lg collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                         Kalenteri
                     </a>
@@ -187,7 +188,7 @@
                 </li>
             </ul>
             <div id="myTabContent" class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active in" id="tanaan" aria-labelledby="home-tab">
+                <div role="tabpanel" class="tab-pane fade active in tayta" id="tanaan" aria-labelledby="home-tab">
                     {% if tapahtumatTanaan %}
                         <div class="list-group" id="tanaanTapahtumat">
                             {% for tapahtumaTanaan in tapahtumatTanaan %}
@@ -211,7 +212,7 @@
                         <p align="center"><br><b>Ei tapahtumia</b></p>
                     {% endif %}
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="huomenna" aria-labelledby="profile-tab">
+                <div role="tabpanel" class="tab-pane fade tayta" id="huomenna" aria-labelledby="profile-tab">
                     {% if tapahtumatHuomenna %}
                         <div class="list-group" id="huomennaTapahtumat">
                             {% for tapahtumaHuomenna in tapahtumatHuomenna %}
@@ -237,7 +238,7 @@
                         <p align="center"><br><b>Ei tapahtumia</b></p>
                     {% endif %}
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="ylihuomenna" aria-labelledby="profile-tab">
+                <div role="tabpanel" class="tab-pane fade tayta" id="ylihuomenna" aria-labelledby="profile-tab">
                     {% if tapahtumatYlihuomenna %}
                         <div class="list-group" id="ylihuomennaTapahtumat">
                             {% for tapahtumaYlihuomenna in tapahtumatYlihuomenna %}
@@ -267,7 +268,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane fade tayta" id="kaikki" aria-labelledby="profile-tab">
                     {% if tapahtumat %}
-                        <div class="list-group tayta" id="kaikkiTapahtumat" style="overflow: auto">
+                        <div class="list-group" id="kaikkiTapahtumat">
                             {% for tapahtuma in tapahtumat %}
                                 <a class="list-group-item">{{ tapahtuma.paiva }},
                                     klo {{ tapahtuma.aika }}. Kuvaus: {{ tapahtuma.kuvaus }}
