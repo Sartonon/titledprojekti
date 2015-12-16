@@ -254,6 +254,7 @@ function skaalaakaikki(){
 
     iframedivmobiili.css('height', korkeus * 0.7);
     $("#perusmobiili").css("height", korkeus * 0.7);
+    $("#perus").css("height", korkeus * 0.7);
 }
 
 
