@@ -1,5 +1,3 @@
-var boolmobiili;
-var booldesktop;
 var tlat = 62.23252728347515; // Agoran koordinaatit oletuksena, ei mikään oikea tila
 var tlon = 25.73729200674370;
 var rakennusnaytetty = false;
@@ -320,16 +318,19 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
 function naytaRakennus() {
     var kartta = $(".kartta");
     var karttamobiili =$(".karttamobiili");
+    var nappidesk = $("#nappinayta");
+    var nappimob = $("#nappinaytamob");
+
     if (rakennusnaytetty) {
-        $("#nappinayta").attr("value", "Rakennuksen kartta");
-        $("#nappinaytamob").attr("value", "Rakennuksen kartta");
+        nappidesk.attr("value", "Rakennuksen kartta");
+        nappimob.attr("value", "Rakennuksen kartta");
         kartta.attr("id", "perus");
         karttamobiili.attr("id", "perusmobiili");
         vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
     }
     else {
-        $("#nappinayta").attr("value", "Nayta rakennus kartalla");
-        $("#nappinaytamob").attr("value", "Nayta rakennus kartalla");
+        nappidesk.attr("value", "Nayta rakennus kartalla");
+        nappimob.attr("value", "Nayta rakennus kartalla");
         rakennusnaytetty = true;
         if (areaId != '' &&
             buildingId != '' &&
