@@ -38,7 +38,7 @@
             width: 100%;
         }
 
-        #zoom {
+        .zoom {
             -webkit-transform: scale(0.5);
             -webkit-transform-origin: 0 0;
             transform: scale(0.5);
@@ -52,7 +52,7 @@
             overflow: auto; /* scrollbarit pois*/
         }
 
-        #zoommobiili {
+        .zoommobiili {
             -webkit-transform: scale(0.5);
             -webkit-transform-origin: 0 0;
             transform: scale(0.5);
@@ -197,7 +197,8 @@
             <div class="flash row-fluid"></div>
             <div class="row-fluid">
                 <div id="karttadiv" class="iframediv levea">
-                    <iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                    <iframe id="karttamobiili" class="perusmobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                    <!--<iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>-->
                 </div>
             </div>
         {% endif %}
@@ -270,7 +271,8 @@
                 </div>
                 <div id="kolmasrivi" class="row-fluid">
                     <div id="desktopdiv" class="col-md-12 iframediv">
-                        <iframe id="perus" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                        <iframe id="kartta" class="perus" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                        <!--<iframe id="perus" class="kartta" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>-->
                     </div>
                 </div>
             </div>

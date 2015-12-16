@@ -200,8 +200,8 @@ function showPosition(position) {
     $("#nappinaytamob").attr("value", "Rakennuksen kartta");
     $("#nappinayta").attr("value", "Rakennuksen kartta");
 
-    var kartta = $(".kartta");
-    var karttamobiili = $(".karttamobiili");
+    var kartta = $("#kartta");
+    var karttamobiili = $("#karttamobiili");
     var pos_latitude = position.coords.latitude;
     var pos_longitude = position.coords.longitude;
     if (tlat != undefined && tlon != undefined) {
@@ -243,16 +243,16 @@ function skaalaakaikki(){
     tabpalkki.css('height', navigointi.height() - tabiotsikko.height() - 25);
 
     var iframedivdesktop = $('#desktopdiv');
-    var zoom = $('#zoom');
+    var zoom = $('.zoom');
     zoom.css('height', iframedivdesktop.height() * 2 );
 
     var iframedivmobiili = $('#karttadiv');
-    var zoommobiili = $('#zoommobiili');
+    var zoommobiili = $('.zoommobiili');
     zoommobiili.css('height', iframedivmobiili.height() * 2 );
 
     iframedivmobiili.css('height', korkeus * 0.7);
-    $("#perusmobiili").css("height", korkeus * 0.7);
-    $("#perus").css("height", korkeus * 0.7);
+    $(".perusmobiili").css("height", korkeus * 0.7);
+    $(".perus").css("height", korkeus * 0.7);
 }
 
 
@@ -274,8 +274,8 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
     if (window.innerWidth < 981) {
         $('body').scrollTo('.karttamobiili');
     }
-    var kartta = $(".kartta");
-    var karttamobiili = $(".karttamobiili");
+    var kartta = $("#kartta");
+    var karttamobiili = $("#karttamobiili");
 
     setTimeout(function () {
         console.log("Tilan tiedot ladattu");
@@ -290,8 +290,8 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
         floorId = floor;
         spaceId = space;
         if (klikattu) naytaoletus = false;
-        kartta.attr("id", "perus");
-        karttamobiili.attr("id", "perusmobiili");
+        kartta.attr("class", "perus");
+        karttamobiili.attr("class", "perusmobiili");
         skaalaakaikki();
         if (document.getElementById("ulat").value != "" && document.getElementById("ulon").value != "") {
 
@@ -316,8 +316,8 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
 
 
 function naytaRakennus() {
-    var kartta = $(".kartta");
-    var karttamobiili =$(".karttamobiili");
+    var kartta = $("#kartta");
+    var karttamobiili =$("#karttamobiili");
     var nappidesk = $("#nappinayta");
     var nappimob = $("#nappinaytamob");
 
@@ -336,8 +336,8 @@ function naytaRakennus() {
             buildingId != '' &&
             floorId != '' &&
             spaceId != '') {
-            kartta.attr("id", "zoom");
-            karttamobiili.attr("id", "zoommobiili");
+            kartta.attr("class", "zoom");
+            karttamobiili.attr("class", "zoommobiili");
             skaalaakaikki();
             kartta.attr("src", encodeURI("http://navi.jyu.fi/?viewport=big#map?areaId=" + areaId +
                 "&buildingId=" + buildingId + "&floorId=" + floorId + "&spaceId=" + spaceId));
