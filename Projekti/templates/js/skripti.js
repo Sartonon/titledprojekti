@@ -15,12 +15,14 @@ window.onload = function () {
 
     console.log("haetaan sijaintia");
 
-    {% if tapahtumatTanaan[0].paikat[0] %}
-    if (naytaoletus) {
-        vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
-            '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
-            '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
-    }
+    {% if tapahtumatTanaan[0] %}
+        {% tapahtumatTanaan[0].paikat[0] %}
+            if (naytaoletus) {
+                vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
+                    '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
+                    '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
+            }
+        {% endif %}
     {% endif %}
 
 }
@@ -216,12 +218,14 @@ function showPosition(position) {
         kartta.attr("src", "/kartta?" + "ulat=" + pos_latitude + "&ulon=" + pos_longitude);
         karttamobiili.attr("src", "/kartta?" + "ulat=" + pos_latitude + "&ulon=" + pos_longitude);
     }
-    {% if tapahtumatTanaan[0].paikat[0] %}
-    if (naytaoletus) {
-        vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
-            '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
-            '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
-    }
+    {% if tapahtumatTanaan[0] %}
+        {% tapahtumatTanaan[0].paikat[0] %}
+            if (naytaoletus) {
+                vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
+                    '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
+                    '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
+            }
+        {% endif %}
     {% endif %}
 }
 
