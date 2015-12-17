@@ -311,9 +311,11 @@ function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
         }
         if (tlat == '') {
             $('.flash').html('<div class="alert alert-warning">Tapahtumasi tilaa ei löydy</div>');
+            skaalaakaikki();
         }
         else {
             $('.flash').html('');
+            skaalaakaikki();
         }
     }, 500);
 }
@@ -326,11 +328,8 @@ function naytaRakennus() {
     var nappimob = $("#nappinaytamob");
 
     if (rakennusnaytetty) {
-        //nappidesk.attr("value", "Rakennuksen kartta");
-        //nappimob.attr("value", "Rakennuksen kartta");
         kartta.attr("class", "perus");
         karttamobiili.attr("class", "perusmobiili");
-        console.log('NYT VAIHTUU');
 
         vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
     }
