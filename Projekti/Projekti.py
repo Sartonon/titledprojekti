@@ -35,10 +35,6 @@ def hae_valittu_paiva():
 @app.route('/uusi', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def perus():
-    # listaD = lista.listaDict()
-    # for key in sorted(listaD):
-    #     print('"' + "%s\": %s" % (key, listaD[key]) + ",")
-
     lat = 62.23252728347514
     lon = 25.73729200674369
     form = LoginForm()
@@ -97,7 +93,7 @@ def kartta():
     else:
         showMarker = False
 
-    if request.args.get('lat') and request.args.get('lon'):# and float(request.args.get('lat')) != 62.23252728347515:
+    if request.args.get('lat') and request.args.get('lon'):
         lat = float(request.args.get("lat"))
         lon = float(request.args.get("lon"))
     else:
@@ -117,9 +113,6 @@ def kartta():
         ulon = float(request.args.get("ulon"))
         map_osm.polygon_marker(location=[ulat, ulon], popup='Sinun sijaintisi(Suuntaa antava)',
                                fill_color='red', num_sides=0, radius=10, rotation=60)
-        # map_osm.polygon_marker(location=[62.22979, 25.74098], popup='Nanolaitos (testimerkki)',
-        #     fill_color='#132b5e', num_sides=7, radius=5, rotation=60)
-
     map_osm.create_map(path='templates/osm.html')
 
     return render_template('osm.html')
