@@ -120,7 +120,7 @@ $(function () {
         monthNamesShort: ['Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesa', 'Heina', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
         showButtonPanel: true,
         dateFormat: 'yy-mm-dd',
-        currentText: "Tänään", //toimiiko push nyt
+        currentText: "Tänään",
         prevText: "Edellinen",
         nextText: "Seuraava",
         altField: '#sendDate',
@@ -136,7 +136,7 @@ $(function () {
                     console.log(data.length);
                     if (data.length == 0) {
                         var spanni = document.createElement("SPAN");
-                        var text = document.createTextNode("Ei tapahtumia valitulla paivalla");
+                        var text = document.createTextNode("Ei tapahtumia valitulla päivalla");
                         spanni.appendChild(text);
                         divi.appendChild(spanni);
                     }
