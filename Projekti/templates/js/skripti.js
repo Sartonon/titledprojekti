@@ -15,7 +15,7 @@ window.onload = function () {
 
     console.log("haetaan sijaintia");
 
-    {% if tapahtumatTanaan %}
+    {% if tapahtumatTanaan[0].paikat[0] %}
     if (naytaoletus) {
         vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
             '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
@@ -216,7 +216,7 @@ function showPosition(position) {
         kartta.attr("src", "/kartta?" + "ulat=" + pos_latitude + "&ulon=" + pos_longitude);
         karttamobiili.attr("src", "/kartta?" + "ulat=" + pos_latitude + "&ulon=" + pos_longitude);
     }
-    {% if tapahtumatTanaan %}
+    {% if tapahtumatTanaan[0].paikat[0] %}
     if (naytaoletus) {
         vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
             '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
