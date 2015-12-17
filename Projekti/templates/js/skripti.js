@@ -16,7 +16,7 @@ window.onload = function () {
     console.log("haetaan sijaintia");
 
     {% if tapahtumatTanaan[0] %}
-        {% tapahtumatTanaan[0].paikat[0] %}
+        {% if tapahtumatTanaan[0].paikat[0] %}
             if (naytaoletus) {
                 vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
                     '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
@@ -219,7 +219,7 @@ function showPosition(position) {
         karttamobiili.attr("src", "/kartta?" + "ulat=" + pos_latitude + "&ulon=" + pos_longitude);
     }
     {% if tapahtumatTanaan[0] %}
-        {% tapahtumatTanaan[0].paikat[0] %}
+        {% if tapahtumatTanaan[0].paikat[0] %}
             if (naytaoletus) {
                 vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
                     '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
@@ -326,8 +326,8 @@ function naytaRakennus() {
     var nappimob = $("#nappinaytamob");
 
     if (rakennusnaytetty) {
-        nappidesk.attr("value", "Rakennuksen kartta");
-        nappimob.attr("value", "Rakennuksen kartta");
+        //nappidesk.attr("value", "Rakennuksen kartta");
+        //nappimob.attr("value", "Rakennuksen kartta");
         kartta.attr("id", "perus");
         karttamobiili.attr("id", "perusmobiili");
         vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
