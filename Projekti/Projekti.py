@@ -133,6 +133,6 @@ if __name__ == '__main__':
     else:
         server_port = int(server_port)
         host = "0.0.0.0"
-        debugging = False
+        debugging = True
 
     app.run(port=server_port, debug=debugging, host=host)
