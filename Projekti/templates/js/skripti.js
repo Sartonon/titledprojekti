@@ -276,7 +276,7 @@ function haeppaSijainti() {
 
 function vaihdaTila(lat, lon, area, building, floor, space, klikattu) {
     if (window.innerWidth < 981) {
-        $('body').scrollTo('.karttamobiili');
+        $('body').scrollTo('#karttamobiili');
     }
     var kartta = $("#kartta");
     var karttamobiili = $("#karttamobiili");
