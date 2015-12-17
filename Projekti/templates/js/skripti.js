@@ -328,8 +328,10 @@ function naytaRakennus() {
     if (rakennusnaytetty) {
         //nappidesk.attr("value", "Rakennuksen kartta");
         //nappimob.attr("value", "Rakennuksen kartta");
-        kartta.attr("id", "perus");
-        karttamobiili.attr("id", "perusmobiili");
+        kartta.attr("class", "perus");
+        karttamobiili.attr("class", "perusmobiili");
+        console.log('NYT VAIHTUU');
+
         vaihdaTila(tlat, tlon, areaId, buildingId, floorId, spaceId);
     }
     else {
