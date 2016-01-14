@@ -1,3 +1,22 @@
+<!--
+# Copyright 2016  Jose Malmberg, Toni Pitkänen, Santeri Rusila, Markus Valkama
+#
+#
+# This file is part of Karttakotka.
+#
+# Karttakotka is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Karttakotka is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with Karttakotka.  If not, see <http://www.gnu.org/licenses/>. -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -272,6 +291,7 @@
                 <div id="kolmasrivi" class="row-fluid">
                     <div id="desktopdiv" class="col-md-12 iframediv">
                         <iframe id="kartta" class="perus" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
+                        <p>Copyright 2016  Jose Malmberg, Toni Pitkänen, Santeri Rusila, Markus Valkama</p>
                     </div>
                 </div>
             </div>
@@ -282,7 +302,7 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Kayttohjeet</h4>
+                            <h4 class="modal-title">Kayttöohjeet</h4>
                         </div>
                         <div class="modal-body">
                             <p>{% for rivi in kayttoohjeet %}
