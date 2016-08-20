@@ -1,0 +1,111 @@
+        /* Smartphones ----------- */
+        @media only screen and (max-width: 980px) {
+            #desktop {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 981px) {
+            #mobile {
+                display: none;
+            }
+        }
+
+        .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+            float: left;
+            margin-left: 35%;
+        }
+
+        iframe {
+            height: 100%;
+            width: 100%;
+        }
+
+        .zoom {
+            -webkit-transform: scale(0.5);
+            -webkit-transform-origin: 0 0;
+            transform: scale(0.5);
+            transform-origin: 0 0;
+            -moz-transform: scale(0.5);
+            -moz-transform-origin: 0 0;
+            -o-transform: scale(0.5);
+            -o-transform-origin: 0 0;
+            width: 200%; /* tuplasti iframen width */
+            height: 1000px; /* tuplasti iframen height */
+            overflow: auto; /* scrollbarit pois*/
+        }
+
+        .zoommobiili {
+            -webkit-transform: scale(0.5);
+            -webkit-transform-origin: 0 0;
+            transform: scale(0.5);
+            transform-origin: 0 0;
+            width: 200%; /* tuplasti iframen width */
+            height: 600px; /* tuplasti iframen height */
+            overflow: auto; /* remove scrollbars */
+        }
+
+        #loaderi {
+            margin: auto;
+            height: 60px;
+            display: none;
+        }
+
+        .jumbotron {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #337AB7;
+        }
+
+        #jumbotronmobiili {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        #uusihaku {
+            margin-top: -20px;
+            margin-bottom: 10px;
+        }
+
+        #ohjelinkki {
+            margin-top: -18px;
+            margin-bottom: 5px;
+        }
+
+        .ui-datepicker {
+            margin: auto;
+        }
+
+        .collapsing {
+            -webkit-transition: none;
+            transition: none;
+        }
+
+        .iframediv {
+            overflow: hidden;
+        }
+
+        .btn {
+            margin-bottom: 10px;
+        }
+
+        h4,
+        a {
+            text-align: center;
+        }
+
+        .tayta {
+            height: inherit;
+            overflow: auto;
+        }
+
+        .levea {
+            width: 100%;
+        }
+
+        .row-fluid {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
