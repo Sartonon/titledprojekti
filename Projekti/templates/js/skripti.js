@@ -69,16 +69,18 @@ $(function () {
                         divi.removeChild(divi.firstChild);
                     }
                     for (var tapahtuma in data) {
-                            var tapahtumatext = data[tapahtuma].paiva + ", "  + " klo " + data[tapahtuma].aika
-                                + ". Kuvaus: " + data[tapahtuma].kuvaus;
+                        var dataTapahtuma = data[tapahtuma];
+                        var tapahtumatext = dataTapahtuma.paiva + ", "  + " klo " + dataTapahtuma.aika
+                                + ". Kuvaus: " + dataTapahtuma.kuvaus;
                             var tapahtumadiv = document.createElement("div");
                             tapahtumadiv.setAttribute('class', 'list-group');
                         for (var paikka in tapahtuma) {
-                            var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[tapahtuma].paikat[paikka].lat + "'" + ","
-                                + "'" + data[tapahtuma].paikat[paikka].lon + "'" + "," + "'" + data[tapahtuma].paikat[paikka].areaId + "'" + ","
-                                + "'" + data[tapahtuma].paikat[paikka].buildingId + "'" + "," + "'" + data[tapahtuma].paikat[paikka].floorId + "'" + ","
-                                + "'" + data[tapahtuma].paikat[paikka].spaceId + "')";
-                            var paikkatext = data[tapahtuma].paikat[paikka].paikka;
+                            var tapahtumaPaikka = dataTapahtuma.paikat[paikka];
+                            var paikkatietohref = "javascript:vaihdaTila(" + "'" + tapahtumaPaikka.lat + "'" + ","
+                                + "'" + tapahtumaPaikka.lon + "'" + "," + "'" + tapahtumaPaikka.areaId + "'" + ","
+                                + "'" + tapahtumaPaikka.buildingId + "'" + "," + "'" + tapahtumaPaikka.floorId + "'" + ","
+                                + "'" + tapahtumaPaikka.spaceId + "')";
+                            var paikkatext = tapahtumaPaikka.paikka;
                             var paikkaelem = document.createElement('a');
                             paikkaelem.setAttribute('class', 'list-group-item');
                             paikkaelem.setAttribute("href", paikkatietohref);
@@ -105,8 +107,10 @@ $(function () {
         firstDay: 1,
         dayNames: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
         dayNamesMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
-        monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesakuu', 'Heinakuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
-        monthNamesShort: ['Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesa', 'Heina', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
+        monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesakuu',
+                        'Heinakuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
+        monthNamesShort: ['Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesa',
+                            'Heina', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
         showButtonPanel: true,
         dateFormat: 'yy-mm-dd',
         currentText: "Tänään",
@@ -122,23 +126,25 @@ $(function () {
                     while (divi.firstChild) {
                         divi.removeChild(divi.firstChild);
                     }
-                    if (data.length == 0) {
+                    if (data.length == 0) { //TODO: Ilmoituksesta samanlainen <li> kuin tapahtumastakin
                         var spanni = document.createElement("SPAN");
-                        var text = document.createTextNode("Ei tapahtumia valitulla päivalla");
+                        var text = document.createTextNode("Ei tapahtumia valitulla päivällä");
                         spanni.appendChild(text);
                         divi.appendChild(spanni);
                     }
                     for (var tapahtuma in data) {
-                            var tapahtumatext = data[tapahtuma].paiva + ", "  + " klo " + data[tapahtuma].aika
-                                + ". Kuvaus: " + data[tapahtuma].kuvaus;
+                            var dataTapahtuma = data[tapahtuma];
+                            var tapahtumatext = dataTapahtuma.paiva + ", "  + " klo " + dataTapahtuma.aika
+                                + ". Kuvaus: " + dataTapahtuma.kuvaus;
                             var tapahtumadiv = document.createElement("div");
                             tapahtumadiv.setAttribute('class', 'list-group');
                         for (var paikka in tapahtuma) {
-                            var paikkatietohref = "javascript:vaihdaTila(" + "'" + data[tapahtuma].paikat[paikka].lat + "'" + ","
-                                + "'" + data[tapahtuma].paikat[paikka].lon + "'" + "," + "'" + data[tapahtuma].paikat[paikka].areaId + "'" + ","
-                                + "'" + data[tapahtuma].paikat[paikka].buildingId + "'" + "," + "'" + data[tapahtuma].paikat[paikka].floorId + "'" + ","
-                                + "'" + data[tapahtuma].paikat[paikka].spaceId + "')";
-                            var paikkatext = data[tapahtuma].paikat[paikka].paikka;
+                            var tapahtumaPaikka = dataTapahtuma.paikat[paikka];
+                            var paikkatietohref = "javascript:vaihdaTila(" + "'" + tapahtumaPaikka.lat + "'" + ","
+                                + "'" + tapahtumaPaikka.lon + "'" + "," + "'" + tapahtumaPaikka.areaId + "'" + ","
+                                + "'" + tapahtumaPaikka.buildingId + "'" + "," + "'" + tapahtumaPaikka.floorId + "'" + ","
+                                + "'" + tapahtumaPaikka.spaceId + "')";
+                            var paikkatext = tapahtumaPaikka.paikka;
                             var paikkaelem = document.createElement('a');
                             paikkaelem.setAttribute('class', 'list-group-item');
                             paikkaelem.setAttribute("href", paikkatietohref);
@@ -217,7 +223,6 @@ function skaalaakaikki(){
     sisalto.css('height', korkeus - $('#jumbotron').height());
     kolmasrivi.css('height', sisalto.height() - ekarivi.height() - tokarivi.height() - 10);
 
-    var tabkaikki = $('#kaikkiTapahtumat');
     var tabpalkki = $('#myTabContent');
     var tabiotsikko = $('#myTabs');
     var navigointi = $('#navigointi');
