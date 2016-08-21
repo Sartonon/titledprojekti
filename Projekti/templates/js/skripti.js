@@ -7,30 +7,17 @@ var buildingId = '';
 var floorId = '';
 var spaceId = '';
 
-var $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
 
 
 window.onload = function () {
     skaalaakaikki();
-
-    console.log("haetaan sijaintia");
-
-    {% if tapahtumatTanaan[0] %}
-        {% if tapahtumatTanaan[0].paikat[0] %}
-            if (naytaoletus) {
-                vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
-                    '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
-                    '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
-            }
-        {% endif %}
-    {% endif %}
-
-}
+    naytaNykyinen()
+};
 
 
 window.onresize = function() {
     skaalaakaikki();
-}
+};
 
 
 $.fn.scrollTo = function (target, options, callback) {
@@ -54,16 +41,18 @@ $.fn.scrollTo = function (target, options, callback) {
             }
         });
     });
-}
+};
 
 
 $(function () {
-    $("#datepicker1").datepicker({ //TODO: napit kuukausien vaihtamiseen nakyvii
+    $("#datepicker1").datepicker({
         firstDay: 1,
         dayNames: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
         dayNamesMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
-        monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesakuu', 'Heinakuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
-        monthNamesShort: ['Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesa', 'Heina', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
+        monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesakuu',
+                        'Heinakuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
+        monthNamesShort: ['Tammi', 'Helmi', 'Maalis', 'Huhti', 'Touko', 'Kesa',
+                            'Heina', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
         showButtonPanel: true,
         dateFormat: 'yy-mm-dd',
         currentText: "Tänään",
@@ -79,8 +68,6 @@ $(function () {
                     while (divi.firstChild) {
                         divi.removeChild(divi.firstChild);
                     }
-                    console.log(data.length);
-                    console.log(data);
                     for (var tapahtuma in data) {
                             var tapahtumatext = data[tapahtuma].paiva + ", "  + " klo " + data[tapahtuma].aika
                                 + ". Kuvaus: " + data[tapahtuma].kuvaus;
@@ -108,13 +95,13 @@ $(function () {
                 });
                 return false;
             });
-        },
+        }
     });
 });
 
 
 $(function () {
-    $("#datepickermob").datepicker({ //TODO: napit kuukausien vaihtamiseen nakyvii
+    $("#datepickermob").datepicker({
         firstDay: 1,
         dayNames: ["Sunnuntai", "Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai", "Lauantai"],
         dayNamesMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
@@ -135,14 +122,12 @@ $(function () {
                     while (divi.firstChild) {
                         divi.removeChild(divi.firstChild);
                     }
-                    console.log(data.length);
                     if (data.length == 0) {
                         var spanni = document.createElement("SPAN");
                         var text = document.createTextNode("Ei tapahtumia valitulla päivalla");
                         spanni.appendChild(text);
                         divi.appendChild(spanni);
                     }
-                    console.log(data);
                     for (var tapahtuma in data) {
                             var tapahtumatext = data[tapahtuma].paiva + ", "  + " klo " + data[tapahtuma].aika
                                 + ". Kuvaus: " + data[tapahtuma].kuvaus;
@@ -170,7 +155,7 @@ $(function () {
                 });
                 return false;
             });
-        },
+        }
     });
 });
 
@@ -196,7 +181,7 @@ function getLocation() {
 
 function showPosition(position) {
     console.log("sijainti haettu");
-    $("#loaderi").css("display", "none")
+    $("#loaderi").css("display", "none");
 
     rakennusnaytetty = true;
     $("#nappinaytamob").attr("value", "Rakennuksen kartta");
@@ -218,15 +203,7 @@ function showPosition(position) {
         kartta.attr("src", "/kartta?" + "ulat=" + pos_latitude + "&ulon=" + pos_longitude);
         karttamobiili.attr("src", "/kartta?" + "ulat=" + pos_latitude + "&ulon=" + pos_longitude);
     }
-    {% if tapahtumatTanaan[0] %}
-        {% if tapahtumatTanaan[0].paikat[0] %}
-            if (naytaoletus) {
-                vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
-                    '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
-                    '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
-            }
-        {% endif %}
-    {% endif %}
+    naytaNykyinen()
 }
 
 

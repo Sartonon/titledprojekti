@@ -104,7 +104,6 @@
             <div class="row-fluid">
                 <div id="karttadiv" class="iframediv levea">
                     <iframe id="karttamobiili" class="perusmobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>
-                    <!--<iframe id="perusmobiili" class="karttamobiili" src="/kartta?lat={{ lat }}&lon={{ lon }}"></iframe>-->
                 </div>
             </div>
         {% endif %}
@@ -117,9 +116,11 @@
                         <h4 class="modal-title">Käyttöohjeet</h4>
                     </div>
                     <div class="modal-body">
-                        <p>{% for rivi in kayttoohjeet %}
-                            {{ rivi }}<br>
-                        {% endfor %}</p>
+                        <p>
+                            {% for rivi in kayttoohjeet %}
+                                {{ rivi }}<br>
+                            {% endfor %}
+                        </p>
                         <a href="https://korppi.jyu.fi/kotka/servlet/calendar/export/ui/ical" target="_blank"
                            class="btn btn-default btn-block btn-lg">Linkki Korppiin</a>
                     </div>
@@ -214,10 +215,21 @@
 <script src="../static/jquery-2.1.4.min.js"></script>
 <script src="../static/jquery-ui.min.js"></script>
 <script src="../static/jquery-ui.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" charset="utf-8">{% include 'js/skripti.js' %}</script>
-
+<script type="text/javascript" charset="utf-8">
+    var $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+    {% include 'js/skripti.js' %}
+    function naytaNykyinen() {
+        {% if tapahtumatTanaan[0] %}
+        {% if tapahtumatTanaan[0].paikat[0] %}
+            if (naytaoletus) {
+                vaihdaTila('{{ tapahtumatTanaan[0].paikat[0].lat }}', '{{ tapahtumatTanaan[0].paikat[0].lon }}',
+                    '{{ tapahtumatTanaan[0].paikat[0].areaId }}', '{{ tapahtumatTanaan[0].paikat[0].buildingId }}',
+                    '{{ tapahtumatTanaan[0].paikat[0].floorId }}', '{{ tapahtumatTanaan[0].paikat[0].spaceId }}', false)
+            }
+        {% endif %}
+    {% endif %}
+    }
+</script>
 </body>
 </html>
