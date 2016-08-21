@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block valikko2 %}
+{% block valikkoMobile %}
     <div class="panel-group levea" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default levea">
             <div class="panel-heading" role="tab" id="headingOne">
@@ -20,8 +20,9 @@
                             <div class="list-group" id="tanaanpaikat">
                                 {% if tapahtumaTanaan.paikat %}
                                     {% for paikka in tapahtumaTanaan.paikat %}
-                                        <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
-                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
+                                        <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}',
+                                                                        '{{ paikka.areaId }}', '{{ paikka.buildingId }}',
+                                                                        '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
                                            class="list-group-item">{{ paikka.paikka }}
                                         </a>
                                     {% endfor %}
@@ -90,7 +91,6 @@
                             </a>
                             <div class="list-group" id="ylihuomennapaikat">
                                 {% if tapahtumaYlihuomenna.paikat %}
-
                                     {% for paikka in tapahtumaYlihuomenna.paikat %}
                                         <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
                                          '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
@@ -161,7 +161,7 @@
         </div>
     </div>
 {% endblock %}
-{% block valikko %}
+{% block valikkoDesktop %}
     <div class="col-lg-4 col-sm-4 tayta" id="navigointi">
         <div class="bs-example bs-example-tabs tayta" data-example-id="togglable-tabs">
             <ul id="myTabs" class="nav nav-tabs" role="tablist">
@@ -197,8 +197,9 @@
                                 <div class="list-group" id="tanaanpaikat">
                                     {% if tapahtumaTanaan.paikat %}
                                         {% for paikka in tapahtumaTanaan.paikat %}
-                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
-                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
+                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}',
+                                                                        '{{ paikka.areaId }}', '{{ paikka.buildingId }}',
+                                                                        '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
                                                class="list-group-item">{{ paikka.paikka }}
                                             </a>
                                         {% endfor %}
@@ -222,8 +223,9 @@
                                 <div class="list-group" id="huomennapaikat">
                                     {% if tapahtumaHuomenna.paikat %}
                                         {% for paikka in tapahtumaHuomenna.paikat %}
-                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
-                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
+                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}',
+                                                                        '{{ paikka.areaId }}', '{{ paikka.buildingId }}',
+                                                                        '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
                                                class="list-group-item">{{ paikka.paikka }}
                                             </a>
                                         {% endfor %}
@@ -250,8 +252,9 @@
                                     {% if tapahtumaYlihuomenna.paikat %}
 
                                         {% for paikka in tapahtumaYlihuomenna.paikat %}
-                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
-                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
+                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}',
+                                                                        '{{ paikka.areaId }}','{{ paikka.buildingId }}',
+                                                                        '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
                                                class="list-group-item">{{ paikka.paikka }}
                                             </a>
                                         {% endfor %}
@@ -276,8 +279,9 @@
                                 <div class="list-group" id="kaikkipaikat">
                                     {% if tapahtuma.paikat %}
                                         {% for paikka in tapahtuma.paikat %}
-                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}', '{{ paikka.areaId }}',
-                                         '{{ paikka.buildingId }}', '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
+                                            <a href="javascript:vaihdaTila('{{ paikka.lat }}', '{{ paikka.lon }}',
+                                                                        '{{ paikka.areaId }}', '{{ paikka.buildingId }}',
+                                                                        '{{ paikka.floorId }}', '{{ paikka.spaceId }}' )"
                                                class="list-group-item">{{ paikka.paikka }}
                                             </a>
                                         {% endfor %}
@@ -294,13 +298,9 @@
                 <div role="tabpanel" class="tab-pane fade" id="calendar" aria-labelledby="profile-tab">
                     <div id="datepicker1"></div>
                     <input type="hidden" id="sendDate" readonly>
-
-                    <div class="list-group" id="valitutTapahtumat">
-
-                    </div>
+                    <div class="list-group" id="valitutTapahtumat"></div>
                     <div id=result></div>
                 </div>
-
             </div>
         </div>
     </div>
